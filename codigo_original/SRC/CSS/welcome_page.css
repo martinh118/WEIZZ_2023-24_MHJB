@@ -1,0 +1,116 @@
+body{
+    background-color: #EFEFEF;
+}
+
+@font-face {
+    font-family: "AgrandirRegular";
+    src: url("../fuentes/PPAgrandir/PPAgrandir-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gladiola";
+    src: url("../fuentes/Gladiola/Gladiola.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+#logo_weizz {
+    height: 7em;
+    margin-left: 15px;
+}
+
+.hrLinea {
+    width: 100%;
+    border: 2px solid;
+}
+
+header {
+    margin-top: 15px;
+    background-image: url("../imagenes_web/background_header_2.png");
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+}
+
+#encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tituloHeader {
+    font-family: 'AgrandirRegular';
+    font-size: 30px;
+    color: black;
+    text-decoration-line: none;
+}
+
+.tituloHeader:hover {
+    text-decoration-line: underline;
+
+}
+
+body {
+    background-image: url('../imagenes_web/background_body_gris_2.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0% 100%;
+    background-size: 55%;
+
+}
+
+#welcomeTitle {
+    font-family: 'Gladiola';
+    font-size: 3em;
+    text-decoration-line: underline;
+    color: #FF4242;
+    text-align: center;
+}
+
+#tusProyectos {
+    font-family: 'AgrandirRegular';
+    text-decoration-line: underline;
+    margin-left: 4cm;
+}
+
+#cuadroCrearProyecto {
+    background-color: rgba(255, 255, 255, 0.719);
+    height: 11em;
+    width: 11em;
+    border: 2px dashed black;
+    border-radius: 20px;
+    position: relative;
+}
+
+#crearProyectoTitle b {
+    font-family: 'AgrandirRegular';
+    color: black;
+    font-size: 20px;
+    margin-left: 15px;
+    
+}
+
+#crearProyectoSimbol {
+    width: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+}
+
+#cuadroCrearProyecto:hover {
+    #crearProyectoSimbol {
+        width: 60px;
+        top: 48%;
+        left: 48%;
+    }
+
+}
+
+.colNuevoProyecto {
+    margin-left: 2cm;
+    margin-top: 20px;
+}
