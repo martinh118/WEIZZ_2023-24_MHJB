@@ -1,11 +1,3 @@
-.containerHijo:hover {
-    #crearProyectoSimbol {
-        width: 60px;
-        top: 48%;
-        left: 50%;
-    }
-
-}
 
 * {
     border-radius: 0px !important;

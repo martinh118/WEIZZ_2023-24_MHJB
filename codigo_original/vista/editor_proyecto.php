@@ -67,10 +67,11 @@
         </div>
         <br><br>
         <div class="row" id="bodyProject">
-
+        
         </div>
 
         <br><br>
+
         <div class="row border-top border-dark border-2" id="footerProject">
 
             <div class="col ">

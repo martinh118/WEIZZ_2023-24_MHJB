@@ -15,48 +15,91 @@ export class FilaContenedor {
         this.#opcionesRow = new BotonesContainer("fila-" + _id + ".botones-" + _id);
         this.#containers = this.#crearArrayContainers();
         this.#filaDivPrincipal = this.#crearElementoDivPrincipal();
+
+        this.#configurarEventosBotones();
     }
 
     #crearArrayContainers() {
-        let listaContainers = []
+        let listaContainers = [];
+        let id = "";
         for (let index = 0; index < this.#numContainers; index++) {
-            let id = "fila-" + this.#id + ".container-" + index;
+
+            id = this.#id + ".container-" + index;
             listaContainers.push(new Container(id));
         }
 
         return listaContainers;
     }
 
+    #configurarEventosBotones() {
+        this.#opcionesRow.crearClickEvent((event) => {
+            event.preventDefault;
+            if(event.target.type != "button"){
+                let padre = this.#filaDivPrincipal.parentNode;
+                let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
+                this.#filaDivPrincipal.insertAdjacentElement("beforebegin", fila.getRow());
+            }
+            
+        });
+
+        this.#opcionesRow.subirClickEvent(() => {
+            let elArriba = this.#filaDivPrincipal.previousSibling;
+            if (this.#isElement(elArriba)) {
+                this.#filaDivPrincipal.insertAdjacentElement("afterend", elArriba);
+            }
+        });
+
+        this.#opcionesRow.bajarClickEvent(() => {
+            let elAbajo = this.#filaDivPrincipal.nextSibling;
+            if (this.#isElement(elAbajo)) {
+                this.#filaDivPrincipal.insertAdjacentElement("beforebegin", elAbajo);
+            }
+        });
+
+        this.#opcionesRow.borrarClickEvent(() => {
+            this.#filaDivPrincipal.remove();
+        });
+
+
+    }
+
+    #isElement(object) {
+        return (
+            typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
+                object && typeof object === "object" && object !== null && object.nodeType === 1 && typeof object.nodeName === "string"
+        );
+    }
+
     #crearElementoDivPrincipal() {
-        let elementoDiv = crearElemento("div", "", "id", "principal" + this.#id);
-        let containerFilaContenedor = crearElemento("div", "", "id", "principal" + this.#id);
+        let elementoDiv = crearElemento("div", "", "id", "principal-" + this.#id);
+        let containerFilaContenedor = crearElemento("div", "", "id", "principalContainers-" + this.#id);
         let opcionesCont = this.#opcionesRow.getDivGrupoBotones();
         let separador = crearElemento("br", "");
 
         let attrElementoDiv = { "class": "align-items-center d-flex flex-column position-relative" };
-        let attrFilaContenedor = {"class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;"};
+        let attrFilaContenedor = { "class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;" };
 
 
         modificarAtributoElemento(elementoDiv, attrElementoDiv);
         modificarAtributoElemento(containerFilaContenedor, attrFilaContenedor);
-        
-        
+
+
         elementoDiv.appendChild(opcionesCont);
         elementoDiv.appendChild(containerFilaContenedor);
         elementoDiv.appendChild(separador);
         for (let cont of this.#containers) {
             containerFilaContenedor.appendChild(cont.getContainer());
         }
-        
+
 
         return elementoDiv;
     }
 
-    #ordenarContainers(){
+    #ordenarContainers() {
 
     }
 
-    getId(){
+    getId() {
         return this.#id;
     }
 
@@ -64,24 +107,26 @@ export class FilaContenedor {
         return this.#filaDivPrincipal;
     }
 
-    getNumContainers(){
+    getNumContainers() {
         return this.#numContainers;
     }
 
-    getOpcionesRow(){
+    getOpcionesRow() {
         return this.#opcionesRow;
     }
 
-    getContainers(){
+    getContainers() {
         return this.#containers;
     }
 
-    setId(newId){
-        this.#id = "FilaContenedor-" +newId;
+    setId(newId) {
+        this.#id = "FilaContenedor-" + newId;
     }
 
-    setNumContainers(numCont){
+    setNumContainers(numCont) {
         this.#numContainers = numCont;
     }
+
+
 
 }
