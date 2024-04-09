@@ -32,14 +32,17 @@ export class FilaContenedor {
     }
 
     #configurarEventosBotones() {
+
         this.#opcionesRow.crearClickEvent((event) => {
             event.preventDefault;
-            if(event.target.type != "button"){
+            if (event.target.type != "button") {
+
                 let padre = this.#filaDivPrincipal.parentNode;
                 let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
                 this.#filaDivPrincipal.insertAdjacentElement("beforebegin", fila.getRow());
+
             }
-            
+
         });
 
         this.#opcionesRow.subirClickEvent(() => {
@@ -74,30 +77,48 @@ export class FilaContenedor {
         let elementoDiv = crearElemento("div", "", "id", "principal-" + this.#id);
         let containerFilaContenedor = crearElemento("div", "", "id", "principalContainers-" + this.#id);
         let opcionesCont = this.#opcionesRow.getDivGrupoBotones();
+
         let separador = crearElemento("br", "");
 
         let attrElementoDiv = { "class": "align-items-center d-flex flex-column position-relative" };
         let attrFilaContenedor = { "class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;" };
 
-
         modificarAtributoElemento(elementoDiv, attrElementoDiv);
         modificarAtributoElemento(containerFilaContenedor, attrFilaContenedor);
 
-
-        elementoDiv.appendChild(opcionesCont);
+        elementoDiv.appendChild(opcionesCont);   
         elementoDiv.appendChild(containerFilaContenedor);
         elementoDiv.appendChild(separador);
+
         for (let cont of this.#containers) {
             containerFilaContenedor.appendChild(cont.getContainer());
         }
 
-
         return elementoDiv;
     }
 
-    #ordenarContainers() {
+    containerSinOpciones(){
+        let elementoDiv = crearElemento("div", "", "id", "principal-" + this.#id);
+        let containerFilaContenedor = crearElemento("div", "", "id", "principalContainers-" + this.#id);
+        
+        let separador = crearElemento("br", "");
 
-    }
+        let attrElementoDiv = { "class": "align-items-center d-flex flex-column position-relative" };
+        let attrFilaContenedor = { "class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;" };
+
+        modificarAtributoElemento(elementoDiv, attrElementoDiv);
+        modificarAtributoElemento(containerFilaContenedor, attrFilaContenedor);
+
+        elementoDiv.appendChild(containerFilaContenedor);
+        elementoDiv.appendChild(separador);
+
+        for (let cont of this.#containers) {
+            containerFilaContenedor.appendChild(cont.getContainer());
+        }
+        
+        this.#filaDivPrincipal = elementoDiv;
+
+    }   
 
     getId() {
         return this.#id;
@@ -127,6 +148,6 @@ export class FilaContenedor {
         this.#numContainers = numCont;
     }
 
-
+    
 
 }

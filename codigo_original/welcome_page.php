@@ -16,13 +16,13 @@
     <header>
         <div class="row" id="encabezado">
             <div class="col ">
-                <a href="./welcome_page.html">
+                <a href="./welcome_page.php">
                     <img src="./SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
                 </a>
 
             </div>
             <div class="col">
-                <h2 id="inicioPage"><a href="./welcome_page.html" class="tituloHeader">Inicio</a></h2>
+                <h2 id="inicioPage"><a href="./welcome_page.php" class="tituloHeader">Inicio</a></h2>
             </div>
             <div class="col">
                 <h2 id="proyectosPage">
@@ -59,7 +59,7 @@
     <div class="row">
 
         <div class="col-2 colNuevoProyecto">
-            <a href="">
+            <a href="./vista/editor_proyecto.php">
                 <div id="cuadroCrearProyecto">
                     <img src="./SRC/imagenes_web/crear_plus.png" alt="crearProyecto" id="crearProyectoSimbol">
                 </div>

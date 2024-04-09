@@ -43,44 +43,22 @@
 
     <div class="row">
         <div class="col">
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-danger">Capas</button>
-                <button type="button" class="btn btn-outline-danger">Elementos</button>
-                <button type="button" class="btn btn-outline-danger">Estilo</button>
-                <button type="button" class="btn btn-outline-danger">Cerrar pestañas</button>
-                <button type="button" class="btn btn-outline-danger">Descargar JSON</button>
-                <button type="button" class="btn btn-outline-danger">Visualizar</button>
-                <button type="button" class="btn btn-outline-danger">Guardar cambios</button>
+            <div class="btn-group" role="group" aria-label="Basic outlined example" style="z-index:1">
+                <button type="button" class="btn btn-outline-danger" id="mostrarCapas">Capas</button>
+                <button type="button" class="btn btn-outline-danger" id="mostrarElementos">Elementos</button>
+                <button type="button" class="btn btn-outline-danger" id="mostrarEstilo">Estilo</button>
+                <button type="button" class="btn btn-outline-danger" id="cerrarPestañas">Cerrar pestañas</button>
+                <button type="button" class="btn btn-outline-danger" id="descargarJson">Descargar JSON</button>
+                <button type="button" class="btn btn-outline-danger" id="visualizarPagina">Visualizar</button>
+                <button type="button" class="btn btn-outline-danger" id="guardarCambios">Guardar cambios</button>
             </div>
         </div>
     </div>
 
     <hr class="hrLinea">
+   
     <div class="container" id="proyecto">
-        <html>
 
-        <div class="row border-bottom border-dark border-2" id="headerProject">
-
-            <div class="col" id="colHeaderProject">
-                <h1>header</h1>
-            </div>
-        </div>
-        <br><br>
-        <div class="row" id="bodyProject">
-        
-        </div>
-
-        <br><br>
-
-        <div class="row border-top border-dark border-2" id="footerProject">
-
-            <div class="col ">
-                <h1>footer</h1>
-            </div>
-        </div>
-
-
-        </html>
 
     </div>
 
