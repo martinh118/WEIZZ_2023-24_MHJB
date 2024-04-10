@@ -22,7 +22,7 @@ function iniciarSesion()
 
         if ($errores == "") {
 
-            $usuario = obtenerUsuarioUnico($_POST['email'])->fetchAll();
+            $usuario = obtenerUsuarioUnico($_POST['email'])->fetch();
             $_SESSION['ID'] = $usuario['ID'];
             $_SESSION['usuario'] = $usuario['usuario'];
             $_SESSION['email'] = $usuario['email'];
@@ -63,11 +63,11 @@ function comprobarDatos()
         $errores = "";
         $usuarios = getUsers();
         $email = $_POST['email'];
-        $contraseña = $_POST['pass'];
+        $contra = $_POST['pass'];
 
         foreach ($usuarios as $user) {
             if ($user['email'] == $email) {
-                if (password_verify($contraseña, $user['contraseña'])) {
+                if (password_verify($contra, $user['contra'])) {
                     return $errores;
                 } else {
                     $errores .= "La contraseña introducida no es correcta.<br><br>";

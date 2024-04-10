@@ -54,10 +54,9 @@
         echo "<div class='alert alert-danger' role='alert'>" . $error . "</div>";
         session_unset();
     } else if (isset($_SESSION['usuario'])) {
-        echo "todo correcto";
     ?>
         <script>
-            // location.replace("../../welcome_page.php");
+            location.replace("../../welcome_page.php");
         </script>
     <?php
     }
