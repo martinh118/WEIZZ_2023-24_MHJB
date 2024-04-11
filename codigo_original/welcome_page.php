@@ -76,7 +76,7 @@ session_start();
     <div class="row">
 
         <div class="col-2 colNuevoProyecto">
-            <a href="./vista/editor_proyecto.php">
+            <a href="./vista/seleccion_bases.php">
                 <div id="cuadroCrearProyecto">
                     <img src="./SRC/imagenes_web/crear_plus.png" alt="crearProyecto" id="crearProyectoSimbol">
                 </div>

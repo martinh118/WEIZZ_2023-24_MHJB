@@ -2,7 +2,7 @@
 
 <head>
 
-    <link rel="stylesheet" href="../SRC/CSS/editor_proyecto.css" type="text/css">
+    <link rel="stylesheet" href="../SRC/CSS/seleccion_base.css" type="text/css">
     <!-- <link rel="stylesheet" href="../SRC/CSS/proyecto1.css" type="text/css"> -->
     <meta charset="UTF-8" />
     <title>Weizz</title>
@@ -10,11 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../controlador/seleccion_bases.js"></script>
 
-    <script type="module" src="../controlador/editor_proyecto/config_mostrar_capas.js"></script>
-    <script type="module" src="../controlador/editor_proyecto/config_mostrar_elementos.js"></script>
-    <script type="module" src="../controlador/editor_proyecto/config_mostrar_estilo.js"></script>
-    <script type="module" src="../controlador/editor_proyecto/editor_proyecto.js"></script>
 </head>
 <?php
 session_start();
@@ -44,7 +41,7 @@ session_start();
 
                 echo "<div class='col-4 offset-4'>
                 <h2 id='iniciarSesionPage'>
-                    <a href='' class='tituloHeader'><b>".$_SESSION['usuario']."</b></a>&nbsp;&nbsp;
+                    <a href='' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
                     <a href='../controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
                 </h2>
             </div>";
@@ -71,25 +68,54 @@ session_start();
     </header>
 
     <div class="row">
-        <div class="col">
-            <div class="btn-group" role="group" aria-label="Basic outlined example" style="z-index:1">
-                <button type="button" class="btn btn-outline-danger" id="mostrarCapas">Capas</button>
-                <button type="button" class="btn btn-outline-danger" id="mostrarElementos">Elementos</button>
-                <button type="button" class="btn btn-outline-danger" id="mostrarEstilo">Estilo</button>
-                <button type="button" class="btn btn-outline-danger" id="cerrarPestañas">Cerrar pestañas</button>
-                <button type="button" class="btn btn-outline-danger" id="descargarJson">Descargar JSON</button>
-                <button type="button" class="btn btn-outline-danger" id="visualizarPagina">Visualizar</button>
-                <button type="button" class="btn btn-outline-danger" id="guardarCambios">Guardar cambios</button>
-            </div>
+        <div class="col-3 offset-1 mt-4">
+            <label for="importButton" class="baseTitle ">Importar proyecto</label>
+            <input type="file" id="importButton" class=" btn btn-danger importButton"></input>
         </div>
     </div>
+    <br><br>
+    <div class="row justify-content-center">
+        <!-- href="./editor_proyecto.php"  -->
 
-    <hr class="hrLinea">
-   
-    <div class="container" id="proyecto">
+        <div class="col-2 colCuadroBase">
+            <a href="./editor_proyecto.php" class="seleccionBase">
+                <div class="cuadroBase" id="baseBasico">
+                </div>
+                <h3 class="baseTitle"><b>Basico</b></h3>
+            </a>
+        </div>
 
+        <div class="col-2 colCuadroBase">
+            <a class="seleccionBase">
+                <div class="cuadroBase" id="baseGaleria">
+
+                </div>
+                <h3 class="baseTitle"><b>Galeria</b></h3>
+            </a>
+        </div>
+
+        <div class="col-2 colCuadroBase">
+            <a class="seleccionBase">
+
+                <div class="cuadroBase" id="baseMultiple">
+
+                </div>
+                <h3 class="baseTitle"><b>Múltiple</b></h3>
+            </a>
+        </div>
+
+        <div class="col-2 colCuadroBase">
+            <a class="seleccionBase">
+
+                <div class="cuadroBase" id="baseModelo">
+
+                </div>
+                <h3 class="baseTitle"><b>Modelo</b></h3>
+            </a>
+        </div>
 
     </div>
+
 
 </body>
 

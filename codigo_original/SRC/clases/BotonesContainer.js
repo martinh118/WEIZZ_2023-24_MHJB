@@ -7,8 +7,8 @@ export class BotonesContainer {
     #subirElemento;
     #bajarElemento;
     #borrarElemento;
-
     #divGrupoBotones;
+
     constructor(id) {
         this.#id = id;
         this.#botonCrear = this.#crearBotonCrear();
@@ -86,6 +86,28 @@ export class BotonesContainer {
         borrarElemento.setAttribute("title", "Eliminar fila de containers.");
         borrarElemento.setAttribute("style","border-top-right-radius: 20px!important;" );
         return borrarElemento;
+    }
+
+    toJSON(){
+        return {
+            idBotonesCont : this.#id,
+            botonCrear : this.#botonCrear.outerHTML,
+            botonSubir : this.#subirElemento.outerHTML,
+            botonBajar : this.#bajarElemento.outerHTML,
+            botonBorrar : this.#borrarElemento.outerHTML,
+            grupoBotones : this.#divGrupoBotones.outerHTML
+        };
+    }
+
+    static fromJSON(json){
+        const range = document.createRange();
+        const botonesContainer = new BotonesContainer(json.idBotonesCont);
+        botonesContainer.#botonCrear = range.createContextualFragment(json.botonCrear);
+        botonesContainer.#subirElemento = range.createContextualFragment(json.botonSubir);
+        botonesContainer.#bajarElemento = range.createContextualFragment(json.botonBajar);
+        botonesContainer.#borrarElemento = range.createContextualFragment(json.botonBorrar);
+        botonesContainer.#divGrupoBotones = range.createContextualFragment(json.grupoBotones);
+        return botonesContainer;
     }
 
     getDivGrupoBotones() {

@@ -41,6 +41,22 @@ export class Container {
         this.#container.removeChild(elemento);
     }
 
+    toJSON(){
+        return {
+            idContainer : this.#id,
+            container : this.#container,
+            elementosHijo : this.#elementosHijo
+        };
+    }
+
+    static fromJSON(json){
+        
+        let container = new Container(json.idContainer);
+        container.#container = json.container;
+        container.#elementosHijo = json.elementosHijo;
+        return container;
+    }
+
     getId(){
         return this.#id;
     }
