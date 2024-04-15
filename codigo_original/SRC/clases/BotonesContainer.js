@@ -28,78 +28,84 @@ export class BotonesContainer {
         //ATRIBUTOS 
         let atributosGrupoPadre = { "class": "list-group list-group-horizontal p-2", "style": 'height: 30%;top: -48px;position: absolute;' };
         let atributosBotonesHijos = { "class": "list-group-item-action list-group-item border border-2 border-dark" };
-        let arrElementos = [ subirElemento, bajarElemento, borrarElemento];
+        let arrElementos = [subirElemento, bajarElemento, borrarElemento];
 
         //APLICAR ATRIBUTOS E HIJOS
         modificarAtributoElemento(grupoBotones, atributosGrupoPadre);
 
-        for (let element of arrElementos) {
-            modificarAtributoElemento(element, atributosBotonesHijos);
-        }
+        subirElemento.setAttribute("class", "list-group-item-action list-group-item border border-2 border-dark botonSubir");
+        bajarElemento.setAttribute("class", "list-group-item-action list-group-item border border-2 border-dark botonBajar");
+        borrarElemento.setAttribute("class", "list-group-item-action list-group-item border border-2 border-dark botonBorrar");
+
 
         grupoBotones.appendChild(botonCrear);
         añadirHijos(grupoBotones, arrElementos);
         return grupoBotones;
     }
 
-    #crearBotonCrear(){
-        let divDropdown = crearElemento("div", "", "class", "dropdown")
+    #crearBotonCrear() {
+        let divDropdown = crearElemento("div", "", "class", "dropdown botonCrear")
         let botonCrear = crearElemento("button", "+", "id", "crear-" + this.#id);
         let ulMenu = crearElemento("ul", "", "class", "dropdown-menu");
-        
+
         for (let index = 1; index <= 4; index++) {
             let item = crearElemento("li", index, "value", index);
             item.setAttribute("class", "dropdown-item");
-            item.setAttribute("id", this.#id + "-item-" + index );
+            item.setAttribute("id", this.#id + "-item-" + index);
             ulMenu.appendChild(item);
         }
-        
-        let attrsBotonCrear = {"title": "Crear una fila de containers superior.", 
-        "class": "btn dropdown-toggle border border-2 border-dark", 
-        "type": "button",
-        "data-bs-toggle":"dropdown",
-        "aria-expanded": "false",
-        "style": "border-top-left-radius: 20px!important;background-color:white;height:47.92px"};
+
+        let attrsBotonCrear = {
+            "title": "Crear una fila de containers superior.",
+            "class": "btn dropdown-toggle border border-2 border-dark",
+            "type": "button",
+            "data-bs-toggle": "dropdown",
+            "aria-expanded": "false",
+            "style": "border-top-left-radius: 20px!important;background-color:white;height:47.92px"
+        };
 
         modificarAtributoElemento(botonCrear, attrsBotonCrear);
 
         divDropdown.appendChild(botonCrear);
         divDropdown.appendChild(ulMenu);
-        
+
         return divDropdown;
     }
 
-    #crearSubirElemento(){
+    #crearSubirElemento() {
         let subirElemento = crearElemento("button", "↑", "id", "subir-" + this.#id);
         subirElemento.setAttribute("title", "Subir fila de containers.");
         return subirElemento;
     }
 
-    #crearBajarElemento(){
+    #crearBajarElemento() {
         let bajarElemento = crearElemento("button", "↓", "id", "bajar-" + this.#id);
         bajarElemento.setAttribute("title", "Bajar fila de containers.");
         return bajarElemento;
     }
 
-    #crearBorrarElemento(){
+    #crearBorrarElemento() {
         let borrarElemento = crearElemento("button", "x", "id", "eliminar-" + this.#id);
-        borrarElemento.setAttribute("title", "Eliminar fila de containers.");
-        borrarElemento.setAttribute("style","border-top-right-radius: 20px!important;" );
+        let attrBorrar = {
+            "title": "Eliminar fila de containers.",
+            "style": "border-top-right-radius: 20px!important;"
+        }
+        modificarAtributoElemento(borrarElemento, attrBorrar);
         return borrarElemento;
     }
 
-    toJSON(){
+    toJSON() {
         return {
-            idBotonesCont : this.#id,
-            botonCrear : this.#botonCrear.outerHTML,
-            botonSubir : this.#subirElemento.outerHTML,
-            botonBajar : this.#bajarElemento.outerHTML,
-            botonBorrar : this.#borrarElemento.outerHTML,
-            grupoBotones : this.#divGrupoBotones.outerHTML
+            idBotonesCont: this.#id,
+            botonCrear: this.#botonCrear.outerHTML,
+            botonSubir: this.#subirElemento.outerHTML,
+            botonBajar: this.#bajarElemento.outerHTML,
+            botonBorrar: this.#borrarElemento.outerHTML,
+            grupoBotones: this.#divGrupoBotones.outerHTML
         };
     }
 
-    static fromJSON(json){
+    static fromJSON(json) {
         const range = document.createRange();
         const botonesContainer = new BotonesContainer(json.idBotonesCont);
         botonesContainer.#botonCrear = range.createContextualFragment(json.botonCrear);
@@ -108,41 +114,42 @@ export class BotonesContainer {
         botonesContainer.#borrarElemento = range.createContextualFragment(json.botonBorrar);
         botonesContainer.#divGrupoBotones = range.createContextualFragment(json.grupoBotones);
         return botonesContainer;
+
     }
 
     getDivGrupoBotones() {
         return this.#divGrupoBotones;
     }
 
-    getBotonCrear(){
+    getBotonCrear() {
         return this.#botonCrear;
     }
 
-    getSubirElemento(){
+    getSubirElemento() {
         return this.#subirElemento;
     }
 
-    getBajarElemento(){
+    getBajarElemento() {
         return this.#bajarElemento;
     }
-    
-    getBorrarElemento(){
+
+    getBorrarElemento() {
         return this.#borrarElemento;
     }
 
-    crearClickEvent(callback){
+    crearClickEvent(callback) {
         this.#botonCrear.addEventListener("click", callback);
     }
 
-    subirClickEvent(callback){
+    subirClickEvent(callback) {
         this.#subirElemento.addEventListener("click", callback);
     }
 
-    bajarClickEvent(callback){
+    bajarClickEvent(callback) {
         this.#bajarElemento.addEventListener("click", callback);
     }
 
-    borrarClickEvent(callback){
+    borrarClickEvent(callback) {
         this.#borrarElemento.addEventListener("click", callback);
     }
 
