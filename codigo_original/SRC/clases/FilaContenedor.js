@@ -10,12 +10,12 @@ export class FilaContenedor {
     #containersHijo = [];
 
     constructor(_id, _numContainers) {
-        this.#id = "FilaContenedor-" + _id;
+        this.#id = _id;
         this.#numContainers = _numContainers;
         this.#opcionesRow = new BotonesContainer("fila-" + _id + ".botones-" + _id);
         this.#containersHijo = this.#crearArrayContainers();
         this.#filaDivPrincipal = this.#crearElementoDivPrincipal();
-        this.#configurarEventosBotones();
+        // this.#configurarEventosBotones();
     }
 
     #crearArrayContainers() {
@@ -128,8 +128,8 @@ export class FilaContenedor {
     }
 
     static fromJSON(json) {
-        let elementoDiv = crearElemento("div", "", "id", "principal-" + json.idFilaContenedor);
         let fc = new FilaContenedor(json.idFilaContenedor, json.numContainers);  
+        let elementoDiv = crearElemento("div", "", "id", "principal-" + json.idFilaContenedor);
         elementoDiv.innerHTML =json.divPrincipal 
         fc.#filaDivPrincipal = elementoDiv;
         fc.#opcionesRow = BotonesContainer.fromJSON(json.opcionesRow);
@@ -137,8 +137,6 @@ export class FilaContenedor {
         return fc;
 
     }
-
-   
 
     getId() {
         return this.#id;

@@ -1,7 +1,8 @@
-import { BotonesContainer } from '../../SRC/clases/BotonesContainer.js';
+
 import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { Proyecto } from '../../SRC/clases/Proyecto.js';
 import { Container } from '../../SRC/clases/Container.js';
+import { aplicarEventListener } from './aplicar_event_listener.js';
 
 let proyecto;
 /**
@@ -59,7 +60,10 @@ $("#guardarCambios").click(function () {
   // console.log(newProject);
   proyecto = Proyecto.fromJSON(newProject);
   $("#proyecto").html(proyecto.getHtmlBase());
-  aplicarEventListener();
+  $("#proyectoGuardadoMessage").show()
+  
+  setTimeout(() =>{$("#proyectoGuardadoMessage").hide()}, 3000);
+
 });
 
 /**
@@ -70,7 +74,7 @@ $("#descargarJson").click(function () {
   console.log("Header: " + proyecto.getHeader());
   console.log("Body: " + proyecto.getBody());
   console.log("Footer: " + proyecto.getFooter());
-  let jsonProject = JSON.stringify(proyecto.toJSON());
+  let jsonProject = JSON.stringify(proyecto);
 
   // Crear un objecte similar a un arxiu format per bytes
   const file = new Blob([jsonProject], { type: 'text/plain' });
@@ -86,73 +90,16 @@ $("#descargarJson").click(function () {
   a.click();
   // Eliminar el link "fantasma"
   URL.revokeObjectURL(a.href);
+  
 
 });
-
-function aplicarEventListener() {
-  let botonCrear = document.querySelectorAll(".botonCrear");
-  let botonSubir = document.querySelectorAll(".botonSubir");
-  let botonBajar = document.querySelectorAll(".botonBajar");
-  let botonBorrar = document.querySelectorAll(".botonBorrar");
-
-  botonCrear.forEach((button) => {
-    button.addEventListener('click', function (event) {
-      if (event.target.type != "button") {
-        let filaBotones = button.parentNode;
-        let filaContenedor = filaBotones.parentNode;
-        let padre = filaContenedor.parentNode;
-
-        let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
-        filaContenedor.insertAdjacentElement("beforebegin", fila.getRow());
-      }
-    });
-  });
-
-  botonSubir.forEach((button) => {
-    button.addEventListener('click', function () {
-      let filaBotones = button.parentNode;
-      let filaContenedor = filaBotones.parentNode;
-      let elArriba = filaContenedor.previousSibling;
-      if (isElement(elArriba)) {
-        filaContenedor.insertAdjacentElement("afterend", elArriba);
-      }
-    });
-  });
-
-  botonBajar.forEach((button) => {
-    button.addEventListener('click', function () {
-      let filaBotones = button.parentNode;
-      let filaContenedor = filaBotones.parentNode;
-      let elAbajo = filaContenedor.nextSibling;
-      if (isElement(elAbajo)) {
-        filaContenedor.insertAdjacentElement("beforebegin", elAbajo);
-      }
-    });
-  });
-
-
-  botonBorrar.forEach((button) => {
-    button.addEventListener('click', function () {
-      let filaBotones = button.parentNode;
-      let filaContenedor = filaBotones.parentNode;
-      filaContenedor.remove();
-    });
-  });
-}
-
-function isElement(object) {
-  return (
-    typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
-      object && typeof object === "object" && object !== null && object.nodeType === 1 && typeof object.nodeName === "string"
-  );
-}
 
 /**
  * 
  */
 function init() {
-
-  proyecto = new Proyecto(1);
+  $("#proyectoGuardadoMessage").hide();
+  proyecto = new Proyecto("FilaContenedor-1", "base_basico");
   $("#proyecto").html(proyecto.getHtmlBase());
 }
 

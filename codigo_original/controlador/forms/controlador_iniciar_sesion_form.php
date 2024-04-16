@@ -27,16 +27,15 @@ function iniciarSesion()
             $_SESSION['usuario'] = $usuario['usuario'];
             $_SESSION['email'] = $usuario['email'];
             $_SESSION['token'] = $usuario['token'];
-
         } else if ($errores != "") {
             $_SESSION['error'] = $errores;
         }
 
-        ?>
+?>
         <script>
             location.replace("../../vista/forms/iniciar_sesion_form.php");
         </script>
-    <?php
+<?php
     } catch (PDOException $e) {
         echo "Error iniciarSesion: " . $e->getMessage();
     }
@@ -75,7 +74,8 @@ function comprobarDatos()
                 }
             }
         }
-        $errores .= "No existe ningun usuario con este correo electronico.<br><br>";
+        $errores .= "No existe ningún usuario con este correo electronico.<br><br>";
+        return $errores;
     } catch (PDOException $e) {
         return "Error comprobarDatos: " . $e->getMessage();
     }

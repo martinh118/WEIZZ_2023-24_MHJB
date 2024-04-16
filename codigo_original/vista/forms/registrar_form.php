@@ -52,11 +52,11 @@
     <?php
     if (isset($_SESSION['error'])) {
         $error = $_SESSION['error'];
-        echo "<div class='alert alert-danger' role='alert'>" . $error . "</div>";
+        echo "<div class='alert alert-danger' role='alert'><b>" . $error . "</b></div>";
         session_unset();
     } else if (isset($_SESSION['success'])){
         $success = $_SESSION['success'];
-        echo "<div class='alert alert-success' role='alert'>" . $success . "</div>";
+        echo "<div class='alert alert-success' role='alert'><b>" . $success . "</b></div>";
         session_unset();
     }
 
@@ -88,7 +88,7 @@
         </div>
         <div class="row">
             <a href="./iniciar_sesion_form.php" id="contraOlvidada" class="col-5">Ya tengo una cuenta.</a>
-            <input type="submit" class="submitButton col-5 offset-2" value="Registrar usuario">
+            <input type="submit" class="submitButton col-5 offset-2 btn btn-outline-danger" value="Registrar usuario">
         </div>
         
     </form>

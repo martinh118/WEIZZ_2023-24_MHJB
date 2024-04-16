@@ -37,8 +37,8 @@ export class BotonesContainer {
         bajarElemento.setAttribute("class", "list-group-item-action list-group-item border border-2 border-dark botonBajar");
         borrarElemento.setAttribute("class", "list-group-item-action list-group-item border border-2 border-dark botonBorrar");
 
-
         grupoBotones.appendChild(botonCrear);
+
         añadirHijos(grupoBotones, arrElementos);
         return grupoBotones;
     }
@@ -113,6 +113,7 @@ export class BotonesContainer {
         botonesContainer.#bajarElemento = range.createContextualFragment(json.botonBajar);
         botonesContainer.#borrarElemento = range.createContextualFragment(json.botonBorrar);
         botonesContainer.#divGrupoBotones = range.createContextualFragment(json.grupoBotones);
+        
         return botonesContainer;
 
     }

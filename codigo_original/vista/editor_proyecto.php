@@ -22,7 +22,7 @@ session_start();
 
 <body style="background-color: #EFEFEF;">
 
-
+    
     <header class="g-0">
         <div class="row g-0" id="encabezado">
             <div class="col-2 ">
@@ -44,7 +44,7 @@ session_start();
 
                 echo "<div class='col-4 offset-4'>
                 <h2 id='iniciarSesionPage'>
-                    <a href='' class='tituloHeader'><b>".$_SESSION['usuario']."</b></a>&nbsp;&nbsp;
+                    <a href='./config_usuario/configurar_usuario.php' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
                     <a href='../controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
                 </h2>
             </div>";
@@ -70,22 +70,44 @@ session_start();
 
     </header>
 
+
+
+
+
     <div class="row">
         <div class="col">
-            <div class="btn-group" role="group" aria-label="Basic outlined example" style="z-index:1">
-                <button type="button" class="btn btn-outline-danger" id="mostrarCapas">Capas</button>
-                <button type="button" class="btn btn-outline-danger" id="mostrarElementos">Elementos</button>
-                <button type="button" class="btn btn-outline-danger" id="mostrarEstilo">Estilo</button>
-                <button type="button" class="btn btn-outline-danger" id="cerrarPestañas">Cerrar pestañas</button>
-                <button type="button" class="btn btn-outline-danger" id="descargarJson">Descargar JSON</button>
-                <button type="button" class="btn btn-outline-danger" id="visualizarPagina">Visualizar</button>
-                <button type="button" class="btn btn-outline-danger" id="guardarCambios">Guardar cambios</button>
-            </div>
+            <?php
+            if (isset($_SESSION['usuario'])) {
+
+                echo "<div class='btn-group' role='group' aria-label='Basic outlined example' style='z-index:1'>
+        <button type='button' class='btn btn-outline-danger' id='mostrarCapas'>Capas</button>
+        <button type='button' class='btn btn-outline-danger' id='mostrarElementos'>Elementos</button>
+        <button type='button' class='btn btn-outline-danger' id='mostrarEstilo'>Estilo</button>
+        <button type='button' class='btn btn-outline-danger' id='cerrarPestañas'>Cerrar pestañas</button>
+        <button type='button' class='btn btn-outline-danger' id='descargarJson'>Descargar JSON</button>
+        <button type='button' class='btn btn-outline-danger' id='visualizarPagina'>Visualizar</button>
+        <button type='button' class='btn btn-outline-danger' id='guardarCambios'>Guardar cambios</button>
+    </div>";
+            } else {
+                echo "<div class='btn-group' role='group' aria-label='Basic outlined example' style='z-index:1'>
+        <button type='button' class='btn btn-outline-danger' id='mostrarCapas'>Capas</button>
+        <button type='button' class='btn btn-outline-danger' id='mostrarElementos'>Elementos</button>
+        <button type='button' class='btn btn-outline-danger' id='mostrarEstilo'>Estilo</button>
+        <button type='button' class='btn btn-outline-danger' id='cerrarPestañas'>Cerrar pestañas</button>
+        <button type='button' class='btn btn-outline-danger' id='descargarJson'>Descargar JSON</button>
+        <button type='button' class='btn btn-outline-danger' id='visualizarPagina'>Visualizar</button>
+    </div>";
+            }
+
+            ?>
         </div>
     </div>
 
     <hr class="hrLinea">
-   
+    
+    <div class='alert alert-success offset-3' role='alert' style="width:40em; text-align:center " id="proyectoGuardadoMessage"><b>Proyecto guardado correctamente</b></div>
+
+
     <div class="container" id="proyecto">
 
 

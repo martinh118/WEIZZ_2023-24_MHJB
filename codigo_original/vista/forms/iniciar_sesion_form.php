@@ -51,8 +51,8 @@
     <?php
     if (isset($_SESSION['error'])) {
         $error = $_SESSION['error'];
-        echo "<div class='alert alert-danger' role='alert'>" . $error . "</div>";
-        session_unset();
+        echo "<div class='alert alert-danger' role='alert'><b>" . $error . "</b></div>";
+        // session_unset();
     } else if (isset($_SESSION['usuario'])) {
     ?>
         <script>
@@ -79,7 +79,7 @@
         </div>
         <div class="row">
             <a href="./contraseña_olvidada_form.php" id="contraOlvidada" class="col-5">Contraseña olvidada.</a>
-            <input type="submit" class="submitButton col-5 offset-2" value="Iniciar Sesión">
+            <input type="submit" class="submitButton col-5 offset-2 btn btn-outline-danger" value="Iniciar Sesión">
         </div>
 
     </form>

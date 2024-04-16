@@ -41,7 +41,7 @@ session_start();
 
                 echo "<div class='col-4 offset-4'>
                 <h2 id='iniciarSesionPage'>
-                    <a href='' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
+                    <a href='./config_usuario/configurar_usuario.php' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
                     <a href='../controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
                 </h2>
             </div>";

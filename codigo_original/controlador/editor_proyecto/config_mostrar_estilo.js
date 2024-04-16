@@ -12,8 +12,8 @@ $("#mostrarEstilo").click(function () {
       let elementoEstilo = cuadroEstilo.getRecuadro();
       let cerrarElementoEstilo;
   
-      elementoEstilo.style.left = 60 + "em";
-      elementoEstilo.style.top = 15 + "em";
+      elementoEstilo.style.left = 65 + "em";
+      elementoEstilo.style.top = 10 + "em";
       $("#proyecto").append(elementoEstilo);
   
   

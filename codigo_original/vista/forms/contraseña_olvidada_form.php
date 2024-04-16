@@ -59,7 +59,7 @@
         </div>
         <br>  
         <div class="row">
-            <input type="submit" class="submitButton col-5 offset-2" value="Enviar">
+            <input type="submit" class="submitButton col-5 offset-2 btn btn-outline-danger" value="Enviar">
         </div>
         
     </form>

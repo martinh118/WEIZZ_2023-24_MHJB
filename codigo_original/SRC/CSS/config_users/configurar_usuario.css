@@ -70,44 +70,9 @@ body {
     text-align: center;
 }
 
-.agrandir{
+.infoUser{
     font-family: 'AgrandirRegular';
-    font-size: 25px;
-    color: black;
-    text-decoration-line: none;
-    text-decoration: underline;
-}
-
-.formTable{
-    width:30em;
-    height: auto;
-	padding:16px;
-	border-radius:10px;
-    border: 2px solid black;
-	margin:auto;
-    background-color: white;
-    
-}
-
-input{
-    width:180px;
-	padding:3px 10px;
-	border:1px solid #000000;
-	border-radius:5px;
-	background-color:#f6f6f6;
-	margin:8px 0;
-	display:inline-block;
-}
-
-.submitButton{
-    font-family: 'AgrandirRegular';
-    font-size: 20px;
-    text-decoration-line: none;
-    margin-left: 13em;
-    margin-top: 0em;
-}
-
-#contraOlvidada{
-    color: grey;
-    margin-top: 1em;
+    font-size: 1.5em;
+    color: #000000;
+    text-align: center;
 }
