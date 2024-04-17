@@ -18,7 +18,7 @@ function deleteUser($usuario)
         reordenarUsuarios();
     } catch (PDOException $e) { //
         // mostrarem els errors
-        echo "Error: " . $e->getMessage();
+        echo "Error deleteUser: " . $e->getMessage();
     }
 }
 
@@ -37,6 +37,6 @@ function reordenarUsuarios()
         $statement->execute();
     } catch (PDOException $e) { //
         // mostrarem els errors
-        echo "Error: " . $e->getMessage();
+        echo "Error reordenarUsuarios: " . $e->getMessage();
     }
 }

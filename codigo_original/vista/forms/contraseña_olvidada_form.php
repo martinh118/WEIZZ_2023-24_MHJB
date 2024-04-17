@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../../SRC/CSS/forms/contraseña_olvidada_form.css">
 
 </head>
-
+<?php
+session_start();
+?>
 
 
 <body>
@@ -28,18 +30,31 @@
                     <a href="" class="tituloHeader">Proyectos</a>
                 </h2>
             </div>
-            <div class="col"></div>
-            <div class="col-2 offset-2">
-                <h2 id="iniciarSesionPage">
-                    <a href="./iniciar_sesion_form.php" class="tituloHeader">Iniciar Sesión</a>
+            
+            <?php
+            if (isset($_SESSION['usuario'])) {
+
+                echo "<div class='col-4 offset-2'>
+                <h2 id='iniciarSesionPage'>
+                    <a href='./configurar_usuario.php' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
+                    <a href='../../controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
+                </h2>
+            </div>";
+            } else {
+                echo "<div class='col-2 offset-2'>
+                <h2 id='iniciarSesionPage'>
+                    <a href='./forms/iniciar_sesion_form.php' class='tituloHeader'>Iniciar Sesión</a>
                 </h2>
             </div>
-            <div class="col-3">
-                <h2 id="registroPage">
-                    <a href="./registrar_form.php" class="tituloHeader">Crear cuenta</a>
+            <div class='col-3'>
+                <h2 id='registroPage'>
+                    <a href='./forms/registrar_form.php' class='tituloHeader'>Crear cuenta</a>
                 </h2>
 
-            </div>
+            </div>";
+            }
+
+            ?>
         </div>
 
         <hr class="hrLinea">

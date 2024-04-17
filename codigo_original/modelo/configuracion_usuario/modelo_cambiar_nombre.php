@@ -14,6 +14,6 @@ function cambiarNombre($ID, $nuevoNombre){
         );
     } catch (PDOException $e) { //
         // mostrarem els errors
-        echo "Error: " . $e->getMessage();
+        echo "Error cambiarNombre: " . $e->getMessage();
     }
 }

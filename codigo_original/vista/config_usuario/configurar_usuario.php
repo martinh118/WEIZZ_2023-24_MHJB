@@ -78,7 +78,7 @@ session_start();
                <div class='btn-group-vertical btn-group-lg' role='group' aria-label='Basic outlined example' style='z-index:1;'>
                     <a href="./editar_nombre_usuario.php" type='button' class='btn btn-outline-danger'>Editar Nombre de usuario</a>
                     <br>
-                    <a href="" type='button' class='btn btn-outline-danger'>Cambiar contraseña</a>
+                    <a href="./cambiar_contraseña.php" type='button' class='btn btn-outline-danger'>Cambiar contraseña</a>
                     <br>
                     <a href="../../welcome_page.php" type='button' class='btn btn-outline-danger'>Tus proyectos</a>
                     <br>

@@ -5,6 +5,11 @@ require_once("../../modelo/configuracion_usuario/modelo_usuarios.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         session_start();
+        $_SESSION['ID'] = null;
+        $_SESSION['usuario'] = null;
+        $_SESSION['email'] = null;
+        $_SESSION['token'] = null ;
+        $_SESSION['error'] = null;
         iniciarSesion();
     } catch (PDOException $e) {
         echo "Error Server Request Iniciar Sesion: " . $e->getMessage();
