@@ -25,11 +25,6 @@ session_start();
             <div class="col">
                 <h2 id="inicioPage"><a href="../../welcome_page.php" class="tituloHeader">Inicio</a></h2>
             </div>
-            <div class="col">
-                <h2 id="proyectosPage">
-                    <a href="" class="tituloHeader">Proyectos</a>
-                </h2>
-            </div>
             <div class="col"></div>
 
             <?php

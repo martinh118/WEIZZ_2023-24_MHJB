@@ -9,6 +9,8 @@
 </head>
 <?php
 session_start();
+
+
 ?>
 
 
@@ -25,25 +27,12 @@ session_start();
             <div class="col">
                 <h2 id="inicioPage"><a href="../../welcome_page.php" class="tituloHeader">Inicio</a></h2>
             </div>
-            <div class="col">
-                <h2 id="proyectosPage">
-                    <a href="" class="tituloHeader">Proyectos</a>
-                </h2>
-            </div>
-            
-            <?php
-            if (isset($_SESSION['usuario'])) {
 
-                echo "<div class='col-4 offset-2'>
+
+
+            <div class='col-2 offset-2'>
                 <h2 id='iniciarSesionPage'>
-                    <a href='./configurar_usuario.php' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
-                    <a href='../../controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
-                </h2>
-            </div>";
-            } else {
-                echo "<div class='col-2 offset-2'>
-                <h2 id='iniciarSesionPage'>
-                    <a href='./forms/iniciar_sesion_form.php' class='tituloHeader'>Iniciar Sesión</a>
+                    <a href='./iniciar_sesion_form.php' class='tituloHeader'>Iniciar Sesión</a>
                 </h2>
             </div>
             <div class='col-3'>
@@ -51,10 +40,10 @@ session_start();
                     <a href='./forms/registrar_form.php' class='tituloHeader'>Crear cuenta</a>
                 </h2>
 
-            </div>";
-            }
+            </div>
 
-            ?>
+
+
         </div>
 
         <hr class="hrLinea">
@@ -66,17 +55,28 @@ session_start();
         <h2 id="welcomeTitle">Recuperar contraseña</h2>
     </div>
 
-    <form action="" class="formTable">
-        <p class="infoText">Aplica tu correo electrónico para que te podamos enviar un link para cambiar tu contraseña.</p>
+    <?php
+    if (isset($_SESSION['errorEmail'])) {
+        $error = $_SESSION['errorEmail'];
+        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
+    } else if (isset($_SESSION['successEmail'])) {
+        $success = $_SESSION['successEmail'];
+        echo "<div class='alert alert-success offset-3' role='alert' style='width:40em; text-align:center' ><b>" . $success . "</b></div>";
+    }
+
+    ?>
+
+    <form action="../../controlador/forms/controlador_contraseña_olvidada.php" class="formTable" method="POST">
+        <p class="infoText">Aplica el correo electrónico de tu cuenta de usuario para que te podamos enviar el link de cambio de contraseña.</p>
         <div class="row">
             <label for="email" class="agrandir">Correo electronico:</label>
-            <input type="text" name="email" id="email">
+            <input type="email" name="email" id="email">
         </div>
-        <br>  
+        <br>
         <div class="row">
             <input type="submit" class="submitButton col-5 offset-2 btn btn-outline-danger" value="Enviar">
         </div>
-        
+
     </form>
 
 

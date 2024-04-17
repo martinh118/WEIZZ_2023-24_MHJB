@@ -26,11 +26,6 @@
             <div class="col">
                 <h2 id="inicioPage"><a href="../../welcome_page.php" class="tituloHeader">Inicio</a></h2>
             </div>
-            <div class="col">
-                <h2 id="proyectosPage">
-                    <a href="" class="tituloHeader">Proyectos</a>
-                </h2>
-            </div>
             <div class="col"></div>
             <div class="col-2 offset-2">
                 <h2 id="iniciarSesionPage">
@@ -51,7 +46,7 @@
     <?php
     if (isset($_SESSION['error'])) {
         $error = $_SESSION['error'];
-        echo "<div class='alert alert-danger' role='alert'><b>" . $error . "</b></div>";
+        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
         // session_unset();
     } else if (isset($_SESSION['usuario'])) {
     ?>

@@ -25,11 +25,6 @@ session_start();
             <div class="col">
                 <h2 id="inicioPage"><a href="../../welcome_page.php" class="tituloHeader">Inicio</a></h2>
             </div>
-            <div class="col">
-                <h2 id="proyectosPage">
-                    <a href="" class="tituloHeader">Proyectos</a>
-                </h2>
-            </div>
             <div class="col"></div>
 
             <?php
@@ -61,11 +56,11 @@ session_start();
     <?php
     if (isset($_SESSION['errorName'])) {
         $error = $_SESSION['errorName'];
-        echo "<div class='alert alert-danger' role='alert'><b>" . $error . "</b></div>";
+        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'> <b>" . $error . "</b></div>";
         // session_unset();
     } else if (isset($_SESSION['success'])) {
         $success = $_SESSION['successName'];
-        echo "<div class='alert alert-success' role='alert'><b>" . $success . "</b></div>";
+        echo "<div class='alert alert-success offset-3' role='alert' style='width:40em; text-align:center'><b>" . $success . "</b></div>";
     }
 
     ?>
