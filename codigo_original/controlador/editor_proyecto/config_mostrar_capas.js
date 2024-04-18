@@ -18,7 +18,7 @@ $("#mostrarCapas").click(function () {
       let cerrarElementoCapas;
   
       elementoCapas.style.left = 2 + "em";
-      elementoCapas.style.top = 10 + "em";
+      elementoCapas.style.top = 15 + "em";
       $("#proyecto").append(elementoCapas);
   
   

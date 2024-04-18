@@ -1,26 +1,26 @@
 import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 
-export function aplicarEventListener(proyecto) {
+export function aplicarEventListener() {
     let botonCrear = document.querySelectorAll(".botonCrear");
     let botonSubir = document.querySelectorAll(".botonSubir");
     let botonBajar = document.querySelectorAll(".botonBajar");
     let botonBorrar = document.querySelectorAll(".botonBorrar");
 
     botonCrear.forEach((button) => {
-        crearContainer(proyecto, button)
+        crearContainer(button)
     });
 
     botonSubir.forEach((button) => {
-        moverArribaCont(proyecto,button);
+        moverArribaCont(button);
     });
 
     botonBajar.forEach((button) => {
-        moverAbajoCont(proyecto,button);
+        moverAbajoCont(button);
     });
 
 
     botonBorrar.forEach((button) => {
-        borrarContianer(proyecto,button);
+        borrarContianer(button);
     });
 
 }
@@ -32,7 +32,7 @@ function isElement(object) {
     );
 }
 
-function moverArribaCont(proyecto, button) {
+function moverArribaCont( button) {
     button.addEventListener('click', function () {
         let filaBotones = button.parentNode;
         let filaContenedor = filaBotones.parentNode;
@@ -44,7 +44,7 @@ function moverArribaCont(proyecto, button) {
     });
 }
 
-function moverAbajoCont(proyecto, button) {
+function moverAbajoCont( button) {
     button.addEventListener('click', function () {
         let filaBotones = button.parentNode;
         let filaContenedor = filaBotones.parentNode;
@@ -56,7 +56,7 @@ function moverAbajoCont(proyecto, button) {
     })
 }
 
-function crearContainer(proyecto, button) {
+function crearContainer( button) {
     button.addEventListener('click', function (event) {
         if (event.target.type != "button") {
             let filaBotones = button.parentNode;
@@ -72,7 +72,7 @@ function crearContainer(proyecto, button) {
     });
 }
 
-function borrarContianer(proyecto, button){
+function borrarContianer( button){
     button.addEventListener('click', function () {
         let filaBotones = button.parentNode;
         let filaContenedor = filaBotones.parentNode;

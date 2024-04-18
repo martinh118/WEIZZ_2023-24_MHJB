@@ -17,7 +17,7 @@ session_start();
 
     <header>
         <div class="row" id="encabezado">
-            <div class="col ">
+            <div class="col">
                 <a href="./welcome_page.php">
                     <img src="./SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
                 </a>
@@ -30,7 +30,6 @@ session_start();
 
             <?php
             if (isset($_SESSION['usuario'])) {
-
                 echo "<div class='col-4 offset-2'>
                 <h2 id='iniciarSesionPage'>
                     <a href='./vista/config_usuario/configurar_usuario.php' class='tituloHeader'><b>".$_SESSION['usuario']."</b></a>&nbsp;&nbsp;
@@ -65,7 +64,7 @@ session_start();
     </div>
 
     <div class="row">
-        <h2 id="tusProyectos">Tus proyectos:</h2>
+        <h2 class="col offset-2" id="tusProyectos">Tus proyectos:</h2>
     </div>
 
     <div class="row">

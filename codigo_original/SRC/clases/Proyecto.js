@@ -1,20 +1,15 @@
-import {crearElemento } from '../librerias/APIElementosHTML.js';
-import base_basico from '../plantillas_base/plantilla_base_basico.json' assert { type: 'json' };
+import { crearElemento } from '../librerias/APIElementosHTML.js';
 import { FilaContenedor } from './FilaContenedor.js';
-import { Container } from './Container.js';
 
 export class Proyecto {
     #id;
-    #plantillaBase;
     #htmlBase;
     #header;
     #body;
     #footer;
 
-    constructor(_id, _plantillaBase) {
+    constructor(_id) {
         this.#id = _id;
-        this.#plantillaBase = _plantillaBase;
-
         this.#header = this.#crearHeader();
         this.#body = this.#crearBody();
         this.#footer = this.#crearFooter();
@@ -29,38 +24,11 @@ export class Proyecto {
 
     #crearBody() {
         let arr = [];
-        switch (this.#plantillaBase) {
-            case "base_basico":
-                for (const filaCont of base_basico.body) {
-                    let jsonProject = JSON.stringify(filaCont);
-
-                    let newProject = JSON.parse(jsonProject, function (key, value) {
-                        if (key == "containersHijo") {
-                            let containers = [];
-                            for (let v of value) containers.push(Container.fromJSON(v));
-                            return containers;
-                        } else {
-                            return value;   // 'nom' i altres atributs "normals"
-                        }
-                    });
-
-                    let filaContenedor = FilaContenedor.fromJSON(newProject);
-                    this.#configurarEventosBotones(filaContenedor)
-                    console.log(filaContenedor);
-                    // this.#configurarEventosBotones(filaContenedor);
-                    arr.push(filaContenedor);
-                }
-                // console.log(proyecto);
-                return arr
-            default:
-
-                let filaBody = new FilaContenedor("Body-" + this.#id, 1);
-                this.#configurarEventosBotones(filaBody)
-                arr.push(filaBody);
-                // this.#configurarEventosBotones(filaBody);
-                return arr;
-        }
-
+        let filaBody = new FilaContenedor("Body-" + this.#id, 1);
+        this.#configurarEventosBotones(filaBody)
+        arr.push(filaBody);
+        // this.#configurarEventosBotones(filaBody);
+        return arr;
     }
 
     #crearFooter() {

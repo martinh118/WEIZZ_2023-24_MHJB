@@ -55,11 +55,11 @@ session_start();
 
     if (isset($_SESSION['errorPass'])) {
         $error = $_SESSION['errorPass'];
-        echo "<div class='alert alert-danger' role='alert'><b>" . $error . "</b></div>";
+        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
         // session_unset();
     } else if (isset($_SESSION['successPass'])) {
         $success = $_SESSION['successPass'];
-        echo "<div class='alert alert-success' role='alert'><b>" . $success . "</b></div>";
+        echo "<div class='alert alert-success offset-3' role='alert' style='width:40em; text-align:center'><b>" . $success . "</b></div>";
     }
 
     ?>

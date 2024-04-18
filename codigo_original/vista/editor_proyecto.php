@@ -23,17 +23,18 @@ session_start();
 <body style="background-color: #EFEFEF;">
 
     
-    <header class="g-0">
-        <div class="row g-0" id="encabezado">
-            <div class="col-2 ">
+    <header>
+        <div class="row " id="encabezado">
+            <div class="col ">
                 <a href="../welcome_page.php">
                     <img src="../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
                 </a>
 
             </div>
-            <div class="col-1">
+            <div class="col">
                 <h2 id="inicioPage"><a href="../welcome_page.php" class="tituloHeader">Inicio</a></h2>
             </div>
+            <div class="col"></div>
             <?php
             if (isset($_SESSION['usuario'])) {
 
@@ -44,7 +45,7 @@ session_start();
                 </h2>
             </div>";
             } else {
-                echo "<div class='col-2 offset-3'>
+                echo "<div class='col-2 offset-2'>
                 <h2 id='iniciarSesionPage'>
                     <a href='./forms/iniciar_sesion_form.php' class='tituloHeader'>Iniciar Sesión</a>
                 </h2>

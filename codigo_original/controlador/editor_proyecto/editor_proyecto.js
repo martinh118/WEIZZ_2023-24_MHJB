@@ -3,6 +3,8 @@ import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { Proyecto } from '../../SRC/clases/Proyecto.js';
 import { Container } from '../../SRC/clases/Container.js';
 import { aplicarEventListener } from './aplicar_event_listener.js';
+import base_basico from '../../SRC/plantillas_base/plantilla_base_basico.json' assert { type: 'json' };
+
 
 let proyecto;
 /**
@@ -61,8 +63,8 @@ $("#guardarCambios").click(function () {
   proyecto = Proyecto.fromJSON(newProject);
   $("#proyecto").html(proyecto.getHtmlBase());
   $("#proyectoGuardadoMessage").show()
-  
-  setTimeout(() =>{$("#proyectoGuardadoMessage").hide()}, 3000);
+
+  setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
 
 });
 
@@ -90,7 +92,7 @@ $("#descargarJson").click(function () {
   a.click();
   // Eliminar el link "fantasma"
   URL.revokeObjectURL(a.href);
-  
+
 
 });
 
@@ -98,8 +100,42 @@ $("#descargarJson").click(function () {
  * 
  */
 function init() {
+  let base = "base_basico";
+
+  switch (base) {
+    case "base_basico":
+      // console.log(proyecto.getContainers());
+      let jsonProject = JSON.stringify(base_basico);
+
+      // console.log(jsonProject);
+      let newProject = JSON.parse(jsonProject, function (key, value) {
+        if (key == "body") {
+          let containers = [];
+          for (let v of value) {
+            let filaContenedor = FilaContenedor.fromJSON(v);
+            containers.push(filaContenedor);
+          }
+          return containers;
+        } else if (key == "containersHijo") {
+          let containers = [];
+          for (let v of value) containers.push(Container.fromJSON(v));
+          return containers;
+        } else {
+          return value;   // 'nom' i altres atributs "normals"
+        }
+      });
+      aplicarEventListener(proyecto);
+      proyecto = Proyecto.fromJSON(newProject);
+      break;
+
+    default:
+      proyecto = new Proyecto("FilaContenedor-1");
+      console.log("no funciona");
+      break;
+  }
+
   $("#proyectoGuardadoMessage").hide();
-  proyecto = new Proyecto("FilaContenedor-1", "base_basico");
+
   $("#proyecto").html(proyecto.getHtmlBase());
 }
 

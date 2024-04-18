@@ -13,7 +13,7 @@ $("#mostrarEstilo").click(function () {
       let cerrarElementoEstilo;
   
       elementoEstilo.style.left = 65 + "em";
-      elementoEstilo.style.top = 10 + "em";
+      elementoEstilo.style.top = 15 + "em";
       $("#proyecto").append(elementoEstilo);
   
   
