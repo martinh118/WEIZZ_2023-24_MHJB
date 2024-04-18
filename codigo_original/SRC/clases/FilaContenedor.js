@@ -12,7 +12,7 @@ export class FilaContenedor {
     constructor(_id, _numContainers) {
         this.#id = _id;
         this.#numContainers = _numContainers;
-        this.#opcionesRow = new BotonesContainer("fila-" + _id + ".botones-" + _id);
+        this.#opcionesRow = new BotonesContainer(_id + ".botones-" + _id);
         this.#containersHijo = this.#crearArrayContainers();
         this.#filaDivPrincipal = this.#crearElementoDivPrincipal();
         // this.#configurarEventosBotones();
@@ -33,12 +33,11 @@ export class FilaContenedor {
     #configurarEventosBotones() {
         this.#opcionesRow.crearClickEvent((event) => {
             event.preventDefault;
-            if(event.target.type != "button"){
+            if (event.target.type != "button") {
                 let padre = this.#filaDivPrincipal.parentNode;
                 let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
                 this.#filaDivPrincipal.insertAdjacentElement("beforebegin", fila.getRow());
             }
-            
         });
 
         this.#opcionesRow.subirClickEvent(() => {
@@ -70,8 +69,13 @@ export class FilaContenedor {
         );
     }
 
+    aplicarEventListeners() {
+        this.#configurarEventosBotones();
+    }
+
+
     #crearElementoDivPrincipal() {
-        let elementoDiv = crearElemento("div", "", "id", "principal-" + this.#id);
+        let elementoDiv = crearElemento("div", "", "id", this.#id);
         let containerFilaContenedor = crearElemento("div", "", "id", "principalContainers-" + this.#id);
         let opcionesCont = this.#opcionesRow.getDivGrupoBotones();
 
@@ -128,9 +132,9 @@ export class FilaContenedor {
     }
 
     static fromJSON(json) {
-        let fc = new FilaContenedor(json.idFilaContenedor, json.numContainers);  
-        let elementoDiv = crearElemento("div", "", "id", "principal-" + json.idFilaContenedor);
-        elementoDiv.innerHTML =json.divPrincipal 
+        let fc = new FilaContenedor(json.idFilaContenedor, json.numContainers);
+        let elementoDiv = crearElemento("div", "", "id", json.idFilaContenedor);
+        elementoDiv.innerHTML = json.divPrincipal
         fc.#filaDivPrincipal = elementoDiv;
         fc.#opcionesRow = BotonesContainer.fromJSON(json.opcionesRow);
         fc.#containersHijo = json.containersHijo;

@@ -38,32 +38,9 @@ $("#cerrarPestañas").click(function () {
  * Esta opción está inhabilitada para los usuarios anonimos.
  */
 $("#guardarCambios").click(function () {
-  // console.log(proyecto.getContainers());
-  let jsonProject = JSON.stringify(proyecto);
-
-  // console.log(jsonProject);
-  let newProject = JSON.parse(jsonProject, function (key, value) {
-    if (key == "body") {
-      let containers = [];
-      for (let v of value) {
-        let filaContenedor = FilaContenedor.fromJSON(v);
-        containers.push(filaContenedor);
-      }
-      return containers;
-    } else if (key == "containersHijo") {
-      let containers = [];
-      for (let v of value) containers.push(Container.fromJSON(v));
-      return containers;
-    } else {
-      return value;   // 'nom' i altres atributs "normals"
-    }
-  });
-
-  // console.log(newProject);
-  proyecto = Proyecto.fromJSON(newProject);
+  proyecto = transformarJson(proyecto);
   $("#proyecto").html(proyecto.getHtmlBase());
   $("#proyectoGuardadoMessage").show()
-
   setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
 
 });
@@ -72,10 +49,6 @@ $("#guardarCambios").click(function () {
  * Obtiene los datos del proyecto en formato JSON y descarga el archivo.
  */
 $("#descargarJson").click(function () {
-  console.log("HTMLBase: " + proyecto.getHtmlBase());
-  console.log("Header: " + proyecto.getHeader());
-  console.log("Body: " + proyecto.getBody());
-  console.log("Footer: " + proyecto.getFooter());
   let jsonProject = JSON.stringify(proyecto);
 
   // Crear un objecte similar a un arxiu format per bytes
@@ -96,6 +69,29 @@ $("#descargarJson").click(function () {
 
 });
 
+function transformarJson(archivoJson) {
+  let jsonProject = JSON.stringify(archivoJson);
+
+  let newProject = JSON.parse(jsonProject, function (key, value) {
+    if (key == "body") {
+      let containers = [];
+      for (let v of value) {
+        let filaContenedor = FilaContenedor.fromJSON(v);
+        containers.push(filaContenedor);
+      }
+      return containers;
+    } else if (key == "containersHijo") {
+      let containers = [];
+      for (let v of value) containers.push(Container.fromJSON(v));
+      return containers;
+    } else {
+      return value;   // 'nom' i altres atributs "normals"
+    }
+  });
+  let project = Proyecto.fromJSON(newProject);
+  return project;
+}
+
 /**
  * 
  */
@@ -104,39 +100,25 @@ function init() {
 
   switch (base) {
     case "base_basico":
-      // console.log(proyecto.getContainers());
-      let jsonProject = JSON.stringify(base_basico);
-
-      // console.log(jsonProject);
-      let newProject = JSON.parse(jsonProject, function (key, value) {
-        if (key == "body") {
-          let containers = [];
-          for (let v of value) {
-            let filaContenedor = FilaContenedor.fromJSON(v);
-            containers.push(filaContenedor);
-          }
-          return containers;
-        } else if (key == "containersHijo") {
-          let containers = [];
-          for (let v of value) containers.push(Container.fromJSON(v));
-          return containers;
-        } else {
-          return value;   // 'nom' i altres atributs "normals"
-        }
-      });
+      proyecto = transformarJson(base_basico);
+      $("#proyecto").html(proyecto.getHtmlBase());
       aplicarEventListener(proyecto);
-      proyecto = Proyecto.fromJSON(newProject);
       break;
 
     default:
-      proyecto = new Proyecto("FilaContenedor-1");
-      console.log("no funciona");
+      proyecto = new Proyecto(1);
+      let fila1 = new FilaContenedor("FilaContenedor-1",1);
+      let fila2 = new FilaContenedor("FilaContenedor-2",2);
+      let fila3 = new FilaContenedor("FilaContenedor-3",3);
+      proyecto.setBody([fila1,fila2,fila3]);
+      $("#proyecto").html(proyecto.getHtmlBase());
+
       break;
   }
 
   $("#proyectoGuardadoMessage").hide();
 
-  $("#proyecto").html(proyecto.getHtmlBase());
+  
 }
 
 

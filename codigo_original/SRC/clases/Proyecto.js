@@ -25,9 +25,7 @@ export class Proyecto {
     #crearBody() {
         let arr = [];
         let filaBody = new FilaContenedor("Body-" + this.#id, 1);
-        this.#configurarEventosBotones(filaBody)
         arr.push(filaBody);
-        // this.#configurarEventosBotones(filaBody);
         return arr;
     }
 
@@ -39,9 +37,9 @@ export class Proyecto {
 
     #crearHtmlProyecto() {
         let html = crearElemento("html", "");
-        let divRowHeader = crearElemento("div", "", "id", "rowHeaderProject" + this.#id);
-        let divRowBody = crearElemento("div", "", "id", "rowBodyProject" + this.#id);
-        let divRowFooter = crearElemento("div", "", "id", "rowFooterProject" + this.#id);
+        let divRowHeader = crearElemento("div", "", "id", "rowHeaderProject");
+        let divRowBody = crearElemento("div", "", "id", "rowBodyProject");
+        let divRowFooter = crearElemento("div", "", "id", "rowFooterProject");
 
         divRowHeader.setAttribute("class", "row border-bottom border-dark border-2");
         divRowBody.setAttribute("class", "row mt-4 border-bottom border-dark border-2");
@@ -60,79 +58,6 @@ export class Proyecto {
 
         return html;
     }
-
-    #configurarEventosBotones(filaCont) {
-        let botones = filaCont.getOpcionesRow();
-        let row = filaCont.getRow();
-
-        botones.crearClickEvent((event) => {
-            event.preventDefault;
-            if (event.target.type != "button") {
-
-                let padre = row.parentNode;
-                let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
-
-                this.#configurarEventosBotones(fila);
-
-                let indexCont = this.#body.indexOf(filaCont);
-                this.#body.splice(indexCont, 0, fila);
-
-                row.insertAdjacentElement("beforebegin", fila.getRow());
-
-            }
-        });
-
-        botones.subirClickEvent(() => {
-            let elArriba = row.previousSibling;
-
-            if (this.#isElement(elArriba)) {
-
-                let indexCont = this.#body.indexOf(filaCont);
-                let indexArriba = indexCont - 1;
-                let contArriba = this.#body[indexArriba];
-
-                this.#body[indexArriba] = this.#body[indexCont];
-                this.#body[indexCont] = contArriba;
-
-                row.insertAdjacentElement("afterend", elArriba);
-            }
-
-        });
-
-        botones.bajarClickEvent(() => {
-            let elAbajo = row.nextSibling;
-
-            if (this.#isElement(elAbajo)) {
-
-                let indexCont = this.#body.indexOf(filaCont);
-                let indexAbajo = indexCont + 1;
-                let contAbajo = this.#body[indexAbajo];
-
-                this.#body[indexAbajo] = this.#body[indexCont];
-                this.#body[indexCont] = contAbajo;
-
-                row.insertAdjacentElement("beforebegin", elAbajo);
-            }
-
-        });
-
-        botones.borrarClickEvent(() => {
-            row.remove();
-            let indexCont = this.#body.indexOf(filaCont);
-            this.#body.splice(indexCont, 1);
-        });
-
-
-    }
-
-    #isElement(object) {
-        return (
-            typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
-                object && typeof object === "object" && object !== null && object.nodeType === 1 && typeof object.nodeName === "string"
-        );
-    }
-
-
 
     toJSON() {
         return {
@@ -177,11 +102,6 @@ export class Proyecto {
         return this.#footer;
     }
 
-    // getContainers() {
-    //     return this.#containers;
-    // }
-
-
     setId(id) {
         this.#id = id;
     }
@@ -192,43 +112,77 @@ export class Proyecto {
 
     setHeader(header) {
         this.#header = header;
+        this.#htmlBase = this.#crearHtmlProyecto();
     }
 
     setBody(body) {
         this.#body = body;
+        this.#htmlBase = this.#crearHtmlProyecto();
     }
 
     setFooter(footer) {
         this.#footer = footer;
+        this.#htmlBase = this.#crearHtmlProyecto();
     }
 
-    addContainerBody(filaContainer) {
-        this.#body.push(filaContainer);
-        console.log(this.#body);
+    addContainerBody(nuevaFila, filaContainer) {
+        for (const filaCont of this.#body) {
+            let row = filaCont.getId();
+            if (row == filaContainer.id) {
+                let indexCont = this.#body.indexOf(filaCont);
+                this.#body.splice(indexCont, 0, nuevaFila);
+                console.log(this.#body);
+                break;
+            }
+        }
     }
 
     deleteContainerBody(filaContainer) {
-        let indexCont = this.#body.indexOf(filaContainer);
-        this.#body.splice(indexCont, 1);
-        console.log(this.#body);
+        for (const filaCont of this.#body) {
+            let row = filaCont.getId();
+            if (row == filaContainer.id) {
+                let indexCont = this.#body.indexOf(filaCont);
+                this.#body.splice(indexCont, 1);
+                console.log(this.#body);
+                break;
+            }
+        }
     }
 
     moverAbajoContainerBody(filaContainer) {
-        let indexCont = this.#body.indexOf(filaContainer);
-        let indexAbajo = indexCont + 1;
-        let contAbajo = this.#body[indexAbajo];
+        for (const filaCont of this.#body) {
+            let row = filaCont.getId();
+            if (row == filaContainer.id) {
+                let indexCont = this.#body.indexOf(filaCont);
+                let indexAbajo = indexCont + 1;
+                let contAbajo = this.#body[indexAbajo];
 
-        this.#body[indexAbajo] = this.#body[indexCont];
-        this.#body[indexCont] = contAbajo;
+                if (contAbajo != undefined) {
+                    this.#body[indexAbajo] = this.#body[indexCont];
+                    this.#body[indexCont] = contAbajo;
+                }
+                console.log(this.#body);
+                break;
+            }
+        }
+
     }
 
     moverArribaContainerBody(filaContainer) {
-        let indexCont = this.#body.indexOf(filaContainer);
-        let indexArriba = indexCont - 1;
-        let contArriba = this.#body[indexArriba];
-
-        this.#body[indexArriba] = this.#body[indexCont];
-        this.#body[indexCont] = contArriba;
+        for (const filaCont of this.#body) {
+            let row = filaCont.getId();
+            if (row == filaContainer.id) {
+                let indexCont = this.#body.indexOf(filaCont);
+                let indexArriba = indexCont - 1;
+                if (indexArriba >= 0) {
+                    let contArriba = this.#body[indexArriba];
+                    this.#body[indexArriba] = this.#body[indexCont];
+                    this.#body[indexCont] = contArriba;
+                }
+                console.log(this.#body);
+                break;
+            }
+        }
     }
 
 
