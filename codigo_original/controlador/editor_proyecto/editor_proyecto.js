@@ -4,6 +4,7 @@ import { Proyecto } from '../../SRC/clases/Proyecto.js';
 import { Container } from '../../SRC/clases/Container.js';
 import { aplicarEventListener } from './aplicar_event_listener.js';
 import base_basico from '../../SRC/plantillas_base/plantilla_base_basico.json' assert { type: 'json' };
+import base_multiple from '../../SRC/plantillas_base/plantilla_base_multiple.json' assert { type: 'json' };
 
 
 let proyecto;
@@ -40,6 +41,7 @@ $("#cerrarPestañas").click(function () {
 $("#guardarCambios").click(function () {
   proyecto = transformarJson(proyecto);
   $("#proyecto").html(proyecto.getHtmlBase());
+  aplicarEventListener(proyecto);
   $("#proyectoGuardadoMessage").show()
   setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
 
@@ -99,26 +101,28 @@ function init() {
   let base = "base_basico";
 
   switch (base) {
+    case "base_multiple":
+      proyecto = transformarJson(base_multiple);
+      break;
     case "base_basico":
       proyecto = transformarJson(base_basico);
-      $("#proyecto").html(proyecto.getHtmlBase());
-      aplicarEventListener(proyecto);
       break;
 
     default:
       proyecto = new Proyecto(1);
-      let fila1 = new FilaContenedor("FilaContenedor-1",1);
-      let fila2 = new FilaContenedor("FilaContenedor-2",2);
-      let fila3 = new FilaContenedor("FilaContenedor-3",3);
-      proyecto.setBody([fila1,fila2,fila3]);
-      $("#proyecto").html(proyecto.getHtmlBase());
-
+      let fila1 = new FilaContenedor("FilaContenedor-1", 1);
+      let fila2 = new FilaContenedor("FilaContenedor-2", 2);
+      let fila3 = new FilaContenedor("FilaContenedor-3", 3);
+      proyecto.setBody([fila1, fila2, fila3]);
       break;
   }
 
+  $("#proyecto").html(proyecto.getHtmlBase());
+  aplicarEventListener(proyecto);
+
   $("#proyectoGuardadoMessage").hide();
 
-  
+
 }
 
 

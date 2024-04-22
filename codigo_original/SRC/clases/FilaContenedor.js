@@ -15,7 +15,6 @@ export class FilaContenedor {
         this.#opcionesRow = new BotonesContainer(_id + ".botones-" + _id);
         this.#containersHijo = this.#crearArrayContainers();
         this.#filaDivPrincipal = this.#crearElementoDivPrincipal();
-        // this.#configurarEventosBotones();
     }
 
     #crearArrayContainers() {
@@ -30,48 +29,48 @@ export class FilaContenedor {
         return listaContainers;
     }
 
-    #configurarEventosBotones() {
-        this.#opcionesRow.crearClickEvent((event) => {
-            event.preventDefault;
-            if (event.target.type != "button") {
-                let padre = this.#filaDivPrincipal.parentNode;
-                let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
-                this.#filaDivPrincipal.insertAdjacentElement("beforebegin", fila.getRow());
-            }
-        });
+    // #configurarEventosBotones() {
+    //     this.#opcionesRow.crearClickEvent((event) => {
+    //         event.preventDefault;
+    //         if (event.target.type != "button") {
+    //             let padre = this.#filaDivPrincipal.parentNode;
+    //             let fila = new FilaContenedor(padre.childNodes.length, event.target.value);
+    //             this.#filaDivPrincipal.insertAdjacentElement("beforebegin", fila.getRow());
+    //         }
+    //     });
 
-        this.#opcionesRow.subirClickEvent(() => {
-            let elArriba = this.#filaDivPrincipal.previousSibling;
-            if (this.#isElement(elArriba)) {
-                this.#filaDivPrincipal.insertAdjacentElement("afterend", elArriba);
-            }
-        });
+    //     this.#opcionesRow.subirClickEvent(() => {
+    //         let elArriba = this.#filaDivPrincipal.previousSibling;
+    //         if (this.#isElement(elArriba)) {
+    //             this.#filaDivPrincipal.insertAdjacentElement("afterend", elArriba);
+    //         }
+    //     });
 
-        this.#opcionesRow.bajarClickEvent(() => {
-            let elAbajo = this.#filaDivPrincipal.nextSibling;
-            if (this.#isElement(elAbajo)) {
-                this.#filaDivPrincipal.insertAdjacentElement("beforebegin", elAbajo);
-            }
-        });
+    //     this.#opcionesRow.bajarClickEvent(() => {
+    //         let elAbajo = this.#filaDivPrincipal.nextSibling;
+    //         if (this.#isElement(elAbajo)) {
+    //             this.#filaDivPrincipal.insertAdjacentElement("beforebegin", elAbajo);
+    //         }
+    //     });
 
-        this.#opcionesRow.borrarClickEvent(() => {
-            this.#filaDivPrincipal.remove();
-        });
-
-
-    }
+    //     this.#opcionesRow.borrarClickEvent(() => {
+    //         this.#filaDivPrincipal.remove();
+    //     });
 
 
-    #isElement(object) {
-        return (
-            typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
-                object && typeof object === "object" && object !== null && object.nodeType === 1 && typeof object.nodeName === "string"
-        );
-    }
+    // }
 
-    aplicarEventListeners() {
-        this.#configurarEventosBotones();
-    }
+
+    // #isElement(object) {
+    //     return (
+    //         typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
+    //             object && typeof object === "object" && object !== null && object.nodeType === 1 && typeof object.nodeName === "string"
+    //     );
+    // }
+
+    // aplicarEventListeners() {
+    //     this.#configurarEventosBotones();
+    // }
 
 
     #crearElementoDivPrincipal() {

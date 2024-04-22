@@ -15,7 +15,7 @@ function deleteUser($usuario)
                 ':usuario' => $usuario
             )
         );
-        reordenarUsuarios();
+        // reordenarUsuarios();
     } catch (PDOException $e) { //
         // mostrarem els errors
         echo "Error deleteUser: " . $e->getMessage();

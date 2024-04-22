@@ -82,7 +82,7 @@ function obtenerCapasProyecto() {
   
       let firstCol = crearElemento("div", "Container Header", "style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black;");
       let proyecto = document.getElementById("proyecto");
-      let containerHeader = proyecto.querySelectorAll("#principalContainers-FilaContenedor-Header-1");
+      let containerHeader = proyecto.querySelectorAll("#principalContainers-Header-1");
       let hijosHeader = containerHeader[0].children;
   
       firstCol.setAttribute("class", "offset-1");
@@ -124,7 +124,7 @@ function obtenerCapasProyecto() {
       let rowPrincipalBody = crearElemento("div", "", "class", "row");
   
       let proyecto = document.getElementById("proyecto");
-      let containersBody = proyecto.querySelector("#rowBodyProject1");
+      let containersBody = proyecto.querySelector("#rowBodyProject");
       let index = 1;
       for (const container of containersBody.children) {
   
@@ -176,7 +176,7 @@ function obtenerCapasProyecto() {
   
       let firstCol = crearElemento("div", "Container Footer", "style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black;");
       let proyecto = document.getElementById("proyecto");
-      let containerFooter = proyecto.querySelectorAll("#principalContainers-FilaContenedor-Footer-1");
+      let containerFooter = proyecto.querySelectorAll("#principalContainers-Footer-1");
       let hijosFooter = containerFooter[0].children;
   
       firstCol.setAttribute("class", "offset-1");

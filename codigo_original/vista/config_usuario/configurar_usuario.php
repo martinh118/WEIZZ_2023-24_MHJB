@@ -64,7 +64,7 @@ session_start();
                 </div>
                 <div class="row infoUser">
                     <?php
-                    echo "<p><u>Correo electronico</u>: <b>" . $_SESSION['email'] . "</b></p>";
+                    echo "<p><u>Correo electrónico</u>: <b>" . $_SESSION['email'] . "</b></p>";
                     ?>
                 </div>
             </div>
