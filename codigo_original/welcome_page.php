@@ -5,6 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./SRC/CSS/welcome_page.css">
+    <script src="./controlador/controlador_welcome.js"></script>
     <title>Weizz - Welcome page</title>
 </head>
 <?php
@@ -76,17 +77,32 @@ session_start();
 
     </div>
 
-    <div class="row">
-        <h2 class="col offset-2" id="tusProyectos">Tus proyectos:</h2>
-    </div>
+    
 
     <?php
     if (isset($_SESSION['usuario'])) {
+        echo "<div class='row'>
+        <h2 class='col offset-2' id='tusProyectos'>Tus proyectos:</h2>
+    </div>";
         mostrarProyectosUser($_SESSION['ID']);
     }
 
     ?>
 
+<!-- Modal Preguntar eliminar cuenta de usuario -->
+<div class="modal fade" id="eliminarProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <h5 class="modal-body">
+        ¿Deseas eliminar el proyecto seleccionado?
+      </h5>
+      <div class="modal-footer">
+          <a href="" type="button" class="btn btn-danger">Eliminar proyecto</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>
