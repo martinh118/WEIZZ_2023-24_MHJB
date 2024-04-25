@@ -74,7 +74,7 @@ session_start();
         <!-- href="./editor_proyecto.php"  -->
 
         <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBasico">
+            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='basico'>
                 <div class="cuadroBase" id="baseBasico">
                 </div>
                 <h3 class="baseTitle"><b>Basico</b></h3>
@@ -82,7 +82,7 @@ session_start();
         </div>
 
         <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalGaleria">
+            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='galeria'>
                 <div class="cuadroBase" id="baseGaleria">
 
                 </div>
@@ -91,7 +91,7 @@ session_start();
         </div>
 
         <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalMultiple">
+            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='multiple'>
 
                 <div class="cuadroBase" id="baseMultiple" >
 
@@ -101,7 +101,7 @@ session_start();
         </div>
 
         <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalModelo">
+            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='modelo'>
 
                 <div class="cuadroBase" id="baseModelo">
 
@@ -113,67 +113,19 @@ session_start();
     </div>
 
     <!-- Modal Preguntar seleccionar base basico -->
-<div class="modal fade" id="modalBasico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalBase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <h5 class="modal-body">
-        ¿Seleccionar base Basico?
+      <h5 class="modal-body" id="tituloModal">
+        
       </h5>
       <div class="modal-footer">
-          <a href="../controlador/config_proyecto/controlador_crear_proyecto.php?base=basico" type="button" class="btn btn-danger">Seleccionar</a>
+          <a href="" type="button" class="btn btn-danger" id="seleccionarBase">Seleccionar</a>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal Preguntar seleccionar base galeria -->
-<div class="modal fade" id="modalGaleria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <h5 class="modal-body">
-        ¿Seleccionar base Galeria?
-      </h5>
-      <div class="modal-footer">
-          <a href="../controlador/config_proyecto/controlador_crear_proyecto.php?base=galeria" type="button" class="btn btn-danger">Seleccionar</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal Preguntar seleccionar base multiple -->
-<div class="modal fade" id="modalMultiple" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <h5 class="modal-body">
-        ¿Seleccionar base Multiple?
-      </h5>
-      <div class="modal-footer">
-          <a href="../controlador/config_proyecto/controlador_crear_proyecto.php?base=multiple" type="button" class="btn btn-danger">Seleccionar</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Preguntar seleccionar base Modelo -->
-<div class="modal fade" id="modalModelo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <h5 class="modal-body">
-        ¿Seleccionar base Modelo?
-      </h5>
-      <div class="modal-footer">
-          <a href="../controlador/config_proyecto/controlador_crear_proyecto.php?base=modelo" type="button" class="btn btn-danger">Seleccionar</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
 </body>

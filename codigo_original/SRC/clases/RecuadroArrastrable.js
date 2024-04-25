@@ -23,7 +23,7 @@ export class RecuadroArrastrable{
         let separador = crearElemento("br", "");
         let bodyRecuadro = crearElemento("div", "", "class", "row bodyRecuadro");
 
-        let attrRecuadro = {"style": "width:15em; background-color: #FF4242;position:fixed;", "class": "draggable"}
+        let attrRecuadro = {"style": "width:15em; background-color: #FF4242;position:fixed; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);", "class": "draggable"}
         modificarAtributoElemento(recuadro, attrRecuadro);
         divTitulo.setAttribute("style", "font-weight: bold;");
 

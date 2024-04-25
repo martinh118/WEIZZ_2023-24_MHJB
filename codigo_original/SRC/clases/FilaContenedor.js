@@ -80,7 +80,7 @@ export class FilaContenedor {
 
         let separador = crearElemento("br", "");
 
-        let attrElementoDiv = { "class": "align-items-center d-flex flex-column position-relative" };
+        let attrElementoDiv = { "class": " col align-items-center d-flex flex-column position-relative" };
         let attrFilaContenedor = { "class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;" };
 
         modificarAtributoElemento(elementoDiv, attrElementoDiv);
@@ -103,7 +103,7 @@ export class FilaContenedor {
 
         let separador = crearElemento("br", "");
 
-        let attrElementoDiv = { "class": "align-items-center d-flex flex-column position-relative" };
+        let attrElementoDiv = { "class": "col align-items-center d-flex flex-column position-relative" };
         let attrFilaContenedor = { "class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;" };
 
         modificarAtributoElemento(elementoDiv, attrElementoDiv);
@@ -162,7 +162,7 @@ export class FilaContenedor {
     }
 
     setId(newId) {
-        this.#id = "FilaContenedor-" + newId;
+        this.#id = newId;
     }
 
     setNumContainers(numCont) {

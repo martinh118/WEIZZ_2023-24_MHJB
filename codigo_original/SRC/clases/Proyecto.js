@@ -1,11 +1,12 @@
 import { crearElemento } from '../librerias/APIElementosHTML.js';
 import { FilaContenedor } from './FilaContenedor.js';
+import { Fila } from './Fila.js';
 
 export class Proyecto {
     #id;
     #htmlBase;
     #header;
-    #body;
+    #body; //Array objeto Fila
     #footer;
 
     constructor(_id) {
@@ -17,21 +18,23 @@ export class Proyecto {
     }
 
     #crearHeader() {
-        let filaHeader = new FilaContenedor("Header-" + this.#id, 3)
-        filaHeader.containerSinOpciones();
+        let contenedor = new FilaContenedor("Header-" + this.#id, 3);
+        contenedor.containerSinOpciones();
+        let filaHeader = new Fila("rowHeader-"+ this.#id, [contenedor])
         return filaHeader;
     }
 
     #crearBody() {
         let arr = [];
-        let filaBody = new FilaContenedor("Body-" + this.#id, 1);
+        let filaBody = new Fila("Body-" + this.#id, []);
         arr.push(filaBody);
         return arr;
     }
 
     #crearFooter() {
-        let filaFooter = new FilaContenedor("Footer-" + this.#id, 4);
-        filaFooter.containerSinOpciones();
+        let contenedor = new FilaContenedor("Footer-" + this.#id, 4);
+        contenedor.containerSinOpciones();
+        let filaFooter = new Fila("rowFooter-"+ this.#id, [contenedor])
         return filaFooter;
     }
 
@@ -45,12 +48,13 @@ export class Proyecto {
         divRowBody.setAttribute("class", "row mt-4 border-bottom border-dark border-2");
         divRowFooter.setAttribute("class", "row mt-4 ");
 
+        // let contenedorHeader = filaHeader.getFilasContenedor();
 
-        divRowHeader.appendChild(this.#header.getRow());
+        divRowHeader.appendChild(this.#header.getHtmlBase());
         for (const body of this.#body) {
-            divRowBody.appendChild(body.getRow());
+            divRowBody.appendChild(body.getHtmlBase());
         }
-        divRowFooter.appendChild(this.#footer.getRow());
+        divRowFooter.appendChild(this.#footer.getHtmlBase());
 
         html.appendChild(divRowHeader);
         html.appendChild(divRowBody);
@@ -74,9 +78,9 @@ export class Proyecto {
         let proyecto = new Proyecto(json.idProyecto);
         let html = crearElemento("hmtl", "");
         html.innerHTML = json.htmlBase;
-        proyecto.#header = FilaContenedor.fromJSON(json.header);
+        proyecto.#header = Fila.fromJSON(json.header);
         proyecto.#body = json.body;
-        proyecto.#footer = FilaContenedor.fromJSON(json.footer);
+        proyecto.#footer = Fila.fromJSON(json.footer);
         proyecto.#htmlBase = html;
         return proyecto;
 

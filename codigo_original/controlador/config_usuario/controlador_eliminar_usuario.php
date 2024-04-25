@@ -9,6 +9,7 @@ function eliminarUsuario()
 {
     session_start();
     $idUsuario = $_SESSION['ID'];
+    eliminarProyectosUser($idUsuario);
     deleteUser($idUsuario);
     session_destroy();
     session_abort();

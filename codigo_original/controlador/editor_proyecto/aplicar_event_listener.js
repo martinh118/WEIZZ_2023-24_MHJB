@@ -1,4 +1,6 @@
 import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
+import { Fila } from '../../SRC/clases/Fila.js';
+import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
 
 export function aplicarEventListener(proyecto) {
     let botonCrear = document.querySelectorAll(".botonCrear");
@@ -25,50 +27,112 @@ export function aplicarEventListener(proyecto) {
 
 }
 
-
-function moverArribaCont(button, proyecto) {
-    button.addEventListener('click', function () {
-        let filaBotones = button.parentNode;
-        let filaContenedor = filaBotones.parentNode;
-        let elArriba = filaContenedor.previousSibling;
-        if (isElement(elArriba)) {
-            filaContenedor.insertAdjacentElement("afterend", elArriba);
-            proyecto.moverArribaContainerBody(filaContenedor);
-        }
-    });
-}
-
-function moverAbajoCont(button, proyecto) {
-    button.addEventListener('click', function () {
-        let filaBotones = button.parentNode;
-        let filaContenedor = filaBotones.parentNode;
-        let elAbajo = filaContenedor.nextSibling;
-        if (isElement(elAbajo)) {
-            filaContenedor.insertAdjacentElement("beforebegin", elAbajo);
-            proyecto.moverAbajoContainerBody(filaContenedor);
-        }
-    })
-}
-
 function crearContainer(button, proyecto) {
     button.addEventListener('click', function (event) {
 
         if (event.target.type != "button") {
-            let filaBotones = button.parentNode;
-            let filaContenedor = filaBotones.parentNode;
+            let selectedFilaBotones = button.parentNode;
+            let selectedFilaContenedor = selectedFilaBotones.parentNode;
+            let selectedFilaRow = selectedFilaContenedor.parentNode;
 
             let newId = obtenerId();
-            let fila = new FilaContenedor(newId, event.target.value);
+            let newFilaCont = new FilaContenedor(newId, event.target.value);
+            let newFilaRow = new Fila(newId, [newFilaCont]);
 
-            aplicarListenersFilaContainer(fila, proyecto);
+            aplicarListenersFilaContainer(newFilaCont, proyecto);
 
-            filaContenedor.insertAdjacentElement("beforebegin", fila.getRow());
-            proyecto.addContainerBody(fila, filaContenedor);
+            selectedFilaRow.insertAdjacentElement("beforebegin", newFilaRow.getHtmlBase());
+            // proyecto.addContainerBody(newFilaRow, selectedFilaRow);
 
             // aplicarEventListener();
         }
     });
 }
+
+
+function moverArribaCont(button, proyecto) {
+    button.addEventListener('click', function () {
+        let selectedFilaBotones = button.parentNode;
+        let selectedFilaContenedor = selectedFilaBotones.parentNode;
+        let selectedFilaRow = selectedFilaContenedor.parentNode;
+
+        let filaRowArriba = selectedFilaRow.previousSibling;
+        let filaContenedorIzquierda = selectedFilaContenedor.previousSibling;
+
+        if (isElement(filaContenedorIzquierda)) {
+            if (isFilaContenedor(filaContenedorIzquierda)) {
+                selectedFilaContenedor.insertAdjacentElement("afterend", filaContenedorIzquierda);
+
+            }
+        } else if (isElement(filaRowArriba)) {
+
+            let ultimoHijoArriba = filaRowArriba.lastChild;
+            selectedFilaContenedor.insertAdjacentElement("beforebegin", ultimoHijoArriba);
+
+            filaRowArriba.appendChild(selectedFilaContenedor);
+            // proyecto.moverArribaContainerBody(selectedFilaRow);
+        }else{
+            let filaContenedorDerecha = selectedFilaContenedor.nextSibling;
+            if(isElement(filaContenedorDerecha)){
+                let newIdFila = obtenerId();
+                let newFila = new Fila(newIdFila, []);
+                let elementoDiv = crearElemento("div", "", "id", newIdFila);
+                
+                elementoDiv.setAttribute("class", "row mt-4");
+                elementoDiv.appendChild(selectedFilaContenedor);
+                
+                newFila.setHtmlBase(elementoDiv);
+                let contentNewFila = newFila.getHtmlBase();
+                selectedFilaRow.insertAdjacentElement("beforebegin", contentNewFila);
+            }
+        }
+
+    });
+}
+
+
+function moverAbajoCont(button, proyecto) {
+    button.addEventListener('click', function () {
+        let selectedFilaBotones = button.parentNode;
+        let selectedFilaContenedor = selectedFilaBotones.parentNode;
+        let selectedFilaRow = selectedFilaContenedor.parentNode;
+
+        let filaRowAbajo = selectedFilaRow.nextSibling;
+        let filaContenedorDerecha = selectedFilaContenedor.nextSibling;
+
+        if (isElement(filaContenedorDerecha)) {
+            if (isFilaContenedor(filaContenedorDerecha)) {
+                selectedFilaContenedor.insertAdjacentElement("beforebegin", filaContenedorDerecha);
+
+            }
+        } else if (isElement(filaRowAbajo)) {
+
+            let primeroHijoAbajo = filaRowAbajo.firstChild;
+            selectedFilaContenedor.insertAdjacentElement("afterend", primeroHijoAbajo);
+
+            filaRowAbajo.prepend(selectedFilaContenedor);
+            // proyecto.moverAbajoContainerBody(selectedFilaRow);
+        }else{
+            let filaContenedorIzquierda = selectedFilaContenedor.previousSibling;
+            if(isElement(filaContenedorIzquierda)){
+                let newIdFila = obtenerId();
+                let newFila = new Fila(newIdFila, []);
+                let elementoDiv = crearElemento("div", "", "id", newIdFila);
+                
+                elementoDiv.setAttribute("class", "row mt-4");
+                elementoDiv.appendChild(selectedFilaContenedor);
+                
+                newFila.setHtmlBase(elementoDiv);
+                let contentNewFila = newFila.getHtmlBase();
+                selectedFilaRow.insertAdjacentElement("afterend", contentNewFila);
+            }
+        }
+
+
+    })
+}
+
+
 
 function borrarContianer(button, proyecto) {
     button.addEventListener('click', function () {
@@ -84,6 +148,15 @@ function isElement(object) {
         typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
             object && typeof object === "object" && object !== null && object.nodeType === 1 && typeof object.nodeName === "string"
     );
+}
+
+function isFilaContenedor(object) {
+    let idFilaContenedor = object.id;
+    let confirm = idFilaContenedor.split("-")[0];
+
+    if (confirm == "FilaContenedor") {
+        return true;
+    } else return false;
 }
 
 function obtenerId() {
@@ -104,12 +177,12 @@ function obtenerId() {
         }
     } while (exist >= 0)
 
-    return "FilaContenedor-" + index;
+    return "FilaRow-" + index;
 
 }
 
-function aplicarListenersFilaContainer(filaContainer, proyecto) {
-    let botones = filaContainer.getOpcionesRow();
+function aplicarListenersFilaContainer(filaRow, proyecto) {
+    let botones = filaRow.getOpcionesRow();
     let botonCrear = botones.getBotonCrear();
     let botonSubir = botones.getSubirElemento();
     let botonBajar = botones.getBajarElemento();

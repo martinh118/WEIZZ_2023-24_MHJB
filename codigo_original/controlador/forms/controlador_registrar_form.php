@@ -74,13 +74,17 @@ function comprobarDatos()
     try {
         $errores = "";
         $usuarios = getUsers();
+        $userName = $_POST['userName'];
         $email = $_POST['email'];
         $pass = $_POST['pass'];
         $pass2 = $_POST['pass2'];
 
         foreach ($usuarios as $user) {
             if ($user['email'] == $email) {
-                $errores .= "El correo electronico '" . $email . "' ya está registrado.<br>";
+                $errores .= "Lo sentimos, el correo electronico <b>'" . $email . "'</b> ya está registrado.<br>";
+            }
+            if ($user['usuario'] == $userName) {
+                $errores .= "Lo sentimos, el nombre de usuario <b>'" . $userName . "'</b> ya está registrado.<br>";
             }
         }
 

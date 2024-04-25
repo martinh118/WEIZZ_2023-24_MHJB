@@ -3,6 +3,7 @@ import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { Proyecto } from '../../SRC/clases/Proyecto.js';
 import { Container } from '../../SRC/clases/Container.js';
 import { aplicarEventListener } from './aplicar_event_listener.js';
+import { Fila } from '../../SRC/clases/Fila.js';
 import base_basico from '../../SRC/plantillas_base/plantilla_base_basico.json' assert { type: 'json' };
 import base_multiple from '../../SRC/plantillas_base/plantilla_base_multiple.json' assert { type: 'json' };
 
@@ -78,13 +79,17 @@ function transformarJson(archivoJson) {
     if (key == "body") {
       let containers = [];
       for (let v of value) {
-        let filaContenedor = FilaContenedor.fromJSON(v);
+        let filaContenedor = Fila.fromJSON(v);
         containers.push(filaContenedor);
       }
       return containers;
     } else if (key == "containersHijo") {
       let containers = [];
       for (let v of value) containers.push(Container.fromJSON(v));
+      return containers;
+    }else if (key == "filasContenedor") {
+      let containers = [];
+      for (let v of value) containers.push(FilaContenedor.fromJSON(v));
       return containers;
     } else {
       return value;   // 'nom' i altres atributs "normals"
@@ -98,7 +103,7 @@ function transformarJson(archivoJson) {
  * 
  */
 function init() {
-  let base = "base_basico";
+  let base = "";
 
   switch (base) {
     case "base_multiple":
@@ -112,8 +117,11 @@ function init() {
       proyecto = new Proyecto(1);
       let fila1 = new FilaContenedor("FilaContenedor-1", 1);
       let fila2 = new FilaContenedor("FilaContenedor-2", 2);
-      let fila3 = new FilaContenedor("FilaContenedor-3", 3);
-      proyecto.setBody([fila1, fila2, fila3]);
+      let fila4 = new FilaContenedor("FilaContenedor-4", 3);
+      let fila3 = new FilaContenedor("FilaContenedor-3", 4);
+      let filaRow1 = new Fila("FilaRow-"+1, [fila1, fila2]);
+      let filaRow2 = new Fila("FilaRow-" +2, [fila4, fila3]);
+      proyecto.setBody([filaRow1, filaRow2]);
       break;
   }
 

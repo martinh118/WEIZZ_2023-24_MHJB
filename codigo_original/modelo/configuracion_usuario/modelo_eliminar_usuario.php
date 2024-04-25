@@ -40,3 +40,20 @@ function reordenarUsuarios()
         echo "Error reordenarUsuarios: " . $e->getMessage();
     }
 }
+
+function eliminarProyectosUser($idUsuario){
+    try {
+        $connexio = conectar();
+        $statement = $connexio->prepare('DELETE FROM proyectos WHERE id_usuario = :idUsuario');
+        $statement->execute(
+            array(
+                ':idUsuario' => $idUsuario
+            )
+        );
+        
+        return $statement;
+    } catch (PDOException $e) { //
+        // mostrarem els errors
+        echo "Error eliminarProyectosUser: " . $e->getMessage();
+    }
+}

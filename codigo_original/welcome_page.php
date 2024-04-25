@@ -77,7 +77,7 @@ session_start();
 
     </div>
 
-    
+
 
     <?php
     if (isset($_SESSION['usuario'])) {
@@ -89,20 +89,56 @@ session_start();
 
     ?>
 
-<!-- Modal Preguntar eliminar cuenta de usuario -->
-<div class="modal fade" id="eliminarProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <h5 class="modal-body">
-        ¿Deseas eliminar el proyecto seleccionado?
-      </h5>
-      <div class="modal-footer">
-          <a href="" type="button" class="btn btn-danger">Eliminar proyecto</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
+    <!-- Modal Preguntar eliminar proyecto -->
+    <div class="modal fade" id="eliminarProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h5 class="modal-body">
+                    ¿Deseas eliminar el proyecto seleccionado?
+                </h5>
+                <div class="modal-footer">
+                    <a href="" type="button" class="btn btn-danger" id="botonEliminarProyecto">Eliminar proyecto</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <!-- Modal Preguntar cambiar nombre de proyecto -->
+    <div class="modal fade" id="cambiarNombre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="./controlador/config_proyecto/controlador_cambiar_nombre.php" method="POST">
+                    <div class="modal-body">
+                        <h5>Escribe el nuevo nombre para tu proyecto: <br>
+                            (25 char max)</h5>
+                        <input type="number" hidden name="idProyecto" id="idProyecto">
+                        <input type="text" name="nuevoNombre" id="nuevoNombre">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-danger" value="Guardar">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal mostrar información del proyecto -->
+    <div class="modal fade" id="infoProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>Información sobre el proyecto:</h5>
+                        <p id="infoIdProyecto"> </p>
+                        <p id="infoNombreProyecto"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>
