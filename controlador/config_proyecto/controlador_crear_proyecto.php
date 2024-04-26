@@ -9,14 +9,15 @@ if(isset($_SESSION['usuario'])){
     $contenido = datosBase($base);
     $nombre = "nuevo_proyecto";
     crearProyectoUser($_SESSION['ID'], $contenido, $nombre);
-    ?>
+    
+}else{
+    echo "anonimos";
+}
+?>
         <script>
             location.replace("../../vista/editor_proyecto.php");
         </script>
     <?php
-}else{
-    echo "anonimos";
-}
 
 
 function datosBase($baseSeleccionada){
