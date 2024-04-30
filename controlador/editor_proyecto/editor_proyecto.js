@@ -4,9 +4,10 @@ import { Proyecto } from '../../SRC/clases/Proyecto.js';
 import { Container } from '../../SRC/clases/Container.js';
 import { aplicarEventListener } from './aplicar_event_listener.js';
 import { Fila } from '../../SRC/clases/Fila.js';
+import { BotonesContainer } from '../../SRC/clases/BotonesContainer.js';
 import base_basico from '../../SRC/plantillas_base/plantilla_base_basico.json' assert { type: 'json' };
 import base_multiple from '../../SRC/plantillas_base/plantilla_base_multiple.json' assert { type: 'json' };
-
+import pruebaJson from '../../SRC/plantillas_base/proyecto_pruebas_multiple.json' assert { type: 'json' };
 
 let proyecto;
 /**
@@ -40,11 +41,33 @@ $("#cerrarPestañas").click(function () {
  * Esta opción está inhabilitada para los usuarios anonimos.
  */
 $("#guardarCambios").click(function () {
-  proyecto = transformarJson(proyecto);
+
+  var datos = {
+    id: document.getElementById("idProject").innerHTML,
+    proyecto: proyecto
+  };
+
+  // Realizar una solicitud AJAX para enviar el contenido HTML al servidor
+  var xhr = new XMLHttpRequest();
+  let rutaGuardar = "../modelo/configuracion_proyecto/modelo_guardar_cambios_proyecto.php";
+  xhr.open("POST", rutaGuardar, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  // Envía el contenido HTML como JSON al servidor
+  xhr.send(JSON.stringify({ datos }));
+
+  // Manejar la respuesta del servidor si es necesario
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      $("#proyectoGuardadoMessage").show()
+      setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
+    } else {
+      console.error("Error al guardar el contenido HTML.");
+    }
+  };
   $("#proyecto").html(proyecto.getHtmlBase());
   aplicarEventListener(proyecto);
-  $("#proyectoGuardadoMessage").show()
-  setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
+
 
 });
 
@@ -55,7 +78,7 @@ $("#descargarJson").click(function () {
   let jsonProject = JSON.stringify(proyecto);
 
   // Crear un objecte similar a un arxiu format per bytes
-  const file = new Blob([jsonProject], { type: 'text/plain' });
+  const file = new Blob([jsonProject], { type: 'text/json' });
 
   // Crear un link "fantasma" (no s'afegirà realment al document)
   const a = document.createElement('a');
@@ -77,25 +100,35 @@ function transformarJson(archivoJson) {
 
   let newProject = JSON.parse(jsonProject, function (key, value) {
     if (key == "body") {
+
       let containers = [];
-      for (let v of value) {
-        let filaContenedor = Fila.fromJSON(v);
-        containers.push(filaContenedor);
-      }
+      for (let v of value) containers.push(Fila.fromJSON(v));
       return containers;
+
     } else if (key == "containersHijo") {
+
       let containers = [];
       for (let v of value) containers.push(Container.fromJSON(v));
       return containers;
-    }else if (key == "filasContenedor") {
+
+    } else if (key == "filasContenedor") {
+
       let containers = [];
       for (let v of value) containers.push(FilaContenedor.fromJSON(v));
       return containers;
-    } else {
+
+    } else if (key == "opcionesRow") {
+
+      return BotonesContainer.fromJSON(value)
+
+    }
+    else {
       return value;   // 'nom' i altres atributs "normals"
     }
   });
+
   let project = Proyecto.fromJSON(newProject);
+  project.rewriteHtml();
   return project;
 }
 
@@ -103,25 +136,32 @@ function transformarJson(archivoJson) {
  * 
  */
 function init() {
-  let base = "";
+  let base = "base_multiple";
+  proyecto = new Proyecto(1);
+  let fila1 = new FilaContenedor("FilaContenedor-1", 1);
+  let fila2 = new FilaContenedor("FilaContenedor-2", 2);
+  let fila3 = new FilaContenedor("FilaContenedor-3", 3);
+  let fila4 = new FilaContenedor("FilaContenedor-4", 4);
+  let filaRow1, filaRow2;
+
 
   switch (base) {
     case "base_multiple":
-      proyecto = transformarJson(base_multiple);
+      filaRow1 = new Fila("FilaRow-1", [fila1, fila2]);
+      filaRow2 = new Fila("FilaRow-2", [fila3, fila4]);
+      proyecto.setBody([filaRow1, filaRow2]);
       break;
     case "base_basico":
-      proyecto = transformarJson(base_basico);
+      filaRow1 = new Fila("FilaRow-1", [fila1]);
+      filaRow2 = new Fila("FilaRow-2", [fila2]);
+      let filaRow3 = new Fila("FilaRow-3", [fila3]);
+      let filaRow4 = new Fila("FilaRow-4", [fila4]);
+      proyecto.setBody([filaRow1, filaRow2, filaRow3, filaRow4]);
       break;
 
     default:
-      proyecto = new Proyecto(1);
-      let fila1 = new FilaContenedor("FilaContenedor-1", 1);
-      let fila2 = new FilaContenedor("FilaContenedor-2", 2);
-      let fila4 = new FilaContenedor("FilaContenedor-4", 3);
-      let fila3 = new FilaContenedor("FilaContenedor-3", 4);
-      let filaRow1 = new Fila("FilaRow-"+1, [fila1, fila2]);
-      let filaRow2 = new Fila("FilaRow-" +2, [fila4, fila3]);
-      proyecto.setBody([filaRow1, filaRow2]);
+      console.log("nada");
+      // proyecto = transformarJson(base_multiple);
       break;
   }
 
@@ -133,5 +173,21 @@ function init() {
 
 }
 
+function initGet() {
+  if (contenidoProyecto != null) {
+    // console.log(JSON.parse(contenidoProyecto));
+    proyecto = transformarJson(contenidoProyecto);
 
-window.onload = init();
+    $("#proyecto").html(proyecto.getHtmlBase());
+    aplicarEventListener(proyecto);
+
+    $("#proyectoGuardadoMessage").hide();
+  }else {
+    
+  }
+  // const urlArchivoPHP = '../../vista/editor_proyecto.php';
+
+
+}
+
+window.onload = initGet();

@@ -307,7 +307,7 @@ function obtenerFilaRowId() {
 }
 
 function obtenerFilaContenedorId(filaRow) {
-    let filas = filaRow.childNodes;
+    let filas = document.querySelectorAll(".FilaContenedor");
     let index = 1;
     let numerosId = []
     let exist;

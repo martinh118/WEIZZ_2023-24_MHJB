@@ -17,7 +17,10 @@
     <script type="module" src="../controlador/editor_proyecto/editor_proyecto.js"></script>
 </head>
 <?php
+require_once("../controlador/config_proyecto/controlador_obtener_proyecto.php");
 session_start();
+
+
 ?>
 
 <body style="background-color: #EFEFEF;">
@@ -94,9 +97,25 @@ session_start();
 
     </div>
 
+    <?php
+    if (isset($_GET['idProject'])) {
+        echo "<div id='idProject' hidden>" . $_GET['idProject'] . "</div>";
+    }
 
+    ?>
     <div class="container" id="proyecto">
+        <?php
+        if (isset($_GET['idProject'])) {
+            $proyecto = cargarProyecto($_GET['idProject']);
+            $contenido = $proyecto['contenido'];
+            ?>
+            <script>
+                var contenidoProyecto = <?php echo $contenido; ?>
+            </script>
 
+            <?php
+        }
+        ?>
 
     </div>
 

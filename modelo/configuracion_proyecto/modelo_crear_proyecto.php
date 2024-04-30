@@ -2,14 +2,15 @@
 require_once("../../modelo/modelo_principal.php");
 
 
-function crearProyectoUser($idUser, $contenido, $nombre){
+function crearProyectoUser($idProyecto, $idUser, $contenido, $nombre){
     try {
         $connexio = conectar();
         $statement = $connexio->prepare('INSERT INTO proyectos 
         (ID,id_usuario, contenido, nombre) VALUES 
-        (NULL,:usuario, :contenido, :nombre)');
+        (:id,:usuario, :contenido, :nombre)');
         $statement->execute(
             array(
+                ':id' => $idProyecto,
                 ':usuario' => $idUser,
                 ':contenido' => $contenido,
                 ':nombre' => $nombre
