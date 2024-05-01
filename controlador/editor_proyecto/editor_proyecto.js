@@ -5,9 +5,6 @@ import { Container } from '../../SRC/clases/Container.js';
 import { aplicarEventListener } from './aplicar_event_listener.js';
 import { Fila } from '../../SRC/clases/Fila.js';
 import { BotonesContainer } from '../../SRC/clases/BotonesContainer.js';
-import base_basico from '../../SRC/plantillas_base/plantilla_base_basico.json' assert { type: 'json' };
-import base_multiple from '../../SRC/plantillas_base/plantilla_base_multiple.json' assert { type: 'json' };
-import pruebaJson from '../../SRC/plantillas_base/proyecto_pruebas_multiple.json' assert { type: 'json' };
 
 let proyecto;
 /**
@@ -40,36 +37,38 @@ $("#cerrarPestañas").click(function () {
  * Al clickar a la opción guardar, este guarda en formato JSON el proyecto a la base de datos con los datos del usuario.
  * Esta opción está inhabilitada para los usuarios anonimos.
  */
-$("#guardarCambios").click(function () {
+$(document).ready(function () {
 
-  var datos = {
-    id: document.getElementById("idProject").innerHTML,
-    proyecto: proyecto
-  };
+  let idProject = document.getElementById("idProject").innerHTML;
 
-  // Realizar una solicitud AJAX para enviar el contenido HTML al servidor
-  var xhr = new XMLHttpRequest();
-  let rutaGuardar = "../modelo/configuracion_proyecto/modelo_guardar_cambios_proyecto.php";
-  xhr.open("POST", rutaGuardar, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
+  $("#guardarCambios").click(function () {
+    fetch("../modelo/configuracion_proyecto/modelo_guardar_cambios_proyecto.php", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ "id": idProject, "proyecto": JSON.stringify(proyecto) })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Hubo un problema al solicitar guardar el nuevo proyecto.');
+        }
+        // Devuelve la respuesta como JSON
+        return response.json();
+      })
+      .then(data => {
+        $("#proyectoGuardadoMessage").show()
+        setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 
-  // Envía el contenido HTML como JSON al servidor
-  xhr.send(JSON.stringify({ datos }));
+    $("#proyecto").html(proyecto.getHtmlBase());
+    aplicarEventListener(proyecto);
 
-  // Manejar la respuesta del servidor si es necesario
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      $("#proyectoGuardadoMessage").show()
-      setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
-    } else {
-      console.error("Error al guardar el contenido HTML.");
-    }
-  };
-  $("#proyecto").html(proyecto.getHtmlBase());
-  aplicarEventListener(proyecto);
-
-
-});
+  });
+})
 
 /**
  * Obtiene los datos del proyecto en formato JSON y descarga el archivo.
@@ -132,48 +131,8 @@ function transformarJson(archivoJson) {
   return project;
 }
 
-/**
- * 
- */
+
 function init() {
-  let base = "base_multiple";
-  proyecto = new Proyecto(1);
-  let fila1 = new FilaContenedor("FilaContenedor-1", 1);
-  let fila2 = new FilaContenedor("FilaContenedor-2", 2);
-  let fila3 = new FilaContenedor("FilaContenedor-3", 3);
-  let fila4 = new FilaContenedor("FilaContenedor-4", 4);
-  let filaRow1, filaRow2;
-
-
-  switch (base) {
-    case "base_multiple":
-      filaRow1 = new Fila("FilaRow-1", [fila1, fila2]);
-      filaRow2 = new Fila("FilaRow-2", [fila3, fila4]);
-      proyecto.setBody([filaRow1, filaRow2]);
-      break;
-    case "base_basico":
-      filaRow1 = new Fila("FilaRow-1", [fila1]);
-      filaRow2 = new Fila("FilaRow-2", [fila2]);
-      let filaRow3 = new Fila("FilaRow-3", [fila3]);
-      let filaRow4 = new Fila("FilaRow-4", [fila4]);
-      proyecto.setBody([filaRow1, filaRow2, filaRow3, filaRow4]);
-      break;
-
-    default:
-      console.log("nada");
-      // proyecto = transformarJson(base_multiple);
-      break;
-  }
-
-  $("#proyecto").html(proyecto.getHtmlBase());
-  aplicarEventListener(proyecto);
-
-  $("#proyectoGuardadoMessage").hide();
-
-
-}
-
-function initGet() {
   if (contenidoProyecto != null) {
     // console.log(JSON.parse(contenidoProyecto));
     proyecto = transformarJson(contenidoProyecto);
@@ -182,12 +141,10 @@ function initGet() {
     aplicarEventListener(proyecto);
 
     $("#proyectoGuardadoMessage").hide();
-  }else {
-    
   }
   // const urlArchivoPHP = '../../vista/editor_proyecto.php';
 
 
 }
 
-window.onload = initGet();
+window.onload = init();
