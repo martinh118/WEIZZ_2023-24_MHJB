@@ -18,8 +18,8 @@ function mostrarProyectosUser($idUser)
         <div class='btn-group-vertical dropdown-content'>
         <button type='button' class='btn btn-outline-danger accionBorrar' data-bs-toggle='modal' data-bs-target='#eliminarProyecto' data-info=\"" . $proj['ID'] . "\">Borrar</button>
         <button type='button' class='btn btn-outline-danger accionCambiarNombre' data-bs-toggle='modal' data-bs-target='#cambiarNombre' data-info=\"" . $proj['ID'] . "\">Cambiar nombre</button>
-        <button type='button' class='btn btn-outline-danger' onclick='window.location.href=\"../eliminar.php?idProject=" . $proj['ID'] . "\"'>Duplicar</button><br>
-        <button type='button' class='btn btn-outline-danger accionInfoProyecto' data-bs-toggle='modal' data-bs-target='#infoProyecto' data-id=\"" . $proj['ID'] . "\" data-nombre=\"" . $proj['nombre'] . "\">Info</button>
+        <button type='button' class='btn btn-outline-danger accionDuplicar' data-bs-toggle='modal' data-bs-target='#duplicarProyecto' data-info=\"" . $proj['ID'] . "\">Duplicar</button><br>
+        <button type='button' class='btn btn-outline-danger accionInfoProyecto' data-bs-toggle='modal' data-bs-target='#infoProyecto' data-id=\"" . $proj['ID'] . "\" data-nombre=\"" . $proj['nombre'] . "\" data-fecha=\"" . $proj['created_date'] . "\">Info</button>
         </div>
     </div>";
             $html .= "<a href='./vista/editor_proyecto.php?idProject=" . $proj["ID"] . "' style='text-decoration-line: none;'>";

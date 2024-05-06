@@ -20,7 +20,7 @@ export class Proyecto {
     #crearHeader() {
         let contenedor = new FilaContenedor("Header-" + this.#id, 3);
         contenedor.containerSinOpciones();
-        let filaHeader = new Fila("rowHeader-"+ this.#id, [contenedor])
+        let filaHeader = new Fila("rowHeader-" + this.#id, [contenedor])
         return filaHeader;
     }
 
@@ -34,7 +34,7 @@ export class Proyecto {
     #crearFooter() {
         let contenedor = new FilaContenedor("Footer-" + this.#id, 4);
         contenedor.containerSinOpciones();
-        let filaFooter = new Fila("rowFooter-"+ this.#id, [contenedor])
+        let filaFooter = new Fila("rowFooter-" + this.#id, [contenedor])
         return filaFooter;
     }
 
@@ -106,6 +106,15 @@ export class Proyecto {
         return this.#footer;
     }
 
+    getFilaRow(id) {
+        for (const filaRow of this.#body) {
+            let row = filaRow.getId();
+            if (row == id) {
+                return filaRow;
+            }
+        }
+    }
+
     setId(id) {
         this.#id = id;
     }
@@ -129,16 +138,22 @@ export class Proyecto {
         this.#htmlBase = this.#crearHtmlProyecto();
     }
 
-    addContainerBody(nuevaFila, filaContainer) {
-        for (const filaCont of this.#body) {
-            let row = filaCont.getId();
-            if (row == filaContainer.id) {
-                let indexCont = this.#body.indexOf(filaCont);
-                this.#body.splice(indexCont, 0, nuevaFila);
-                console.log(this.#body);
-                break;
+    rewriteHtml() {
+        this.#htmlBase = this.#crearHtmlProyecto();
+    }
+
+    addFilaRowBody(nuevaFila, filaContainer = undefined) {
+        if (filaContainer != undefined) {
+
+            for (const filaCont of this.#body) {
+                let row = filaCont.getId();
+                if (row == filaContainer.id) {
+                    let indexCont = this.#body.indexOf(filaCont);
+                    this.#body.splice(indexCont, 0, nuevaFila);
+                    break;
+                }
             }
-        }
+        } else this.#body.push(nuevaFila);
     }
 
     deleteContainerBody(filaContainer) {
@@ -147,46 +162,35 @@ export class Proyecto {
             if (row == filaContainer.id) {
                 let indexCont = this.#body.indexOf(filaCont);
                 this.#body.splice(indexCont, 1);
-                console.log(this.#body);
                 break;
             }
         }
     }
 
-    moverAbajoContainerBody(filaContainer) {
+    moverFilasRow(FilaRowArriba, FilaRowAbajo) {
+        let indexFRArriba, indexFRAbajo;
+
         for (const filaCont of this.#body) {
             let row = filaCont.getId();
-            if (row == filaContainer.id) {
-                let indexCont = this.#body.indexOf(filaCont);
-                let indexAbajo = indexCont + 1;
-                let contAbajo = this.#body[indexAbajo];
-
-                if (contAbajo != undefined) {
-                    this.#body[indexAbajo] = this.#body[indexCont];
-                    this.#body[indexCont] = contAbajo;
-                }
-                console.log(this.#body);
-                break;
+            if (row == FilaRowArriba.id) {
+                indexFRArriba = this.#body.indexOf(filaCont);
             }
         }
 
-    }
-
-    moverArribaContainerBody(filaContainer) {
         for (const filaCont of this.#body) {
             let row = filaCont.getId();
-            if (row == filaContainer.id) {
-                let indexCont = this.#body.indexOf(filaCont);
-                let indexArriba = indexCont - 1;
-                if (indexArriba >= 0) {
-                    let contArriba = this.#body[indexArriba];
-                    this.#body[indexArriba] = this.#body[indexCont];
-                    this.#body[indexCont] = contArriba;
-                }
-                console.log(this.#body);
-                break;
+            if (row == FilaRowAbajo.id) {
+                indexFRAbajo = this.#body.indexOf(filaCont);
             }
         }
+
+        if (FilaRowArriba >= 0 && FilaRowAbajo >= 0) {
+            let contArriba = this.#body[indexFRArriba];
+            this.#body[indexFRArriba] = this.#body[indexFRAbajo];
+            this.#body[indexFRAbajo] = contArriba;
+        }
+
+
     }
 
 

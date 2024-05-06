@@ -27,7 +27,7 @@ export class BotonesContainer {
 
         //ATRIBUTOS 
         let atributosGrupoPadre = { "class": "list-group list-group-horizontal p-2", "style": 'height: 30%;top: -48px;position: absolute;' };
-        let atributosBotonesHijos = { "class": "list-group-item-action list-group-item border border-2 border-dark" };
+        // let atributosBotonesHijos = { "class": "list-group-item-action list-group-item border border-2 border-dark" };
         let arrElementos = [subirElemento, bajarElemento, borrarElemento];
 
         //APLICAR ATRIBUTOS E HIJOS
@@ -95,26 +95,64 @@ export class BotonesContainer {
     }
 
     toJSON() {
+        console.log("BotonerCrearHTML: " + this.#botonCrear)
+        console.log("BotonerSubirElementoHTML: " +this.#subirElemento.outerHTML)
         return {
             idBotonesCont: this.#id,
-            botonCrear: this.#botonCrear.outerHTML,
+            botonCrear: this.#botonCrear.innerHTML,
             botonSubir: this.#subirElemento.outerHTML,
             botonBajar: this.#bajarElemento.outerHTML,
             botonBorrar: this.#borrarElemento.outerHTML,
-            grupoBotones: this.#divGrupoBotones.outerHTML
+            grupoBotones: this.#divGrupoBotones.innerHTML
         };
+        
     }
 
     static fromJSON(json) {
         const range = document.createRange();
         const botonesContainer = new BotonesContainer(json.idBotonesCont);
-        botonesContainer.#botonCrear = range.createContextualFragment(json.botonCrear);
-        botonesContainer.#subirElemento = range.createContextualFragment(json.botonSubir);
-        botonesContainer.#bajarElemento = range.createContextualFragment(json.botonBajar);
-        botonesContainer.#borrarElemento = range.createContextualFragment(json.botonBorrar);
-        botonesContainer.#divGrupoBotones = range.createContextualFragment(json.grupoBotones);
+
+        botonesContainer.#botonCrear = crearBotonCrear();
+        botonesContainer.#subirElemento = json.botonSubir;
+        botonesContainer.#bajarElemento = json.botonBajar;
+        botonesContainer.#borrarElemento = json.botonBorrar;
+        botonesContainer.#divGrupoBotones = grupoBotones();
         
         return botonesContainer;
+
+        function crearBajarElemento() {
+            let bajarElemento = crearElemento("button", "↓", "id", "bajar-" + json.idBotonesCont);
+            bajarElemento.setAttribute("title", "Bajar fila de containers.");
+            return bajarElemento;
+        }
+
+        function crearBotonCrear(){
+            let divDropdown = crearElemento("div", "", "class", "dropdown botonCrear");
+            divDropdown.innerHTML = json.botonCrear;
+            return divDropdown;
+        }
+
+        function crearSubirElemento() {
+            let subirElemento = crearElemento("button", "↑", "id", "subir-" + json.idBotonesCont);
+            subirElemento.setAttribute("title", "Subir fila de containers.");
+            return subirElemento;
+        }
+
+        function crearBorrarElemento() {
+            let borrarElemento = crearElemento("button", "x", "id", "eliminar-" + json.idBotonesCont);
+            let attrBorrar = {
+                "title": "Eliminar fila de containers.",
+                "style": "border-top-right-radius: 20px!important;"
+            }
+            modificarAtributoElemento(borrarElemento, attrBorrar);
+            return borrarElemento;
+        }
+
+        function grupoBotones(){
+            let grupoBotones = crearElemento("div", "", "id", json.idBotonesCont);
+            grupoBotones.innerHTML = json.grupoBotones;
+            return grupoBotones;
+        }
 
     }
 
@@ -152,6 +190,10 @@ export class BotonesContainer {
 
     borrarClickEvent(callback) {
         this.#borrarElemento.addEventListener("click", callback);
+    }
+
+    rewriteHTML(){
+        this.#divGrupoBotones = this.#crearBotones();
     }
 
 }

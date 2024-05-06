@@ -104,6 +104,21 @@ session_start();
         </div>
     </div>
 
+    <!-- Modal Preguntar duplicar proyecto -->
+    <div class="modal fade" id="duplicarProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h5 class="modal-body">
+                    ¿Duplicar proyecto?
+                </h5>
+                <div class="modal-footer">
+                    <a href="" type="button" class="btn btn-danger" id="botonDuplicarPrpyecto">Duplicar</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Preguntar cambiar nombre de proyecto -->
     <div class="modal fade" id="cambiarNombre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -128,14 +143,15 @@ session_start();
     <div class="modal fade" id="infoProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                    <div class="modal-body">
-                        <h5>Información sobre el proyecto:</h5>
-                        <p id="infoIdProyecto"> </p>
-                        <p id="infoNombreProyecto"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
+                <div class="modal-body">
+                    <h5>Información sobre el proyecto:</h5>
+                    <p id="infoIdProyecto"> </p>
+                    <p id="infoNombreProyecto"></p>
+                    <p id="infoFechaCreacion"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>

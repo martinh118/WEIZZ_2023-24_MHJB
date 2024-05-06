@@ -49,3 +49,16 @@ function obtenerElementosBasicos(){
         echo "Error obtenerUsuarios: " . $e->getMessage();
     }
 }
+
+function obtenerUltimoProyecto(){
+    try {
+        $connexio = conectar();
+        $statement = $connexio->prepare('SELECT * FROM proyectos ORDER BY ID DESC LIMIT 1;');
+        $statement->execute();
+        
+        return $statement;
+    } catch (PDOException $e) { //
+        // mostrarem els errors
+        echo "Error obtenerUltimoProyecto: " . $e->getMessage();
+    }
+}

@@ -13,28 +13,43 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $(".accionBorrar").click(function(){
+    $(".accionBorrar").click(function () {
         let info = $(this).data('info');
         let href = "./controlador/config_proyecto/controlador_eliminar_proyecto.php?idProyecto=" + info;
-        
+
         $("#botonEliminarProyecto").attr("href", href);
+    })
+
+
+})
+
+
+$(document).ready(function () {
+    $(".accionDuplicar").click(function () {
+        let info = $(this).data('info');
+        let href = "./controlador/config_proyecto/controlador_duplicar_proyecto.php?idProyecto=" + info;
+
+        $("#botonDuplicarPrpyecto").attr("href", href);
     })
 })
 
+
 $(document).ready(function () {
-    $(".accionCambiarNombre").click(function(){
+    $(".accionCambiarNombre").click(function () {
         let info = $(this).data('info');
-        
+
         $("#idProyecto").attr("value", info);
     })
 })
 
 $(document).ready(function () {
-    $(".accionInfoProyecto").click(function(){
+    $(".accionInfoProyecto").click(function () {
         let idProyecto = "<b>Identificador:</b> " + $(this).data('id');
         let nombreProyecto = "<b>Nombre del proyecto:</b> " + $(this).data('nombre');
-        
+        let fechaCreacion = "<b>Fecha creacion:</b> " + $(this).data('fecha');
+
         $("#infoIdProyecto").html(idProyecto);
         $("#infoNombreProyecto").html(nombreProyecto);
+        $("#infoFechaCreacion").html(fechaCreacion);
     })
 })

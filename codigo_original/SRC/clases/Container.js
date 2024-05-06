@@ -81,4 +81,8 @@ export class Container {
     setElementosHijo(elementosHijo) {
         this.#elementosHijo = elementosHijo;
     }
+
+    rewriteHTML(){
+        this.#container = this.#crearContainer();
+    }
 }
