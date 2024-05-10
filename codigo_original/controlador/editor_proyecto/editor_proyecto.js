@@ -4,7 +4,8 @@ import { Proyecto } from '../../SRC/clases/Proyecto.js';
 import { Container } from '../../SRC/clases/Container.js';
 import { aplicarEventListener } from './aplicar_event_listener.js';
 import { Fila } from '../../SRC/clases/Fila.js';
-import { BotonesContainer } from '../../SRC/clases/BotonesContainer.js';
+import { Elemento } from '../../SRC/clases/Elemento.js';
+
 
 let proyecto;
 /**
@@ -39,35 +40,39 @@ $("#cerrarPestañas").click(function () {
  */
 $(document).ready(function () {
 
-  let idProject = document.getElementById("idProject").innerHTML;
+  if (document.getElementById("idProject") != null) {
 
-  $("#guardarCambios").click(function () {
-    fetch("../modelo/configuracion_proyecto/modelo_guardar_cambios_proyecto.php", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ "id": idProject, "proyecto": JSON.stringify(proyecto) })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Hubo un problema al solicitar guardar el nuevo proyecto.');
-        }
-        // Devuelve la respuesta como JSON
-        return response.json();
+
+    let idProject = document.getElementById("idProject").innerHTML;
+
+    $("#guardarCambios").click(function () {
+      fetch("../modelo/configuracion_proyecto/modelo_guardar_cambios_proyecto.php", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": idProject, "proyecto": JSON.stringify(proyecto) })
       })
-      .then(data => {
-        $("#proyectoGuardadoMessage").show()
-        setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Hubo un problema al solicitar guardar el nuevo proyecto.');
+          }
+          // Devuelve la respuesta como JSON
+          return response.json();
+        })
+        .then(data => {
+          $("#proyectoGuardadoMessage").show()
+          setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
 
-    $("#proyecto").html(proyecto.getHtmlBase());
-    aplicarEventListener(proyecto);
+      $("#proyecto").html(proyecto.getHtmlBase());
+      aplicarEventListener(proyecto);
 
-  });
+    });
+  }
 })
 
 /**
@@ -98,46 +103,61 @@ function transformarJson(archivoJson) {
   let jsonProject = JSON.stringify(archivoJson);
 
   let newProject = JSON.parse(jsonProject, function (key, value) {
-    if (key == "body") {
+    let containers = [];
+    switch (key) {
+      case "body":
+        containers = [];
+        for (let v of value) {
+          let f = Fila.fromJSON(v);
+          f.rewriteHTML();
+          containers.push(f);
+        };
+        return containers;
+      case "containersHijo":
+        containers = [];
+        for (let v of value) {
+          let c = Container.fromJSON(v);
+          c.rewriteHTML();
+          containers.push(c);
+        };
+        return containers;
+      case "filasContenedor":
+        containers = [];
+        for (let v of value) {
+          let fc = FilaContenedor.fromJSON(v);
+          fc.rewriteHTML();
+          containers.push(fc);
+        };
+        return containers;
+      case "elementoHijo":
+        return Elemento.fromJSON(value);
+      default:
+        return value;
 
-      let containers = [];
-      for (let v of value) {
-        let f = Fila.fromJSON(v);
-        f.rewriteHtml();
-        containers.push(f);
-      };
-      return containers;
-
-    } else if (key == "containersHijo") {
-
-      let containers = [];
-      for (let v of value){ 
-        let c = Container.fromJSON(v);
-        c.rewriteHTML();
-        containers.push(c);
-      };
-      return containers;
-
-    } else if (key == "filasContenedor") {
-
-      let containers = [];
-      for (let v of value) {
-        let fc = FilaContenedor.fromJSON(v);
-        fc.rewriteHTML();
-        containers.push(fc);
-      };
-      return containers;
-
-    } else {
-      return value;   // 'nom' i altres atributs "normals"
     }
   });
 
   let project = Proyecto.fromJSON(newProject);
-  project.rewriteHtml();
+  project.rewriteHTML();
   return project;
 }
 
+function elegirElementoHijo(value){
+  switch (value.id) {
+    case "Titulo":
+        return Titulo.fromJSON(value);
+    case "Texto":
+        return Texto.fromJSON(value);
+    case "Imagen":
+        return Imagen.fromJSON(value);
+    case "Lista":
+        return Lista.fromJSON(value);
+    case "Tabla":
+        return Tabla.fromJSON(value);
+    default:
+        return null;
+}
+}
 
 function init() {
   if (contenidoProyecto != null) {

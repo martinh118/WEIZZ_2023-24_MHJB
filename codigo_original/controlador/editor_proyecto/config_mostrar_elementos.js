@@ -1,12 +1,11 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
-import { crearElemento, crearDobleElemento, añadirHijos, añadirMismoAtributos } from '../../SRC/librerias/APIElementosHTML.js';
+import { crearElemento, añadirHijos, añadirMismoAtributos } from '../../SRC/librerias/APIElementosHTML.js';
 
 
 $("#mostrarElementos").click(function () {
     var selection = document.querySelector('#cuadroElementos') !== null;
 
     if (!selection) {
-
 
         let offsetX, offsetY, isDragging = false;
         let content = obtenerElementosDisponibles();
@@ -47,6 +46,10 @@ $("#mostrarElementos").click(function () {
             isDragging = false;
         });
 
+        elementoElementos.addEventListener('mouseleave', () => {
+            isDragging = false;
+        })
+
 
     }
 });
@@ -54,14 +57,30 @@ $("#mostrarElementos").click(function () {
 function obtenerElementosDisponibles() {
     let contenidoCompleto = crearElemento("div", "", "id", "contenidoRecuadroElementos");
 
-    let container = crearElemento("div", "Container", "class", "elementoContainer");
-    let titulo = crearElemento("div", "Titulo", "class", "elementoTitulo");
-    let texto = crearElemento("div", "Texto", "class", "elementoTexto");
-    let imagen = crearElemento("div", "Imagen", "class", "elementoImagen");
-    let lista = crearElemento("div", "Lista", "class", "elementoLista");
-    let tabla = crearElemento("div", "Tabla", "class", "elementoTabla");
+    let container = crearElemento("div", "Container", "class", "selectElement");
+    let titulo = crearElemento("div", "Titulo", "class", "selectElement ");
+    let texto = crearElemento("div", "Texto", "class", "selectElement ");
+    let imagen = crearElemento("div", "Imagen", "class", "selectElement ");
+    let lista = crearElemento("div", "Lista", "class", "selectElement ");
+    let tabla = crearElemento("div", "Tabla", "class", "selectElement ");
+
+    container.setAttribute("data-elemento", "Container");
+    titulo.setAttribute("data-elemento", "Titulo");
+    texto.setAttribute("data-elemento", "Texto");
+    imagen.setAttribute("data-elemento", "Imagen");
+    lista.setAttribute("data-elemento", "Lista");
+    tabla.setAttribute("data-elemento", "Tabla");
+
+    container.setAttribute("ondragstart", "dragStart(event)");
+    titulo.setAttribute("ondragstart", "dragStart(event)");
+    texto.setAttribute("ondragstart", "dragStart(event)");
+    imagen.setAttribute("ondragstart", "dragStart(event)");
+    lista.setAttribute("ondragstart", "dragStart(event)");
+    tabla.setAttribute("ondragstart", "dragStart(event)");
 
     let arrElementos = [container, titulo, texto, imagen, lista, tabla];
+
+    añadirMismoAtributos("draggable", "true", arrElementos);
 
     añadirMismoAtributos("style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black; margin-left: 10px; margin-bottom: 10px", arrElementos);
     añadirHijos(contenidoCompleto, arrElementos);

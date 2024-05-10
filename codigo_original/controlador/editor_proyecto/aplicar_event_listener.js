@@ -1,5 +1,6 @@
 import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { Fila } from '../../SRC/clases/Fila.js';
+import { aplicarEventosArrastrar, eventosContainerHijo } from './arrastrar_elementos.js';
 
 export function aplicarEventListener(proyecto) {
     let botonCrear = document.querySelectorAll(".botonCrear");
@@ -19,10 +20,11 @@ export function aplicarEventListener(proyecto) {
         moverAbajoCont(button, proyecto);
     });
 
-
     botonBorrar.forEach((button) => {
         borrarContainer(button, proyecto);
     });
+
+    aplicarEventosArrastrar(proyecto);
 
 }
 
@@ -39,42 +41,37 @@ function crearContainer(button, proyecto) {
             if (isElement(filaContenedorIzquierda)) {
                 if (isFilaContenedor(filaContenedorIzquierda)) {
                     let filaRow = proyecto.getFilaRow(selectedFilaRow.id);
-                    let domFilaRow = document.getElementById(filaRow.getId());
-                    let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(domFilaRow), event.target.value);
+                    let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(), event.target.value);
                     aplicarListenersFilaContainer(newFilaCont, proyecto);
                     filaRow.añadirFilaContenedor(newFilaCont, selectedFilaContenedor);
 
-                    filaRow.rewriteHtml();
-                    // selectedFilaRow.replaceWith(filaRow.getHtmlBase());
-
-                    proyecto.rewriteHtml();
+                    filaRow.rewriteHTML();
+                    
+                    proyecto.rewriteHTML();
                     $("#proyecto").html(proyecto.getHtmlBase());
 
                 }
             } else {
                 let newIdFila = obtenerFilaRowId();
                 let newFilaRow = new Fila(newIdFila, []);
-                let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(newFilaRow), event.target.value);
+                let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(), event.target.value);
 
 
                 newFilaRow.setFilasContenedor([newFilaCont]);
-                newFilaRow.rewriteHtml();
+                newFilaRow.rewriteHTML();
 
                 aplicarListenersFilaContainer(newFilaCont, proyecto);
-                // selectedFilaRow.insertAdjacentElement("beforebegin", newFilaRow.getHtmlBase());
-
+                
                 proyecto.addFilaRowBody(newFilaRow, selectedFilaRow);
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
             }
 
-            // proyecto.addContainerBody(newFilaRow, selectedFilaRow);
-
-            // aplicarEventListener();
+            
         }
+
     });
 }
-
 
 function moverArribaCont(button, proyecto) {
     button.addEventListener('click', function () {
@@ -90,10 +87,10 @@ function moverArribaCont(button, proyecto) {
 
                 let filaRow = proyecto.getFilaRow(selectedFilaRow.id);
                 filaRow.moverFilasContenedor(filaContenedorIzquierda, selectedFilaContenedor);
-                filaRow.rewriteHtml();
+                filaRow.rewriteHTML();
                 // selectedFilaRow.replaceWith(filaRow.getHtmlBase());
 
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
             }
         } else if (isElement(filaRowArriba)) {
@@ -120,11 +117,11 @@ function moverArribaCont(button, proyecto) {
                     filaRowObject.añadirFilaContenedor(filaContenedorRowArribaObject, selectedFilaContenedor.nextSibling);
                 } else filaRowObject.añadirFilaContenedor(filaContenedorRowArribaObject);
 
-                filaRowObject.rewriteHtml();
-                filaRowArribaObject.rewriteHtml();
+                filaRowObject.rewriteHTML();
+                filaRowArribaObject.rewriteHTML();
 
                 proyecto.moverFilasRow(filaRowArribaObject, filaRowObject);
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
 
             }
@@ -142,10 +139,10 @@ function moverArribaCont(button, proyecto) {
 
                 proyecto.addFilaRowBody(newFila, selectedFilaRow);
 
-                filaRowObject.rewriteHtml();
+                filaRowObject.rewriteHTML();
                 // selectedFilaRow.replaceWith(filaRowObject.getHtmlBase());
 
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
 
             }
@@ -170,9 +167,9 @@ function moverAbajoCont(button, proyecto) {
 
                 let filaRow = proyecto.getFilaRow(selectedFilaRow.id);
                 filaRow.moverFilasContenedor(selectedFilaContenedor, filaContenedorDerecha);
-                filaRow.rewriteHtml();
+                filaRow.rewriteHTML();
                 // selectedFilaRow.replaceWith(filaRow.getHtmlBase());
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
 
             }
@@ -206,12 +203,12 @@ function moverAbajoCont(button, proyecto) {
                 } else filaRowAbajoObject.añadirFilaContenedor(filaContenedorRowObject);
 
                 
-                filaRowObject.rewriteHtml();
-                filaRowAbajoObject.rewriteHtml();
+                filaRowObject.rewriteHTML();
+                filaRowAbajoObject.rewriteHTML();
                 
                 proyecto.moverFilasRow(filaRowObject, filaRowAbajoObject);
                 
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
 
             }
@@ -225,11 +222,11 @@ function moverAbajoCont(button, proyecto) {
                 let newFila = new Fila(newIdFila, [filaContenedorObject]);
 
                 filaRowObject.eliminarFilaContenedor(selectedFilaContenedor);
-                filaRowObject.rewriteHtml();
+                filaRowObject.rewriteHTML();
                 // selectedFilaRow.replaceWith(filaRowObject.getHtmlBase());
 
                 proyecto.addFilaRowBody(newFila);
-                proyecto.rewriteHtml();
+                proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
 
             }
@@ -252,13 +249,13 @@ function borrarContainer(button, proyecto) {
             selectedFilaRow.remove();
             
             proyecto.deleteContainerBody(selectedFilaRow);
-            proyecto.rewriteHtml();
+            proyecto.rewriteHTML();
             $("#proyecto").html(proyecto.getHtmlBase());
         } else {
             let filaRow = proyecto.getFilaRow(selectedFilaRow.id);
             filaRow.eliminarFilaContenedor(filaContenedor);
-            filaRow.rewriteHtml();
-            proyecto.rewriteHtml();
+            filaRow.rewriteHTML();
+            proyecto.rewriteHTML();
             $("#proyecto").html(proyecto.getHtmlBase());
         }
 
@@ -308,7 +305,7 @@ function obtenerFilaRowId() {
 
 }
 
-function obtenerFilaContenedorId(filaRow) {
+function obtenerFilaContenedorId() {
     let filas = document.querySelectorAll(".FilaContenedor");
     let index = 1;
     let numerosId = []
@@ -332,7 +329,8 @@ function obtenerFilaContenedorId(filaRow) {
     return "FilaContenedor-" + index;
 }
 
-function aplicarListenersFilaContainer(filaRow, proyecto) {
+export function aplicarListenersFilaContainer(filaRow, proyecto) {
+    let containers = filaRow.getContainers();
     let botones = filaRow.getOpcionesRow();
     let botonCrear = botones.getBotonCrear();
     let botonSubir = botones.getSubirElemento();
@@ -343,5 +341,10 @@ function aplicarListenersFilaContainer(filaRow, proyecto) {
     moverArribaCont(botonSubir, proyecto);
     moverAbajoCont(botonBajar, proyecto);
     borrarContainer(botonBorrar, proyecto);
+
+    containers.forEach(cont => {
+        let contenedorHijo = cont.getContainer();
+        eventosContainerHijo(contenedorHijo, proyecto);
+    });
 
 }

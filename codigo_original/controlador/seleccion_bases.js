@@ -12,7 +12,8 @@ $(document).ready(function () {
 
     $("#seleccionarBase").click(
         function () {
-            fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php").then(response => {
+            fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php")
+            .then(response => {
                 if (!response.ok) {
                     throw new Error('Hubo un problema al obtener un nuevo ID.');
                 }
@@ -25,7 +26,7 @@ $(document).ready(function () {
                 }else  newId = data.ID;
                 newId = parseInt(newId) + 1;
                 let project = crearProyecto(base, newId);
-                enviarDatos(project, newId);
+                enviarDatos(project, newId, base);
             }).catch(error => {
                 console.error('Error:', error);
             });
@@ -74,7 +75,7 @@ function crearProyecto(base, id) {
     return proyecto;
 }
 
-function enviarDatos(project, id) {
+function enviarDatos(project, id, base) {
     fetch("../controlador/config_proyecto/controlador_crear_proyecto.php", {
         method: 'POST',
         headers: {
@@ -91,7 +92,9 @@ function enviarDatos(project, id) {
         })
         .then(data => {
             console.log(data.mensaje);
-            location.replace("./editor_proyecto.php?idProject=" + id);
+            if(data.mensaje == "anonimo"){
+                location.replace("./editor_proyecto.php?baseAnonimo=" + base);
+            }else location.replace("./editor_proyecto.php?idProject=" + id);
         })
         .catch(error => {
             console.error('Error:', error);

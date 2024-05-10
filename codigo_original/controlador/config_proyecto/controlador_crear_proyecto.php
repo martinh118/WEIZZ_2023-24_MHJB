@@ -12,7 +12,7 @@ if(isset($_SESSION['usuario'])){
     echo json_encode(['mensaje' => 'Proyecto guardado correctamente']);
 
 }else{
-    echo "anonimos";
+    echo json_encode(['mensaje' => 'anonimo']);
 }
 
 

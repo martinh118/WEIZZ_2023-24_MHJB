@@ -1,5 +1,5 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
-import { crearElemento, crearDobleElemento, añadirHijos, añadirMismoAtributos } from '../../SRC/librerias/APIElementosHTML.js';
+import { crearElemento, crearDobleElemento } from '../../SRC/librerias/APIElementosHTML.js';
 
 
 /**
