@@ -15,6 +15,7 @@
     <script type="module" src="../controlador/editor_proyecto/config_mostrar_elementos.js"></script>
     <script type="module" src="../controlador/editor_proyecto/config_mostrar_estilo.js"></script>
     <script type="module" src="../controlador/editor_proyecto/editor_proyecto.js"></script>
+    <script type="module" src="../controlador/editor_proyecto/arrastrar_elementos.js"></script>
 </head>
 <?php
 require_once("../controlador/config_proyecto/controlador_obtener_proyecto.php");
@@ -22,6 +23,13 @@ session_start();
 
 
 ?>
+
+<script>
+    function dragStart(event) {
+        let tipoElemento = event.target.dataset.elemento;
+        event.dataTransfer.setData("text/plain", tipoElemento);
+    }
+</script>
 
 <body style="background-color: #EFEFEF;">
 
@@ -108,12 +116,29 @@ session_start();
         if (isset($_GET['idProject'])) {
             $proyecto = cargarProyecto($_GET['idProject']);
             $contenido = $proyecto['contenido'];
-            ?>
+        ?>
             <script>
                 var contenidoProyecto = <?php echo $contenido; ?>
             </script>
 
-            <?php
+        <?php
+        } else if (isset($_GET['baseAnonimo'])) {
+            $base = $_GET['baseAnonimo'];
+            $contenido = "";
+            switch ($base) {
+                case "basico":
+                    $contenido = file_get_contents('../SRC/plantillas_base/plantilla_base_basico.json');
+                    break;
+                case "multiple":
+                    $contenido = file_get_contents('../SRC/plantillas_base/plantilla_base_multiple.json');
+                    break;
+            }
+        ?>
+            <script>
+                var contenidoProyecto = <?php echo $contenido; ?>
+            </script>
+
+        <?php
         }
         ?>
 
