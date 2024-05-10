@@ -4,7 +4,7 @@ import { Elemento } from './Elemento.js';
 export class Container {
     #id;
     #container;
-    #elementosHijo = [];
+    #elementoHijo;
 
     constructor(id) {
         this.#id = id;
@@ -16,44 +16,36 @@ export class Container {
         let imagen = crearElemento("img", "");
 
         let atributosContainer = { "id": this.#id, "class": "container containerHijo", "style": "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;" }
-        let atributosApplyImg = { "id": "apply-" + this.#id, "src": "../SRC/imagenes_web/crear_plus.png", "alt": "aplicarElemento", "style": "width: 50px;","title": "Añadir elemento" };
+        let atributosApplyImg = { "id": "apply-" + this.#id, "src": "../SRC/imagenes_web/crear_plus.png", "alt": "aplicarElemento", "style": "width: 50px;","title": "Añadir elemento", "class":"imagenPlus" };
 
         modificarAtributoElemento(cont, atributosContainer);
         modificarAtributoElemento(imagen, atributosApplyImg);
 
-        cont.appendChild(imagen);
+        if(this.#elementoHijo != undefined){
+            let content = this.#elementoHijo.getElementoDom()
+            cont.appendChild(content);
+        }else cont.appendChild(imagen);
 
         return cont;
-    }
-
-    añadirElemento(elemento) {
-        this.#elementosHijo.push(elemento);
-        this.#container.appendChild(elemento);
-    }
-
-    eliminarElemento(elemento) {
-        for (let index = 0; index < this.#elementosHijo.length; index++) {
-            if (this.#elementosHijo[index] == elemento) {
-                this.#elementosHijo.splice(index, 1);
-            }
-
-        }
-        this.#container.removeChild(elemento);
     }
 
     toJSON(){
         return {
             idContainer : this.#id,
-            container : this.#container,
-            elementosHijo : this.#elementosHijo
+            container : this.#container.innerHTML,
+            elementoHijo : this.#elementoHijo
         };
     }
 
     static fromJSON(json){
-        
+        let cont = crearElemento("div", "");
+        let atributosContainer = { "id": json.idContainer, "class": "container containerHijo", "style": "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;" }
+        modificarAtributoElemento(cont, atributosContainer);
+        cont.innerHTML = json.container;
+
         let container = new Container(json.idContainer);
-        container.#container = json.container;
-        container.#elementosHijo = json.elementosHijo;
+        container.#elementoHijo = json.elementoHijo;
+        container.#container = cont;
         return container;
     }
 
@@ -65,8 +57,8 @@ export class Container {
         return this.#container;
     }
 
-    getElementosHijo() {
-        return this.#elementosHijo;
+    getElementoHijo() {
+        return this.#elementoHijo;
     }
 
 
@@ -78,8 +70,8 @@ export class Container {
         this.#container = container;
     }
 
-    setElementosHijo(elementosHijo) {
-        this.#elementosHijo = elementosHijo;
+    setElementoHijo(elementoHijo) {
+        this.#elementoHijo = elementoHijo;
     }
 
     rewriteHTML(){

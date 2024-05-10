@@ -55,12 +55,12 @@ export class FilaContenedor {
     }
 
     containerSinOpciones() {
-        let elementoDiv = crearElemento("div", "", "id", "principal-" + this.#id);
+        let elementoDiv = crearElemento("div", "", "id",this.#id);
         let containerFilaContenedor = crearElemento("div", "", "id", "principalContainers-" + this.#id);
 
         let separador = crearElemento("br", "");
 
-        let attrElementoDiv = { "class": "col align-items-center d-flex flex-column position-relative" };
+        let attrElementoDiv = { "class": "col align-items-center d-flex flex-column position-relative FilaContenedor" };
         let attrFilaContenedor = { "class": "container border border-3 border-dark d-flex justify-content-center", "style": "height: 5cm;" };
 
         modificarAtributoElemento(elementoDiv, attrElementoDiv);
@@ -119,6 +119,15 @@ export class FilaContenedor {
         return this.#containersHijo;
     }
 
+    getContainerUnico(idCont){
+        for (const Cont of this.#containersHijo) {
+            let row = Cont.getId();
+            if (row == idCont) {
+                return Cont;
+            }
+        }
+    }
+
     setId(newId) {
         this.#id = newId;
     }
@@ -131,5 +140,11 @@ export class FilaContenedor {
         this.#opcionesRow = new BotonesContainer(this.#id + ".botones-" + this.#id);
         this.#filaDivPrincipal = this.#crearElementoDivPrincipal();
     }
+
+    rewriteHTMLSinOpciones(){
+        this.#filaDivPrincipal = this.containerSinOpciones();
+    }
+    
+
 
 }

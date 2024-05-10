@@ -1,53 +1,90 @@
+import { crearElemento } from "../librerias/APIElementosHTML.js";
 
-export class Elemento{
-    #id;
-    #contenido;
-    #elemento;
-    #elementoPadre;
-    #estiloElemento;
+export class Elemento {
+    id;
+    contenido;
+    elementoDOM;
+    estiloElemento;
 
-    constructor(_id, _elementoPadre, _estilo){
-        this.#id = _id;
-        this.#elementoPadre = _elementoPadre;
-        this.#estiloElemento = _estilo;
+    constructor(_id, _contenido) {
+        this.id = _id;
+        this.contenido = _contenido;
+        this.estiloElemento = "";
     }
 
+    // aplicarHijo(){
+    //     this.elementoPadre.appendChild(this.elementoDOM);
+    // }
 
-    getId(){
-        return this.#id;
+    crearElemento() {
+        let element = crearElemento(this.elemento, this.contenido, "id", this.id);
+        element.setAttribute("style", this.estiloElemento);
+        element.setAttribute("class", "element")
+        return element;
     }
 
-    getContenido(){
-        return this.#contenido;
+    rewriteHTML() {
+        this.elementoDOM = this.crearElemento();
     }
 
-    getElemento(){
-        return this.#elemento;
+    getId() {
+        return this.id;
     }
 
-    getElementoPadre(){
-        return this.#elementoPadre;
+    getContenido() {
+        return this.contenido;
     }
 
-    getEstiloElemento(){
-        return this.#estiloElemento;
+    getElementoDom() {
+        return this.elementoDOM;
     }
 
-    setId(newId){
-        this.#id = newId;
+    getElementoPadre() {
+        return this.elementoPadre;
     }
 
-    setContenido(contenido){
-        this.#contenido = contenido;
+    getEstiloElemento() {
+        return this.estiloElemento;
     }
 
-    setElementoPadre(nuevoPadre){
-        this.#elementoPadre = nuevoPadre;
+    setId(newId) {
+        this.id = newId;
     }
 
-    setEstiloElemento(estilo){
-        this.#estiloElemento = estilo;
+    setContenido(contenido) {
+        this.contenido = contenido;
     }
 
+    setElementoDom(elemento) {
+        this.elementoDOM = elemento;
+    }
+
+    setElementoPadre(nuevoPadre) {
+        this.elementoPadre = nuevoPadre;
+        this.aplicarHijo();
+    }
+
+    setEstiloElemento(estilo) {
+        this.estiloElemento = estilo;
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            contenido: this.contenido,
+            elementoDOM: this.elementoDOM.outerHTML,
+            estiloElemento: this.estiloElemento
+        }
+    }
+
+    static fromJSON(json) {
+        let elemento = new Elemento(json.id, json.contenido, json.elementoPadre, json.estiloElemento);
+        const placeholder = document.createElement("div");
+        placeholder.insertAdjacentHTML("afterbegin", json.elementoDOM);
+        const node = placeholder.firstElementChild;
+        elemento.elementoDOM = node;
+        elemento.elementoPadre = json.elementoPadre;
+        return elemento;
+    }
 
 }

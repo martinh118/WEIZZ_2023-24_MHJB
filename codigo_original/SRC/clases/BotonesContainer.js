@@ -95,8 +95,6 @@ export class BotonesContainer {
     }
 
     toJSON() {
-        console.log("BotonerCrearHTML: " + this.#botonCrear)
-        console.log("BotonerSubirElementoHTML: " +this.#subirElemento.outerHTML)
         return {
             idBotonesCont: this.#id,
             botonCrear: this.#botonCrear.innerHTML,
@@ -109,7 +107,7 @@ export class BotonesContainer {
     }
 
     static fromJSON(json) {
-        const range = document.createRange();
+       
         const botonesContainer = new BotonesContainer(json.idBotonesCont);
 
         botonesContainer.#botonCrear = crearBotonCrear();
@@ -120,32 +118,10 @@ export class BotonesContainer {
         
         return botonesContainer;
 
-        function crearBajarElemento() {
-            let bajarElemento = crearElemento("button", "↓", "id", "bajar-" + json.idBotonesCont);
-            bajarElemento.setAttribute("title", "Bajar fila de containers.");
-            return bajarElemento;
-        }
-
         function crearBotonCrear(){
             let divDropdown = crearElemento("div", "", "class", "dropdown botonCrear");
             divDropdown.innerHTML = json.botonCrear;
             return divDropdown;
-        }
-
-        function crearSubirElemento() {
-            let subirElemento = crearElemento("button", "↑", "id", "subir-" + json.idBotonesCont);
-            subirElemento.setAttribute("title", "Subir fila de containers.");
-            return subirElemento;
-        }
-
-        function crearBorrarElemento() {
-            let borrarElemento = crearElemento("button", "x", "id", "eliminar-" + json.idBotonesCont);
-            let attrBorrar = {
-                "title": "Eliminar fila de containers.",
-                "style": "border-top-right-radius: 20px!important;"
-            }
-            modificarAtributoElemento(borrarElemento, attrBorrar);
-            return borrarElemento;
         }
 
         function grupoBotones(){

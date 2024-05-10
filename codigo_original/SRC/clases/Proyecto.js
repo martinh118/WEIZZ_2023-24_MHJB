@@ -20,7 +20,7 @@ export class Proyecto {
     #crearHeader() {
         let contenedor = new FilaContenedor("Header-" + this.#id, 3);
         contenedor.containerSinOpciones();
-        let filaHeader = new Fila("rowHeader-" + this.#id, [contenedor])
+        let filaHeader = new Fila("FilaRowHeader-" + this.#id, [contenedor])
         return filaHeader;
     }
 
@@ -34,7 +34,7 @@ export class Proyecto {
     #crearFooter() {
         let contenedor = new FilaContenedor("Footer-" + this.#id, 4);
         contenedor.containerSinOpciones();
-        let filaFooter = new Fila("rowFooter-" + this.#id, [contenedor])
+        let filaFooter = new Fila("FilaRowFooter-" + this.#id, [contenedor])
         return filaFooter;
     }
 
@@ -138,7 +138,7 @@ export class Proyecto {
         this.#htmlBase = this.#crearHtmlProyecto();
     }
 
-    rewriteHtml() {
+    rewriteHTML() {
         this.#htmlBase = this.#crearHtmlProyecto();
     }
 

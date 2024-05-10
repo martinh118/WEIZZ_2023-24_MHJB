@@ -123,7 +123,7 @@ export class Fila{
         }
     }
 
-    rewriteHtml(){
+    rewriteHTML(){
         this.#htmlBase = this.#crearHtmlBase();
     }
 }
