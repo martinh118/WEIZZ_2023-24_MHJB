@@ -19,7 +19,7 @@ $("#mostrarCapas").click(function () {
 
     elementoCapas.style.left = 2 + "em";
     elementoCapas.style.top = 15 + "em";
-    $("#proyecto").append(elementoCapas);
+    document.body.appendChild(elementoCapas);
 
 
     cerrarElementoCapas = document.getElementById("cerrarcuadroCapas");

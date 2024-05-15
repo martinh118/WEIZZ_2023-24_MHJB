@@ -1,7 +1,9 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { crearElemento, añadirHijos, añadirMismoAtributos } from '../../SRC/librerias/APIElementosHTML.js';
-
-
+var cuadroElementos  = undefined;
+/**
+ * Muestra el recuadro flotante para mostrar los elementos disponibles para aplicar en el proyecto.
+ */
 $("#mostrarElementos").click(function () {
     var selection = document.querySelector('#cuadroElementos') !== null;
 
@@ -9,13 +11,13 @@ $("#mostrarElementos").click(function () {
 
         let offsetX, offsetY, isDragging = false;
         let content = obtenerElementosDisponibles();
-        let cuadroElementos = new RecuadroArrastrable("cuadroElementos", "Elementos", content);
+        cuadroElementos = new RecuadroArrastrable("cuadroElementos", "Elementos", content);
         let elementoElementos = cuadroElementos.getRecuadro();
         let cerrarElementoElementos;
 
         elementoElementos.style.left = 2 + "em";
-        elementoElementos.style.top = 25 + "em";
-        $("#proyecto").append(elementoElementos);
+        elementoElementos.style.top = 15 + "em";
+        document.body.appendChild(elementoElementos);
 
 
         cerrarElementoElementos = document.getElementById("cerrarcuadroElementos");
@@ -54,6 +56,10 @@ $("#mostrarElementos").click(function () {
     }
 });
 
+/**
+ * Crea el contenido del recuadro flotando con los elementos disponibles.
+ * @returns {DOMElement} Body con los elementos disponibles.
+ */
 function obtenerElementosDisponibles() {
     let contenidoCompleto = crearElemento("div", "", "id", "contenidoRecuadroElementos");
 

@@ -5,7 +5,12 @@ import { Imagen } from '../../SRC/clases/Elementos/Imagen.js';
 import { Tabla } from '../../SRC/clases/Elementos/Tabla.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
-
+import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
+import { reescribirHTML } from '../../SRC/librerias/gestionElementos.js';
+/**
+ * 
+ * @param {Proyecto} proyecto 
+ */
 export function aplicarEventosArrastrar(proyecto) {
     let containers = document.querySelectorAll(".containerHijo");
     containers.forEach((containerHijo) => {
@@ -13,6 +18,11 @@ export function aplicarEventosArrastrar(proyecto) {
     });
 }
 
+/**
+ * 
+ * @param {*} cont 
+ * @param {*} proyecto 
+ */
 export function eventosContainerHijo(cont, proyecto) {
 
     cont.addEventListener("drop", function (event) {
@@ -44,9 +54,8 @@ export function eventosContainerHijo(cont, proyecto) {
                 }
 
                 let elementoCreado = crearElemento(data, elementoPadre);
-
                 añadirCambiosClase(elementoCreado, elementoPadre, proyecto);
-
+                aplicarEventoMostrarEstilo();
 
             }
         } catch (err) {
@@ -81,15 +90,15 @@ function crearElemento(data, elementoPadre) {
 
     switch (data) {
         case "Titulo":
-            return new Titulo("Titulo", "TITULO MH", elementoPadre);
+            return new Titulo(elementoPadre.id + ".Titulo", "TITULO MH", elementoPadre);
         case "Texto":
-            return new Texto("Texto", "", elementoPadre);
+            return new Texto(elementoPadre.id + ".Texto", "", elementoPadre);
         case "Imagen":
-            return new Imagen("Imagen", "", elementoPadre);
+            return new Imagen(elementoPadre.id + ".Imagen", "", elementoPadre);
         case "Lista":
-            return new Lista("Lista", "", elementoPadre);
+            return new Lista(elementoPadre.id + ".Lista", "", elementoPadre);
         case "Tabla":
-            return new Tabla("Tabla", "", elementoPadre);
+            return new Tabla(elementoPadre.id + ".Tabla", "", elementoPadre);
         default:
             return null;
     }
@@ -131,19 +140,13 @@ function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
             claseContainer = claseFilaContenedor.getContainerUnico(elementoPadre.id);
             claseContainer.setElementoHijo(elementoCreado);
             reescribirHTML(claseContainer, claseFilaContenedor, claseFilaRow, proyecto);
+            aplicarListenersFilaContainer(claseFilaContenedor, proyecto);
+        
         }
     }
 
 }
 
-function reescribirHTML(claseContainer, claseFilaContenedor, claseFilaRow, proyecto) {
-    claseContainer.rewriteHTML();
-    claseFilaContenedor.rewriteHTML();
-    claseFilaRow.rewriteHTML();
-    proyecto.rewriteHTML();
-    $("#proyecto").html(proyecto.getHtmlBase());
-    aplicarListenersFilaContainer(claseFilaContenedor, proyecto);
-}
 
 
 

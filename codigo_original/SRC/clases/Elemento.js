@@ -18,9 +18,22 @@ export class Elemento {
 
     crearElemento() {
         let element = crearElemento(this.elemento, this.contenido, "id", this.id);
-        element.setAttribute("style", this.estiloElemento);
+        let estilo = this.crearStringEstilo();
+        element.setAttribute("style", estilo);
         element.setAttribute("class", "element")
+        element.setAttribute("contenteditable", "");
         return element;
+    }
+
+    crearStringEstilo(){
+        let html = "";
+        
+        for(let es in this.estiloElemento){
+            html += `${es}: ${this.estiloElemento[es]};`;
+        }
+
+        return html;
+
     }
 
     rewriteHTML() {
@@ -78,13 +91,16 @@ export class Elemento {
     }
 
     static fromJSON(json) {
-        let elemento = new Elemento(json.id, json.contenido, json.elementoPadre, json.estiloElemento);
+        let elemento = new Elemento(json.id, json.contenido);
         const placeholder = document.createElement("div");
         placeholder.insertAdjacentHTML("afterbegin", json.elementoDOM);
         const node = placeholder.firstElementChild;
         elemento.elementoDOM = node;
-        elemento.elementoPadre = json.elementoPadre;
         return elemento;
+    }
+
+    obtenerConfigEstilo(){
+        return "";
     }
 
 }

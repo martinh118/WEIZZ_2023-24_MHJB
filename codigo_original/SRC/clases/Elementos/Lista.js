@@ -19,6 +19,7 @@ export class Lista extends Elemento{
         for (let index = 0; index < 5; index++) {
             let li = crearElemento("li", "Item-"+index);
             li.setAttribute("class", "element");
+            li.setAttribute("contenteditable", "");
             ol.appendChild(li);
         }
 
