@@ -2,7 +2,7 @@ import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { proyecto } from './editor_proyecto.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
-import { reescribirHTML } from '../../SRC/librerias/gestionElementos.js';
+import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/gestionElementos.js';
 
 var cuadroEstilo = undefined;
 
@@ -69,10 +69,19 @@ function encontrarObjetoElemento(elemento){
   let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
   let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
   let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
+  let filaRowObject;
 
-  let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+  if(filaRowDom.id.includes("Header")){
+    filaRowObject = proyecto.getHeader(filaRowDom.id);
+  }else if(filaRowDom.id.includes("Footer")){
+    filaRowObject = proyecto.getFooter(filaRowDom.id);
+  }else{
+    filaRowObject = proyecto.getFilaRow(filaRowDom.id);  
+  }
+
   let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
   let contenedorHijoObject = filaContenedorObject.getContainerUnico(contenedorHijoDom.id);
+
   return contenedorHijoObject.getElementoHijo();
 }
 
@@ -252,10 +261,21 @@ function aplicarCambios(elemento){
   let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
   let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
   let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
+  let filaRowObject;
 
-  let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+  if(filaRowDom.id.includes("Header")){
+    filaRowObject = proyecto.getHeader(filaRowDom.id);
+  }else if(filaRowDom.id.includes("Footer")){
+    filaRowObject = proyecto.getFooter(filaRowDom.id);
+  }else{
+    filaRowObject = proyecto.getFilaRow(filaRowDom.id);  
+  }
+
   let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
   let contenedorHijoObject = filaContenedorObject.getContainerUnico(contenedorHijoDom.id);
-  reescribirHTML(contenedorHijoObject, filaContenedorObject, filaRowObject, proyecto);
+
+  if(filaRowDom.id.includes("Header") || filaRowDom.id.includes("Footer")){
+    reescribirHTMLHeaderFooter(contenedorHijoObject, filaContenedorObject, filaRowObject, proyecto);
+  }else reescribirHTML(contenedorHijoObject, filaContenedorObject, filaRowObject, proyecto);
 
 }

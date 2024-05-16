@@ -36,6 +36,7 @@ export class Texto extends Elemento{
 
     static fromJSON(json){
         let object = new Texto(json.id, json.contenido);
+        object.setContenido(json.contenido);
         object.setColor(json.color);
         object.setFuente(json.fontFamily);
         object.setTamaño(json.fontSize);
@@ -45,6 +46,10 @@ export class Texto extends Elemento{
         object.cambiarEstilo(json.estiloElemento);
         object.rewriteHTML();
         return object;
+    }
+
+    setContenido(newContent){
+        this.contenido = newContent;
     }
 
     setColor(newColor){

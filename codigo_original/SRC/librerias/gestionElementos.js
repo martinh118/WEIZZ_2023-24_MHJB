@@ -36,3 +36,12 @@ export function reescribirHTML(claseContainer, claseFilaContenedor, claseFilaRow
     proyecto.rewriteHTML();
     $("#proyecto").html(proyecto.getHtmlBase());
 }
+
+export function reescribirHTMLHeaderFooter(claseContainer, claseFilaContenedor, claseFilaRow, proyecto) {
+    claseContainer.rewriteHTML();
+    claseFilaContenedor.rewriteHTML();
+    claseFilaContenedor.containerSinOpciones();
+    claseFilaRow.rewriteHTML();
+    proyecto.rewriteHTML();
+    $("#proyecto").html(proyecto.getHtmlBase());
+}

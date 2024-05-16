@@ -127,10 +127,10 @@ session_start();
             $contenido = "";
             switch ($base) {
                 case "basico":
-                    $contenido = file_get_contents('../SRC/plantillas_base/plantilla_base_basico.json');
+                    $contenido = file_get_contents('../SRC/plantillas_base/plantilla_base_basico_2.json');
                     break;
                 case "multiple":
-                    $contenido = file_get_contents('../SRC/plantillas_base/plantilla_base_multiple.json');
+                    $contenido = file_get_contents('../SRC/plantillas_base/plantilla_base_multiple_2.json');
                     break;
             }
         ?>

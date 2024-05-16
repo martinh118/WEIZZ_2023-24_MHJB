@@ -6,7 +6,7 @@ import { Tabla } from '../../SRC/clases/Elementos/Tabla.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
-import { reescribirHTML } from '../../SRC/librerias/gestionElementos.js';
+import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/gestionElementos.js';
 /**
  * 
  * @param {Proyecto} proyecto 
@@ -107,42 +107,36 @@ function crearElemento(data, elementoPadre) {
 function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
     let filaRow = encontrarPadre(elementoPadre, "id", "FilaRow");
     let claseFilaRow, DOMFilaContenedor, claseFilaContenedor, claseContainer;
+
     // console.log(filaRow);
     if (filaRow.id.includes("Header")) {
         claseFilaRow = proyecto.getHeader();
-        cambiosHeaderFooter();
     } else if (filaRow.id.includes("Footer")) {
         claseFilaRow = proyecto.getFooter();
-        cambiosHeaderFooter();
     } else {
         claseFilaRow = proyecto.getFilaRow(filaRow.id);
-        cambiosBody();
     }
 
-    function cambiosHeaderFooter(){
+    if (claseFilaRow != undefined) {
         DOMFilaContenedor = encontrarPadre(elementoPadre, "class", "FilaContenedor");
         claseFilaContenedor = claseFilaRow.getFilaContenedorUnico(DOMFilaContenedor.id)
         claseContainer = claseFilaContenedor.getContainerUnico(elementoPadre.id);
         claseContainer.setElementoHijo(elementoCreado);
-        claseContainer.rewriteHTML();
-        claseFilaContenedor.rewriteHTML();
-        claseFilaContenedor.containerSinOpciones();
-        claseFilaRow.rewriteHTML();
-        proyecto.rewriteHTML();
-        $("#proyecto").html(proyecto.getHtmlBase());
-        aplicarListenersFilaContainer(claseFilaContenedor, proyecto);
     }
 
-    function cambiosBody(){
-        if (claseFilaRow != undefined) {
-            DOMFilaContenedor = encontrarPadre(elementoPadre, "class", "FilaContenedor");
-            claseFilaContenedor = claseFilaRow.getFilaContenedorUnico(DOMFilaContenedor.id)
-            claseContainer = claseFilaContenedor.getContainerUnico(elementoPadre.id);
-            claseContainer.setElementoHijo(elementoCreado);
+    if(filaRow.id.includes("Header") || filaRow.id.includes("Footer")){
+        cambiosHeaderFooter();
+    }else cambiosBody();
+
+
+    function cambiosHeaderFooter() {
+            reescribirHTMLHeaderFooter(claseContainer, claseFilaContenedor, claseFilaRow, proyecto);
+            aplicarListenersFilaContainer(claseFilaContenedor, proyecto);
+    }
+
+    function cambiosBody() {
             reescribirHTML(claseContainer, claseFilaContenedor, claseFilaRow, proyecto);
             aplicarListenersFilaContainer(claseFilaContenedor, proyecto);
-        
-        }
     }
 
 }
