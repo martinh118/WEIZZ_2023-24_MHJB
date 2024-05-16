@@ -15,7 +15,7 @@ function eliminarUsuario()
     session_abort();
     $script = <<<EOT
                 <script type='text/javascript'>
-                window.location.replace("../../welcome_page.php");
+                window.location.replace("../../index.php");
                 alert('Usuario eliminado correctamente.');
                 </script>
                 EOT;

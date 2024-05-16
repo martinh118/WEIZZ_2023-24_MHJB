@@ -19,13 +19,13 @@
     <header>
         <div class="row" id="encabezado">
             <div class="col ">
-                <a href="../../welcome_page.php">
+                <a href="../../index.php">
                     <img src="../../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
                 </a>
 
             </div>
             <div class="col">
-                <h2 id="inicioPage"><a href="../../welcome_page.php" class="tituloHeader">Inicio</a></h2>
+                <h2 id="inicioPage"><a href="../../index.php" class="tituloHeader">Inicio</a></h2>
             </div>
             <div class="col"></div>
             <div class="col-2 offset-2">

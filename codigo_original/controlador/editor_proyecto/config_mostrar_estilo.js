@@ -159,6 +159,10 @@ function listenerGuardarEstilo(){
       cambiarEstiloTabla(elementoObjecto);
     }
 
+    if(idElemento.includes("Imagen")){
+      cambiarEstiloImagen(elementoObjecto);
+    }
+
     aplicarCambios(elemento);
     aplicarEventoMostrarEstilo();
     // console.log(elementoObjecto);
@@ -255,6 +259,31 @@ function cambiarEstiloTabla(elementoObjeto){
 
   elementoObjeto.rewriteTabla();
 
+}
+
+function cambiarEstiloImagen(elementoObjeto){
+  let imagen;
+  let ancho = document.getElementById("anchoImagen").value;
+  let alto = document.getElementById("altoImagen").value;
+  let borderRadius = document.getElementById("borderRadius").value;
+  let anchoBorde = document.getElementById("anchoBorde").value;
+  let colorBorde = document.getElementById("colorBorde").value;
+  
+  elementoObjeto.setAncho(ancho);
+  elementoObjeto.setAlto(alto);
+  elementoObjeto.setBorderRadius(borderRadius);
+  elementoObjeto.setAnchoBorde(anchoBorde);
+  elementoObjeto.setColorBorde(colorBorde);
+
+  let object = {
+    "height": `${alto}%`,
+    "width": `${ancho}%`,
+    "border": `${anchoBorde}px solid ${colorBorde}`,
+    "border-radius": `${borderRadius}% !important;`
+  }
+  elementoObjeto.setEstilo(object);
+
+  elementoObjeto.rewriteImagen();
 }
 
 function aplicarCambios(elemento){

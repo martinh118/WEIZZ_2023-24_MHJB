@@ -9,7 +9,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == "POST") {
 
 ?>
     <script>
-        location.replace("../../welcome_page.php");
+        location.replace("../../index.php");
     </script>
 
 <?php

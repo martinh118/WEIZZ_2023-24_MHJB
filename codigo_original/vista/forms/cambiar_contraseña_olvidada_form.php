@@ -92,7 +92,7 @@ if (isset($_GET['email'])) {
                     ¿Ir al inicio de la web?
                 </h5>
                 <div class='modal-footer'>
-                    <a href="../../welcome_page.php" type="submit" type='button' class='btn btn-danger'>Confirmar</a>
+                    <a href="../../index.php" type="submit" type='button' class='btn btn-danger'>Confirmar</a>
                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                 </div>
             </div>

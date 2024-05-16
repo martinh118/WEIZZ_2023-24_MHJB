@@ -5,5 +5,5 @@
     ?>
 
     <script>
-        location.replace("../../welcome_page.php");
+        location.replace("../../index.php");
     </script>
