@@ -2,7 +2,7 @@ import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { proyecto } from './editor_proyecto.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
-import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/gestionElementos.js';
+import {cambiarEstiloTitulo, cambiarEstiloTabla, cambiarEstiloImagen, cambiarEstiloLista, aplicarCambios} from './libreria_cambiar_estilo_elementos.js'
 
 var cuadroEstilo = undefined;
 
@@ -26,10 +26,10 @@ export function aplicarEventoMostrarEstilo() {
 
 
 function mostrarConfigEstilo(contenedor) {
-  contenedor.addEventListener("click", function (event) {eventListener(event)});
+  contenedor.addEventListener("click", function (event) { eventListener(event) });
   // contenedor.firstChild.addEventListener("click", function (event) {eventListener(event)});
 
-  function eventListener(event){
+  function eventListener(event) {
     let contenido = null;
     let elemento;
     if ($(event.target).attr("class").includes("containerHijo")) {
@@ -60,23 +60,22 @@ function mostrarContenidoCSS(elemento) {
   let divPrincipal = crearElemento("div", "");
   divPrincipal.innerHTML = elementoObject.obtenerConfigEstilo();
   return divPrincipal;
-  // let configEstilo = elemento.obtenerConfigEstilo();
 
 
 }
 
-function encontrarObjetoElemento(elemento){
+function encontrarObjetoElemento(elemento) {
   let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
   let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
   let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
   let filaRowObject;
 
-  if(filaRowDom.id.includes("Header")){
+  if (filaRowDom.id.includes("Header")) {
     filaRowObject = proyecto.getHeader(filaRowDom.id);
-  }else if(filaRowDom.id.includes("Footer")){
+  } else if (filaRowDom.id.includes("Footer")) {
     filaRowObject = proyecto.getFooter(filaRowDom.id);
-  }else{
-    filaRowObject = proyecto.getFilaRow(filaRowDom.id);  
+  } else {
+    filaRowObject = proyecto.getFilaRow(filaRowDom.id);
   }
 
   let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
@@ -141,26 +140,30 @@ function abrirRecuadro(contenido) {
 
 }
 
-function listenerGuardarEstilo(){
-  $(".guardarEstiloElemento").click(function(){
-    let idElemento = $(".idElemento").html(); 
+function listenerGuardarEstilo() {
+  $(".guardarEstiloElemento").click(function () {
+    let idElemento = $(".idElemento").html();
     let elemento = document.getElementById(idElemento);
     let elementoObjecto = encontrarObjetoElemento(elemento);
 
-    if(idElemento.includes("Titulo")){
+    if (idElemento.includes("Titulo")) {
       cambiarEstiloTitulo(elementoObjecto);
     }
 
-    if(idElemento.includes("Texto")){
+    if (idElemento.includes("Texto")) {
       cambiarEstiloTitulo(elementoObjecto);
     }
 
-    if(idElemento.includes("Tabla")){
+    if (idElemento.includes("Tabla")) {
       cambiarEstiloTabla(elementoObjecto);
     }
 
-    if(idElemento.includes("Imagen")){
+    if (idElemento.includes("Imagen")) {
       cambiarEstiloImagen(elementoObjecto);
+    }
+
+    if (idElemento.includes("Lista")) {
+      cambiarEstiloLista(elementoObjecto);
     }
 
     aplicarCambios(elemento);
@@ -169,142 +172,4 @@ function listenerGuardarEstilo(){
   });
 }
 
-function cambiarEstiloTitulo(elementoObjecto){
-  let newContent = document.getElementById("contenidoTitulo").value;
-  let newColor = document.getElementById("colorTextoTitulo").value;
-  let nuevaFuente = document.getElementById("fuenteTextoTitulo").value;
-  let nuevoTamaño = document.getElementById("tamañoTitulo").value;
-  let medida = document.getElementById("medidaTamañoTitulo").value;
-  let subrayado = document.getElementById("subrayado");
-  let bolSub, cssSub = "";
-  
-  elementoObjecto.setContenido(newContent);
-  elementoObjecto.setColor(newColor);
-  elementoObjecto.setFuente(nuevaFuente);
-  elementoObjecto.setTamaño(nuevoTamaño);
-  elementoObjecto.setMedida(medida);
-  if(subrayado.checked){ 
-    bolSub = true;
-    cssSub = "underline " + newColor+ ";";
-  }
-  else bolSub = false; 
-  elementoObjecto.setSubrayado(bolSub);
 
-  let objetoEstilo = {
-    "color" : newColor,
-    "font-family": nuevaFuente,
-    "font-size": nuevoTamaño+medida,
-    "text-decoration": cssSub
-  }
-
-  if(document.getElementById("negrita")){
-    let bolNeg;
-    let negrita = document.getElementById("negrita");
-
-    if(negrita.checked){ 
-      bolNeg = true;
-      objetoEstilo["font-weight"] = "bold";
-    }
-    else bolNeg = false; 
-    elementoObjecto.setNegrita(bolSub);
-
-  }
-
-  elementoObjecto.cambiarEstilo(objetoEstilo);
-  elementoObjecto.rewriteHTML();
-  
-}
-
-function cambiarEstiloTabla(elementoObjeto){
-  let numFilas = document.getElementById("numFilas").value;
-  let numColumnas = document.getElementById("numColumnas").value;
-  let grosorTabla = document.getElementById("grosorTabla").value;
-  let estiloBordeTabla = document.getElementById("estiloBordeTabla").value;
-  let colorContornoTabla = document.getElementById("colorContornoTabla").value;
-  let colorFondoHeader = document.getElementById("colorFondoHeader").value;
-  let colorFondoBody = document.getElementById("colorFondoBody").value;
-  let colorLetraHeader = document.getElementById("colorLetraHeader").value;
-  let colorLetraBody = document.getElementById("colorLetraBody").value;
-
-  elementoObjeto.setFilas(numFilas);
-  elementoObjeto.setColumnas(numColumnas)
-  elementoObjeto.setGrosor(grosorTabla)
-  elementoObjeto.setEstiloBorde(estiloBordeTabla)
-  elementoObjeto.setColorContorno(colorContornoTabla)
-  elementoObjeto.setColorHeader(colorFondoHeader)
-  elementoObjeto.setColorBody(colorFondoBody)
-  elementoObjeto.setColorLetraHeader(colorLetraHeader)
-  elementoObjeto.setColorLetraBody(colorLetraBody)
-
-  let estiloTable = {
-    'border': `${grosorTabla}px ${estiloBordeTabla} ${colorContornoTabla}`,
-    'border-collapse': 'collapse'
-  }
-
-  let estiloHeader = {
-    'border': `${grosorTabla}px ${estiloBordeTabla} ${colorContornoTabla}`,
-    'background' : colorFondoHeader,
-    'color': colorLetraHeader,
-  }
-
-  let estiloBody = {
-    'border': `${grosorTabla}px ${estiloBordeTabla} ${colorContornoTabla}`,
-    'background' : colorFondoBody,
-    'color': colorLetraBody,
-  }
-
-  elementoObjeto.setEstiloTable(estiloTable)
-  elementoObjeto.setEstiloHeader(estiloHeader)
-  elementoObjeto.setEstiloBody(estiloBody)
-
-  elementoObjeto.rewriteTabla();
-
-}
-
-function cambiarEstiloImagen(elementoObjeto){
-  let imagen;
-  let ancho = document.getElementById("anchoImagen").value;
-  let alto = document.getElementById("altoImagen").value;
-  let borderRadius = document.getElementById("borderRadius").value;
-  let anchoBorde = document.getElementById("anchoBorde").value;
-  let colorBorde = document.getElementById("colorBorde").value;
-  
-  elementoObjeto.setAncho(ancho);
-  elementoObjeto.setAlto(alto);
-  elementoObjeto.setBorderRadius(borderRadius);
-  elementoObjeto.setAnchoBorde(anchoBorde);
-  elementoObjeto.setColorBorde(colorBorde);
-
-  let object = {
-    "height": `${alto}%`,
-    "width": `${ancho}%`,
-    "border": `${anchoBorde}px solid ${colorBorde}`,
-    "border-radius": `${borderRadius}% !important;`
-  }
-  elementoObjeto.setEstilo(object);
-
-  elementoObjeto.rewriteImagen();
-}
-
-function aplicarCambios(elemento){
-  let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
-  let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
-  let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
-  let filaRowObject;
-
-  if(filaRowDom.id.includes("Header")){
-    filaRowObject = proyecto.getHeader(filaRowDom.id);
-  }else if(filaRowDom.id.includes("Footer")){
-    filaRowObject = proyecto.getFooter(filaRowDom.id);
-  }else{
-    filaRowObject = proyecto.getFilaRow(filaRowDom.id);  
-  }
-
-  let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
-  let contenedorHijoObject = filaContenedorObject.getContainerUnico(contenedorHijoDom.id);
-
-  if(filaRowDom.id.includes("Header") || filaRowDom.id.includes("Footer")){
-    reescribirHTMLHeaderFooter(contenedorHijoObject, filaContenedorObject, filaRowObject, proyecto);
-  }else reescribirHTML(contenedorHijoObject, filaContenedorObject, filaRowObject, proyecto);
-
-}
