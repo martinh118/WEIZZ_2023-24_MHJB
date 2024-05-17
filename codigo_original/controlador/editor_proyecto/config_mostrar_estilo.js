@@ -3,6 +3,7 @@ import { proyecto } from './editor_proyecto.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
 import {cambiarEstiloTitulo, cambiarEstiloTabla, cambiarEstiloImagen, cambiarEstiloLista, aplicarCambios} from './libreria_cambiar_estilo_elementos.js'
+import { mostrarTablaElementos } from './config_mostrar_elementos.js';
 
 var cuadroEstilo = undefined;
 
@@ -44,8 +45,10 @@ function mostrarConfigEstilo(contenedor) {
       elemento = event.target;
     }
 
-    contenido = mostrarContenidoCSS(elemento);
-    abrirRecuadro(contenido);
+    if(elemento != undefined){
+      contenido = mostrarContenidoCSS(elemento);
+      abrirRecuadro(contenido);
+    }else mostrarTablaElementos();
   }
 
 }

@@ -4,7 +4,10 @@ var cuadroElementos  = undefined;
 /**
  * Muestra el recuadro flotante para mostrar los elementos disponibles para aplicar en el proyecto.
  */
-$("#mostrarElementos").click(function () {
+$("#mostrarElementos").click(mostrarTablaElementos());
+
+export function mostrarTablaElementos(){
+
     var selection = document.querySelector('#cuadroElementos') !== null;
 
     if (!selection) {
@@ -54,7 +57,7 @@ $("#mostrarElementos").click(function () {
 
 
     }
-});
+}
 
 /**
  * Crea el contenido del recuadro flotando con los elementos disponibles.
