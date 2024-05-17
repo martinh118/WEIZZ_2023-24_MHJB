@@ -66,6 +66,7 @@ export class Imagen extends Elemento{
         img.setBorderRadius(json.borderRadius);
         img.setAnchoBorde(json.anchoBorde);
         img.setColorBorde(json.colorBorde);
+        img.rewriteImagen();
         return img;
     }
 
@@ -111,18 +112,21 @@ export class Imagen extends Elemento{
         <div id="contenidoRecuadroEstilo" style="padding: 5px 5px 5px 5px">
         <div hidden class='idElemento'>${this.id}</div>
             <label for="inputImagen"><b>Imagen:</b> </label><br>
-            <input type="file" id="inputImagen">
+            <input type="file" id="inputImagen" accept="image/png, image/jpeg">
             <br><br>
             <label for="anchoImagen"><b>Ancho imagen (width): </b></label>
             <input type="number" id="anchoImagen" value='${this.#ancho}' min='0' max='100'>
             <br>
             <label for="altoImagen"><b>Alto imagen (height):</b> </label>
+            <br>
             <input type="number" id="altoImagen" value='${this.#alto}' min='0' max='100'>
             <br><br>
             <label for="borderRadius"><b>Border Radius (%):</b> </label>
+            <br>
             <input type="number" id="borderRadius" value='${this.#borderRadius}' min='0' max='100'>
-            <br><br>
+            <br>
             <label for="anchoBorde"><b>Ancho borde (px):</b></label>
+            <br>
             <input type="number" id="anchoBorde" value='${this.#anchoBorde}' min='0' max='100'>
             <br>
             <label for="colorBorde"><b>Color borde:</b></label><br>

@@ -1,5 +1,5 @@
 <?php
-require_once(".\modelo\configuracion_proyecto\modelo_obtener_proyectos.php");
+require_once("./modelo/configuracion_proyecto/modelo_obtener_proyectos.php");
 
 function mostrarProyectosUser($idUser)
 {

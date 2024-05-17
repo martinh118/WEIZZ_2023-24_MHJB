@@ -95,7 +95,7 @@ function enviarCorreo($correo, $token){
         <body>
         <p>Accede al siguiente link para redirigirte al formulario para aplicar la nueva contraseña de usuario.</p>
             <h3>Link per recuperar contrasenya: </h3>
-            <a href='http://localhost/practiques/PROYECTO_FINAL_2DAW/codigo_original/vista/forms/cambiar_contraseña_olvidada_form.php?token=$token&email=$correo'> Click aquí per recuperar contrasenya.</a>
+            <a href='http://localhost/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original/vista/forms/cambiar_contraseña_olvidada_form.php?token=$token&email=$correo'> Click aquí per recuperar contrasenya.</a>
         </body>
         </html>";    //Cos del missatge. En aquest cas el text aplicat al formulari.
 
