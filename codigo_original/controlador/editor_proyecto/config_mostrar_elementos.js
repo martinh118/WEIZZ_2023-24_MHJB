@@ -1,12 +1,12 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { crearElemento, añadirHijos, añadirMismoAtributos } from '../../SRC/librerias/APIElementosHTML.js';
-var cuadroElementos  = undefined;
+var cuadroElementos = undefined;
 /**
  * Muestra el recuadro flotante para mostrar los elementos disponibles para aplicar en el proyecto.
  */
 $("#mostrarElementos").click(mostrarTablaElementos);
 
-export function mostrarTablaElementos(){
+export function mostrarTablaElementos() {
 
     var selection = document.querySelector('#cuadroElementos') !== null;
 
@@ -65,15 +65,21 @@ export function mostrarTablaElementos(){
  */
 function obtenerElementosDisponibles() {
     let contenidoCompleto = crearElemento("div", "", "id", "contenidoRecuadroElementos");
+    let text = crearElemento("p","¡Arrastra y suelta un elemento!" )
+    text.setAttribute("style", "font-weight: bold; text-align: center; margin-bottom: 10px");
+    contenidoCompleto.appendChild(text);
 
     let container = crearElemento("div", "Container", "class", "selectElement");
+    let borrar = crearElemento("div", "Borrar Elemento", "class", "selectElement");
     let titulo = crearElemento("div", "Titulo", "class", "selectElement ");
     let texto = crearElemento("div", "Texto", "class", "selectElement ");
     let imagen = crearElemento("div", "Imagen", "class", "selectElement ");
     let lista = crearElemento("div", "Lista", "class", "selectElement ");
     let tabla = crearElemento("div", "Tabla", "class", "selectElement ");
 
+
     container.setAttribute("data-elemento", "Container");
+    borrar.setAttribute("data-elemento", "Borrar");
     titulo.setAttribute("data-elemento", "Titulo");
     texto.setAttribute("data-elemento", "Texto");
     imagen.setAttribute("data-elemento", "Imagen");
@@ -81,7 +87,7 @@ function obtenerElementosDisponibles() {
     tabla.setAttribute("data-elemento", "Tabla");
 
 
-    let arrElementos = [container, titulo, texto, imagen, lista, tabla];
+    let arrElementos = [borrar, titulo, texto, imagen, lista, tabla];
 
     añadirMismoAtributos("draggable", "true", arrElementos);
     añadirMismoAtributos("ondragstart", "dragStart(event)", arrElementos);

@@ -16,6 +16,7 @@
     <script type="module" src="../controlador/editor_proyecto/config_mostrar_estilo.js"></script>
     <script type="module" src="../controlador/editor_proyecto/editor_proyecto.js"></script>
     <script type="module" src="../controlador/editor_proyecto/arrastrar_elementos.js"></script>
+    <script type="module" src="../controlador/editor_proyecto/visualizar_proyecto.js"></script>
 </head>
 <?php
 require_once("../controlador/config_proyecto/controlador_obtener_proyecto.php");

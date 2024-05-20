@@ -59,7 +59,7 @@ function mostrarConfigEstilo(contenedor) {
  * @param {DOMElement} elemento Elemento seleccionado
  * @returns {DOMElement} divPrincipal: Devuelve el div con las opciones de configuración del estilo CSS.
  */
-function mostrarContenidoCSS(elemento) {
+export function mostrarContenidoCSS(elemento) {
   let elementoObject = encontrarObjetoElemento(elemento)
   let divPrincipal = crearElemento("div", "");
   divPrincipal.innerHTML = elementoObject.obtenerConfigEstilo();
@@ -92,7 +92,7 @@ function encontrarObjetoElemento(elemento) {
  * Abre el recuadro del estilo del objeto con el contenido del objeto dependiendo del elemento
  * @param {*} contenido Contenido devuelto por el objeto a partir de una función propia.
  */
-function abrirRecuadro(contenido) {
+export function abrirRecuadro(contenido) {
   var selection = document.querySelector('#cuadroEstilo') !== null;
 
   if (!selection) {

@@ -1,6 +1,7 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
 import { modificarAtributoElemento } from '../../SRC/librerias/APIElementosHTML.js';
+import { mostrarContenidoCSS, abrirRecuadro } from './config_mostrar_estilo.js';
 
 /**
  * Muestra recuadro con las capas aplicadas actualmente en el proyecto.
@@ -95,15 +96,17 @@ function crearContenidoRecuadro(divPrincipal, elemento, width, color) {
       let divMostrar
       let contenidoTexto;
       if (clases.includes("element")) {
-      
-        contenidoTexto =  devolverNombreElemento(elemento.tagName);
+        contenidoTexto = devolverNombreElemento(elemento.tagName);
       } else if (clases.includes("containerHijo")) {
         contenidoTexto = elemento.id.split(".")[1];
       }
       else {
         contenidoTexto = elemento.id;
       }
-      divMostrar = crearElemento("div", contenidoTexto, "style", `width: ${width}em; height: 2em;background-color: ${color}; border: 2px solid black;font-weight: bold; `);
+      divMostrar = crearElemento("div", contenidoTexto, "style", `width: ${width}em; height: 2em;background-color: ${color}; border: 2px solid black; font-weight: bold; `);
+      divMostrar.setAttribute("data-idElemento", elemento.id);
+      
+      if (clases.includes("element")) añadirEventListenerEstilo(divMostrar, elemento.id)
       // divMostrar.setAttribute("class", "offset-3");
       divPrincipal.appendChild(divMostrar);
     }
@@ -115,13 +118,27 @@ function crearContenidoRecuadro(divPrincipal, elemento, width, color) {
 
 }
 
+function añadirEventListenerEstilo(elementoDiv, id){
+  elementoDiv.addEventListener("click", function(){
+    let target = document.getElementById(id);
+    let contenido = mostrarContenidoCSS(target);
+    abrirRecuadro(contenido);
+  })
+}
+
 
 function crearBodyItem(titulo) {
   let divPrincipalBody = crearElemento("div", "", "class", "accordion-collapse collapse show");
   let attrDivPrincipal = {
     "id": "panel" + titulo,
-    "aria-labelledby": "panel" + titulo
+    "aria-labelledby": "panel" + titulo,
+    "style": "overflow-y: scroll; scroll-behavior: smooth; height: 200px"
   }
+  divPrincipalBody.addEventListener('shown.bs.collapse', function (event) {
+    modificarAtributoElemento(divPrincipalBody, attrDivPrincipal);
+  }
+  );
+
   modificarAtributoElemento(divPrincipalBody, attrDivPrincipal);
   return divPrincipalBody;
 }
