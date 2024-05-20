@@ -19,7 +19,7 @@ export class Imagen extends Elemento{
         this.#borderRadius = 0;
         this.#anchoBorde = 0;
         this.#colorBorde = "#000000";
-        this.estiloElemento = {"height": `${this.#alto}%`,"width": `${this.#ancho}%`, "border": `${this.#anchoBorde}px solid ${this.#colorBorde}`, "border-radius": `${this.#borderRadius}% !important`}
+        this.estiloElemento = {"height": `${this.#alto}px`,"width": `${this.#ancho}px`, "border": `${this.#anchoBorde}px solid ${this.#colorBorde}`, "border-radius": `${this.#borderRadius}% !important`}
         this.elementoDOM = this.#crearElementoDOM();    
     }
 
@@ -116,10 +116,10 @@ export class Imagen extends Elemento{
             <label for="inputImagen"><b>Imagen:</b> </label><br>
             <input type="file" id="inputImagen" accept="image/png, image/jpeg, image/webp">
             <br><br>
-            <label for="anchoImagen"><b>Ancho imagen (width): </b></label>
+            <label for="anchoImagen"><b>Ancho imagen (width px): </b></label>
             <input type="number" id="anchoImagen" value='${this.#ancho}' min='0' max='100'>
             <br>
-            <label for="altoImagen"><b>Alto imagen (height):</b> </label>
+            <label for="altoImagen"><b>Alto imagen (height px):</b> </label>
             <br>
             <input type="number" id="altoImagen" value='${this.#alto}' min='0' max='100'>
             <br><br>

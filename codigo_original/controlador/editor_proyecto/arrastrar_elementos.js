@@ -90,7 +90,7 @@ function crearElemento(data, elementoPadre) {
 
     switch (data) {
         case "Titulo":
-            return new Titulo(elementoPadre.id + ".Titulo", "TITULO MH", elementoPadre);
+            return new Titulo(elementoPadre.id + ".Titulo", "TITULO H1", elementoPadre);
         case "Texto":
             return new Texto(elementoPadre.id + ".Texto", "", elementoPadre);
         case "Imagen":

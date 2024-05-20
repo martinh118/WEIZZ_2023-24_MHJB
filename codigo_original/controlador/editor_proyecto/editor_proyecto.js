@@ -107,7 +107,7 @@ $("#descargarJson").click(function () {
  * @param {JSON} archivoJson: contenido JSON
  * @returns {Proyecto} devuelve la variable como objeto Proyecto con el contenido del proyecto.
  */
-function transformarJson(archivoJson) {
+export function transformarJson(archivoJson) {
   let jsonProject = JSON.stringify(archivoJson);
 
   let newProject = JSON.parse(jsonProject, function (key, value) {
@@ -138,7 +138,7 @@ function transformarJson(archivoJson) {
         };
         return containers;
       case "elementoHijo":
-        if(value != null){
+        if (value != null) {
           return elegirElementoHijo(value);
         }
       default:
@@ -157,33 +157,33 @@ function transformarJson(archivoJson) {
  * @param {JSON} value: contenido JSON 
  * @returns {Titulo, Texto, Imagen, Lista, Tabla} 
  */
-function elegirElementoHijo(value){
-  try{
+function elegirElementoHijo(value) {
+  try {
 
     let idElemento = value.id;
-    if(idElemento.includes("Titulo")){
+    if (idElemento.includes("Titulo")) {
       let obj = Titulo.fromJSON(value);
       obj.rewriteHTML();
       return obj;
     }
-  
-    if(idElemento.includes("Texto")){
+
+    if (idElemento.includes("Texto")) {
       return Texto.fromJSON(value);
     }
-  
-    if(idElemento.includes("Imagen")){
+
+    if (idElemento.includes("Imagen")) {
       return Imagen.fromJSON(value);
     }
-  
-    if(idElemento.includes("Lista")){
+
+    if (idElemento.includes("Lista")) {
       return Lista.fromJSON(value);
     }
-  
-    if(idElemento.includes("Tabla")){
+
+    if (idElemento.includes("Tabla")) {
       return Tabla.fromJSON(value);
     }
 
-  }catch (err){
+  } catch (err) {
     console.error(err);
   }
 
@@ -194,7 +194,6 @@ function elegirElementoHijo(value){
  */
 function init() {
   if (contenidoProyecto != null) {
-    // console.log(JSON.parse(contenidoProyecto));
     proyecto = transformarJson(contenidoProyecto);
 
     $("#proyecto").html(proyecto.getHtmlBase());
@@ -202,7 +201,6 @@ function init() {
 
     $("#proyectoGuardadoMessage").hide();
   }
-  // const urlArchivoPHP = '../../vista/editor_proyecto.php';
 
 
 }

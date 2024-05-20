@@ -116,8 +116,8 @@ export function cambiarEstiloImagen(elementoObjeto) {
     elementoObjeto.setColorBorde(colorBorde);
 
     let object = {
-        "height": `${alto}%`,
-        "width": `${ancho}%`,
+        "height": `${alto}px`,
+        "width": `${ancho}px`,
         "border": `${anchoBorde}px solid ${colorBorde}`,
         "border-radius": `${borderRadius}% !important;`
     }
