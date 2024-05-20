@@ -4,7 +4,7 @@ var cuadroElementos  = undefined;
 /**
  * Muestra el recuadro flotante para mostrar los elementos disponibles para aplicar en el proyecto.
  */
-$("#mostrarElementos").click(mostrarTablaElementos());
+$("#mostrarElementos").click(mostrarTablaElementos);
 
 export function mostrarTablaElementos(){
 
@@ -80,18 +80,13 @@ function obtenerElementosDisponibles() {
     lista.setAttribute("data-elemento", "Lista");
     tabla.setAttribute("data-elemento", "Tabla");
 
-    container.setAttribute("ondragstart", "dragStart(event)");
-    titulo.setAttribute("ondragstart", "dragStart(event)");
-    texto.setAttribute("ondragstart", "dragStart(event)");
-    imagen.setAttribute("ondragstart", "dragStart(event)");
-    lista.setAttribute("ondragstart", "dragStart(event)");
-    tabla.setAttribute("ondragstart", "dragStart(event)");
 
     let arrElementos = [container, titulo, texto, imagen, lista, tabla];
 
     añadirMismoAtributos("draggable", "true", arrElementos);
+    añadirMismoAtributos("ondragstart", "dragStart(event)", arrElementos);
 
-    añadirMismoAtributos("style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black; margin-left: 10px; margin-bottom: 10px", arrElementos);
+    añadirMismoAtributos("style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black; margin-left: 10px; margin-bottom: 10px; font-weight: bold; text-align: center ", arrElementos);
     añadirHijos(contenidoCompleto, arrElementos);
 
     return contenidoCompleto;

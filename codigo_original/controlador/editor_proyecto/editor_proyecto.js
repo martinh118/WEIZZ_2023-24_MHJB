@@ -72,7 +72,7 @@ $(document).ready(function () {
         });
 
       $("#proyecto").html(proyecto.getHtmlBase());
-      aplicarEventListener(proyecto);
+      // aplicarEventListener(proyecto);
 
     });
   }

@@ -2,8 +2,9 @@ import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { proyecto } from './editor_proyecto.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
-import {cambiarEstiloTitulo, cambiarEstiloTabla, cambiarEstiloImagen, cambiarEstiloLista, aplicarCambios} from './libreria_cambiar_estilo_elementos.js'
+import { cambiarEstiloTitulo, cambiarEstiloTabla, cambiarEstiloImagen, cambiarEstiloLista, aplicarCambios } from './libreria_cambiar_estilo_elementos.js'
 import { mostrarTablaElementos } from './config_mostrar_elementos.js';
+import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 
 var cuadroEstilo = undefined;
 
@@ -45,10 +46,10 @@ function mostrarConfigEstilo(contenedor) {
       elemento = event.target;
     }
 
-    if(elemento != undefined){
+    if (elemento != undefined) {
       contenido = mostrarContenidoCSS(elemento);
       abrirRecuadro(contenido);
-    }else mostrarTablaElementos();
+    } else mostrarTablaElementos();
   }
 
 }
@@ -171,6 +172,17 @@ function listenerGuardarEstilo() {
 
     aplicarCambios(elemento);
     aplicarEventoMostrarEstilo();
+
+    let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
+    let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
+
+    let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+    
+    if(filaRowObject != undefined){
+      let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
+      aplicarListenersFilaContainer(filaContenedorObject, proyecto);
+    }
+
     // console.log(elementoObjecto);
   });
 }

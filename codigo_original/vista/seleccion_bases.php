@@ -82,14 +82,14 @@ session_start();
             </a>
         </div>
 
-        <div class="col-2 colCuadroBase">
+        <!-- <div class="col-2 colCuadroBase">
             <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='galeria'>
                 <div class="cuadroBase" id="baseGaleria">
 
                 </div>
                 <h3 class="baseTitle"><b>Galeria</b></h3>
             </a>
-        </div>
+        </div> -->
 
         <div class="col-2 colCuadroBase">
             <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='multiple'>
@@ -100,7 +100,7 @@ session_start();
                 <h3 class="baseTitle"><b>Múltiple</b></h3>
             </a>
         </div>
-
+<!-- 
         <div class="col-2 colCuadroBase">
             <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='modelo'>
 
@@ -109,7 +109,7 @@ session_start();
                 </div>
                 <h3 class="baseTitle"><b>Modelo</b></h3>
             </a>
-        </div>
+        </div> -->
 
     </div>
 

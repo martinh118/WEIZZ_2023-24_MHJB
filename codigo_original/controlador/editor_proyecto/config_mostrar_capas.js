@@ -1,12 +1,183 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
-import { crearElemento, crearDobleElemento } from '../../SRC/librerias/APIElementosHTML.js';
-
+import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
+import { modificarAtributoElemento } from '../../SRC/librerias/APIElementosHTML.js';
 
 /**
  * Muestra recuadro con las capas aplicadas actualmente en el proyecto.
  * Aplica la configuración de eventos para poder arrastrar el elemento alrededor de la página.
  */
-$("#mostrarCapas").click(function () {
+$("#mostrarCapas").click(abrirRecuadroCapas);
+
+/**
+ * Obtiene de manera ordenada todas las capas aplicadas en el proyecto.
+ * @returns contenidoCompleto: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas del proyecto.
+ */
+function obtenerCapasProyecto() {
+  let contenidoCompleto = crearElemento("div", "", "id", "contenidoRecuadroCapas");
+  let atributos = {
+    "style": "width:16em; background-color: #FF4242;",
+    "class": "accordion"
+  }
+  modificarAtributoElemento(contenidoCompleto, atributos);
+
+  contenidoCompleto.appendChild(crearCapasHeader());
+  contenidoCompleto.appendChild(crearCapasBody());
+  contenidoCompleto.appendChild(crearCapasFooter());
+
+  return contenidoCompleto;
+}
+
+/**
+ * Obtiene de manera ordenada todas las capas aplicadas en la zona Header del proyecto.
+ * @returns rowHeader: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas en la zona Header del proyecto.
+ */
+function crearCapasHeader() {
+  let rowHeader = crearElemento("div", "", "class", "accordion-item");
+
+
+  let divPrincipalBody = crearBodyItem("HEADER");
+
+  let divHijoBody = crearElemento("div", "", "class", "accordion-body");
+  let divHeader = document.getElementById("rowHeaderProject")
+
+  crearContenidoRecuadro(divHijoBody, divHeader, 14, "#6D6C6C")
+  divPrincipalBody.appendChild(divHijoBody);
+
+
+  rowHeader.appendChild(crearHeaderItem("HEADER"));
+  rowHeader.appendChild(divPrincipalBody);
+
+  return rowHeader;
+}
+
+
+function crearCapasBody() {
+  let rowHeader = crearElemento("div", "", "class", "accordion-item");
+
+  let divPrincipalBody = crearBodyItem("BODY");
+
+  let divHijoBody = crearElemento("div", "", "class", "accordion-body");
+  let divHeader = document.getElementById("rowBodyProject")
+
+  crearContenidoRecuadro(divHijoBody, divHeader, 14, "#6D6C6C")
+  divPrincipalBody.appendChild(divHijoBody);
+
+
+  rowHeader.appendChild(crearHeaderItem("BODY"));
+  rowHeader.appendChild(divPrincipalBody);
+
+  return rowHeader;
+}
+
+
+function crearCapasFooter() {
+  let rowHeader = crearElemento("div", "", "class", "accordion-item");
+
+  let divPrincipalBody = crearBodyItem("FOOTER");
+
+  let divHijoBody = crearElemento("div", "", "class", "accordion-body");
+  let divHeader = document.getElementById("rowFooterProject")
+
+  crearContenidoRecuadro(divHijoBody, divHeader, 14, "#6D6C6C")
+  divPrincipalBody.appendChild(divHijoBody);
+
+  rowHeader.appendChild(crearHeaderItem("FOOTER"));
+  rowHeader.appendChild(divPrincipalBody);
+
+  return rowHeader;
+}
+
+
+function crearContenidoRecuadro(divPrincipal, elemento, width, color) {
+  if (elemento.id) {
+    let clases = elemento.getAttribute("class");
+    if (elemento.id.includes("FilaRow") || clases.includes("FilaContenedor") || clases.includes("containerHijo") || clases.includes("element")) {
+      let divMostrar
+      let contenidoTexto;
+      if (clases.includes("element")) {
+      
+        contenidoTexto =  devolverNombreElemento(elemento.tagName);
+      } else if (clases.includes("containerHijo")) {
+        contenidoTexto = elemento.id.split(".")[1];
+      }
+      else {
+        contenidoTexto = elemento.id;
+      }
+      divMostrar = crearElemento("div", contenidoTexto, "style", `width: ${width}em; height: 2em;background-color: ${color}; border: 2px solid black;font-weight: bold; `);
+      // divMostrar.setAttribute("class", "offset-3");
+      divPrincipal.appendChild(divMostrar);
+    }
+    Array.from(elemento.children).forEach(child => {
+      let colorOscuro = oscurecerColor(color, -20);
+      crearContenidoRecuadro(divPrincipal, child, width - 1, colorOscuro);
+    });
+  }
+
+}
+
+
+function crearBodyItem(titulo) {
+  let divPrincipalBody = crearElemento("div", "", "class", "accordion-collapse collapse show");
+  let attrDivPrincipal = {
+    "id": "panel" + titulo,
+    "aria-labelledby": "panel" + titulo
+  }
+  modificarAtributoElemento(divPrincipalBody, attrDivPrincipal);
+  return divPrincipalBody;
+}
+
+function crearHeaderItem(titulo) {
+  let tituloH2 = crearElemento("h2", "", "class", "accordion-header");
+  let buttonHeader = crearElemento("button", titulo, "class", "accordion-button");
+  let atributosButton = {
+    "type": "button",
+    "data-bs-toggle": "collapse",
+    "data-bs-target": "#panel" + titulo,
+    "aria-expanded": "false",
+    "aria-controls": "panel" + titulo,
+    "style": "width:16em; height:2em;font-weight: bold; background-color: #6D6C6C; border: 2px solid black;"
+  }
+
+  modificarAtributoElemento(buttonHeader, atributosButton);
+
+  tituloH2.appendChild(buttonHeader);
+  return tituloH2;
+}
+
+function oscurecerColor(color, cant) {
+  //voy a extraer las tres partes del color
+  var rojo = color.substr(1, 2);
+  var verd = color.substr(3, 2);
+  var azul = color.substr(5, 2);
+
+  //voy a convertir a enteros los string, que tengo en hexadecimal
+  var introjo = parseInt(rojo, 16);
+  var intverd = parseInt(verd, 16);
+  var intazul = parseInt(azul, 16);
+
+  //ahora verifico que no quede como negativo y resto
+  if (introjo - cant >= 0) introjo = introjo - cant;
+  if (intverd - cant >= 0) intverd = intverd - cant;
+  if (intazul - cant >= 0) intazul = intazul - cant;
+
+  //voy a convertir a hexadecimal, lo que tengo en enteros
+  rojo = introjo.toString(16);
+  verd = intverd.toString(16);
+  azul = intazul.toString(16);
+
+  //voy a validar que los string hexadecimales tengan dos caracteres
+  if (rojo.length < 2) rojo = "0" + rojo;
+  if (verd.length < 2) verd = "0" + verd;
+  if (azul.length < 2) azul = "0" + azul;
+
+  //voy a construir el color hexadecimal
+  var oscuridad = "#" + rojo + verd + azul;
+
+  //la función devuelve el valor del color hexadecimal resultante
+  return oscuridad;
+}
+
+function abrirRecuadroCapas() {
   var selection = document.querySelector('#cuadroCapas') !== null;
 
   if (!selection) {
@@ -52,155 +223,21 @@ $("#mostrarCapas").click(function () {
 
 
   }
-});
-
-/**
- * Obtiene de manera ordenada todas las capas aplicadas en el proyecto.
- * @returns contenidoCompleto: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas del proyecto.
- */
-function obtenerCapasProyecto() {
-  let contenidoCompleto = crearElemento("div", "", "id", "contenidoRecuadroCapas");
-  contenidoCompleto.setAttribute("style", "width:15em; background-color: #FF4242;");
-
-  contenidoCompleto.appendChild(crearCapasHeader());
-  contenidoCompleto.appendChild(crearCapasBody());
-  contenidoCompleto.appendChild(crearCapasFooter());
-
-  return contenidoCompleto;
 }
 
-/**
- * Obtiene de manera ordenada todas las capas aplicadas en la zona Header del proyecto.
- * @returns rowHeader: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas en la zona Header del proyecto.
- */
-function crearCapasHeader() {
-  let rowHeader = crearElemento("div", "", "class", "row");
-  let colTituloHeader = crearDobleElemento("div", "div", "Header", "style", "width:15em; height:2em;font-weight: bold; background-color: #6D6C6C; border: 2px solid black;")
-
-  function hijosRowHeader() {
-    let rowPrincipalHeader = crearElemento("div", "", "class", "row");
-
-    let firstCol = crearElemento("div", "Container Header", "style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black;");
-    let proyecto = document.getElementById("proyecto");
-    let containerHeader = proyecto.querySelectorAll("#principalContainers-Header-1");
-    let hijosHeader = containerHeader[0].children;
-
-    firstCol.setAttribute("class", "offset-1");
-
-    rowPrincipalHeader.appendChild(firstCol);
-    for (const cont of hijosHeader) {
-
-      let rowCont = crearElemento("div", "", "class", "row");
-      let idElement = cont.id.split(".")[1];
-      let contenidoRow = crearElemento("div", idElement, "style", "width:13em; height:2em; background-color: #C7C6C6; border: 2px solid black;");
-
-      contenidoRow.setAttribute("class", "offset-2");
-
-      rowCont.appendChild(contenidoRow);
-      rowPrincipalHeader.appendChild(rowCont);
-
-    }
-
-    // console.log(hijosHeader);
-
-    return rowPrincipalHeader;
+function devolverNombreElemento(tagName) {
+  switch (tagName) {
+    case "H1":
+      return "TITULO"
+    case "TABLE":
+      return "TABLA"
+    case "UL":
+      return "LISTA";
+    case "P":
+      return "TEXTO";
+    case "IMG":
+      return "IMAGEN";
+    default:
+      return undefined;
   }
-
-  rowHeader.appendChild(colTituloHeader);
-  rowHeader.appendChild(hijosRowHeader());
-
-  return rowHeader;
-}
-
-/**
- * Obtiene de manera ordenada todas las capas aplicadas en la zona Body del proyecto.
- * @returns rowHeader: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas en la zona Body del proyecto.
- */
-function crearCapasBody() {
-  let rowBody = crearElemento("div", "", "class", "row");
-  let colTituloBody = crearDobleElemento("div", "div", "Body", "style", "font-weight: bold;width:15em; height:2em; background-color: #6D6C6C; border: 2px solid black;")
-
-  function hijosRowBody() {
-    let rowPrincipalBody = crearElemento("div", "", "class", "row");
-
-    let proyecto = document.getElementById("proyecto");
-    let containersBody = proyecto.querySelector("#rowBodyProject");
-    let index = 1;
-    for (const container of containersBody.children) {
-
-      let rowContainer = crearElemento("div", "", "class", "row");
-      let idContainer = container.id.split("-");
-      let tituloContainer = crearElemento("div", idContainer[1] + "-" + index, "style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black;");
-
-      tituloContainer.setAttribute("class", "offset-1");
-
-      let guardaElementos = container.children[1];
-      let elementos = guardaElementos.children;
-      rowContainer.appendChild(tituloContainer);
-
-      for (const element of elementos) {
-        let rowElemento = crearElemento("div", "", "class", "row");
-        let idElement = element.id.split(".")[1];
-        let colElemento = crearElemento("div", idElement + "-" + index, "style", "width:13em; height:2em; background-color: #C7C6C6; border: 2px solid black;");
-        colElemento.setAttribute("class", "offset-3");
-
-        rowElemento.appendChild(colElemento);
-        rowContainer.appendChild(rowElemento);
-      }
-
-      rowPrincipalBody.appendChild(rowContainer);
-      index++;
-    }
-
-
-
-    return rowPrincipalBody;
-  }
-
-  rowBody.appendChild(colTituloBody);
-  rowBody.appendChild(hijosRowBody());
-
-  return rowBody;
-}
-
-/**
- * Obtiene de manera ordenada todas las capas aplicadas en la zona Footer del proyecto.
- * @returns rowHeader: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas en la zona Footer del proyecto.
- */
-function crearCapasFooter() {
-  let rowFooter = crearElemento("div", "", "class", "row");
-  let colTituloFooter = crearDobleElemento("div", "div", "Footer", "style", "width:15em; height:2em;font-weight: bold; background-color: #6D6C6C; border: 2px solid black;")
-
-  function hijosRowFooter() {
-    let rowPrincipalFooter = crearElemento("div", "", "class", "row");
-
-    let firstCol = crearElemento("div", "Container Footer", "style", "width:14em; height:2em; background-color: #A8A8A8; border: 2px solid black;");
-    let proyecto = document.getElementById("proyecto");
-    let containerFooter = proyecto.querySelectorAll("#principalContainers-Footer-1");
-    let hijosFooter = containerFooter[0].children;
-
-    firstCol.setAttribute("class", "offset-1");
-
-    rowPrincipalFooter.appendChild(firstCol);
-    for (const cont of hijosFooter) {
-
-      let rowCont = crearElemento("div", "", "class", "row");
-      let idElement = cont.id.split(".")[1];
-      let contenidoRow;
-      contenidoRow = crearElemento("div", idElement, "style", "width:13em; height:2em; background-color: #C7C6C6; border: 2px solid black;");
-
-      contenidoRow.setAttribute("class", "offset-2");
-
-      rowCont.appendChild(contenidoRow);
-      rowPrincipalFooter.appendChild(rowCont);
-
-    }
-
-    return rowPrincipalFooter;
-  }
-
-  rowFooter.appendChild(colTituloFooter);
-  rowFooter.appendChild(hijosRowFooter());
-
-  return rowFooter;
 }

@@ -330,9 +330,9 @@ function obtenerFilaContenedorId() {
     return "FilaContenedor-" + index;
 }
 
-export function aplicarListenersFilaContainer(filaRow, proyecto) {
-    let containers = filaRow.getContainers();
-    let botones = filaRow.getOpcionesRow();
+export function aplicarListenersFilaContainer(filaContenedor, proyecto) {
+    let containers = filaContenedor.getContainers();
+    let botones = filaContenedor.getOpcionesRow();
     let botonCrear = botones.getBotonCrear();
     let botonSubir = botones.getSubirElemento();
     let botonBajar = botones.getBajarElemento();
