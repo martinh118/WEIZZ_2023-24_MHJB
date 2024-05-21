@@ -98,6 +98,15 @@ export class Lista extends Elemento {
         this.#negrita = negrita;
     }
 
+    reiniciarEstilo(){
+        this.#numItems = 5;
+        this.#estilo = "default";
+        this.#color = "#000000";
+        this.#fuente = "Arial, Helvetica, sans-serif";
+        this.#negrita = false;
+        this.estiloElemento = {"color": this.#color, "list-style-type": this.#estilo, "font-family": this.#fuente}
+        this.elementoDOM = this.#crearElementoDOM();
+    }
 
     obtenerConfigEstilo() {
 

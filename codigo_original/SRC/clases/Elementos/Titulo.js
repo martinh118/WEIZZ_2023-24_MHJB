@@ -66,6 +66,16 @@ export class Titulo extends Elemento {
         this.estiloElemento = objectEstilo;
     }
 
+    reiniciarEstilo(){
+        this.#color = "#000000";
+        this.#fontFamily = "Verdana, Geneva, Tahoma, sans-serif";
+        this.#fontSize = "50";
+        this.#subrayado = false;
+        this.#medida = "px";
+        this.estiloElemento = { "color": "#000000", "font-family": "Verdana, Geneva, Tahoma, sans-serif", "font-size": "50px" };
+        this.elementoDOM = super.crearElemento();
+    }
+
     obtenerConfigEstilo() {
         
         let html = `<div id="contenidoRecuadroEstilo" style='padding:5px 5px 5px 5px'>
@@ -101,8 +111,8 @@ export class Titulo extends Elemento {
         }else html += `<input type="checkbox" name="" id="subrayado" >`;
 
         html += `<br><br>
-        <input type='button' class='guardarEstiloElemento' value='Guardar' id='cambiosTitulo'>
-        <input type='button' value='Reset' id='resetTitulo'>
+        <input type='button' class='guardarEstiloElemento' value='Guardar'>
+        <input type='button' value='Reset' class='resetEstiloElemento'>
     </div>
         `;
         return html;

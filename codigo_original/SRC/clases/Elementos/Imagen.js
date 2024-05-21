@@ -109,6 +109,17 @@ export class Imagen extends Elemento{
         this.elementoDOM = this.#crearElementoDOM(); 
     }
 
+    reiniciarEstilo(){
+        this.#source = "../SRC/imagenes_usuario/default_image.jpg";
+        this.#ancho = 90;
+        this.#alto = 90
+        this.#borderRadius = 0;
+        this.#anchoBorde = 0;
+        this.#colorBorde = "#000000";
+        this.estiloElemento = {"height": `${this.#alto}px`,"width": `${this.#ancho}px`, "border": `${this.#anchoBorde}px solid ${this.#colorBorde}`, "border-radius": `${this.#borderRadius}% !important`}
+        this.elementoDOM = this.#crearElementoDOM();  
+    }
+
     obtenerConfigEstilo() {
         let html = `
         <div id="contenidoRecuadroEstilo" style="padding: 5px 5px 5px 5px">
@@ -135,7 +146,7 @@ export class Imagen extends Elemento{
             <input type="color" id="colorBorde" value='${this.#colorBorde}'>
             <br><br>
             <input type='button' value='Guardar' class="guardarEstiloElemento">
-            <input type='button' value='Reset' >
+            <input type='button' value='Reset' class="resetEstiloElemento">
         </div>
         
         `

@@ -207,3 +207,4 @@ export function aplicarCambios(elemento) {
     } else reescribirHTML(contenedorHijoObject, filaContenedorObject, filaRowObject, proyecto);
 
 }
+

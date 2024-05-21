@@ -80,6 +80,17 @@ export class Texto extends Elemento{
         this.estiloElemento = objectEstilo;
     }
 
+    reiniciarEstilo(){
+        this.#color = "#000000";
+        this.#fontFamily = "Verdana, Geneva, Tahoma, sans-serif";
+        this.#fontSize = "16";
+        this.#subrayado = false;
+        this.#negrita = false;
+        this.#medida = "px";
+        this.estiloElemento = "overflow-wrap: break-word;word-wrap: break-word;"
+        this.elementoDOM = super.crearElemento();
+    }
+
     obtenerConfigEstilo() {
         
         let html = `<div id="contenidoRecuadroEstilo" style='padding:5px 5px 5px 5px'>

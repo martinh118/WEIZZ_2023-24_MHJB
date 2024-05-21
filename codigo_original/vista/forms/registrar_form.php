@@ -64,7 +64,7 @@
     <form action="../../controlador/forms/controlador_registrar_form.php" class="formTable" method="POST">
         <div class="row">
             <label for="email" class="agrandir">Correo electronico:</label>
-            <input type="text" name="email" id="email">
+            <input type="email" name="email" id="email">
         </div>
         <br>  
         <div class="row">

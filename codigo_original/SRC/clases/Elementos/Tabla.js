@@ -173,6 +173,23 @@ export class Tabla extends Elemento {
         this.#estiloBody = estiloBody;
     }
 
+    reiniciarEstilo(){
+        this.elemento = "table";
+        this.#filas = 3;
+        this.#columnas = 3;
+        this.#grosor = 1;
+        this.#estiloBorde = "solid";
+        this.#colorContorno = "#000000";
+        this.#colorHeader = "#FFFFFF";
+        this.#colorBody = "#FFFFFF";
+        this.#colorLetraHeader = "#000000";
+        this.#colorLetraBody = "#000000";
+        this.#estiloTable = { 'border': '1px solid black', 'border-collapse': 'collapse' };
+        this.#estiloHeader = { 'border': '1px solid black' };
+        this.#estiloBody = { 'border': '1px solid black' };
+        this.elementoDOM = this.#crearElementoDOM();
+    }
+
     obtenerConfigEstilo() {
         let html = `
         <div id="contenidoRecuadroEstilo" style='padding:5px 5px 5px 5px'>

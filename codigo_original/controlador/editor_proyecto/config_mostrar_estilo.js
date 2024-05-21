@@ -141,6 +141,7 @@ export function abrirRecuadro(contenido) {
   }
 
   listenerGuardarEstilo();
+  listenerReiniciarEstilo();
 
 }
 
@@ -184,6 +185,29 @@ function listenerGuardarEstilo() {
     }
 
     // console.log(elementoObjecto);
+  });
+}
+
+function listenerReiniciarEstilo(){
+  $(".resetEstiloElemento").click(function(){
+    let idElemento = $(".idElemento").html();
+    let elemento = document.getElementById(idElemento);
+    let elementoObjecto = encontrarObjetoElemento(elemento);
+
+    elementoObjecto.reiniciarEstilo();
+
+    aplicarCambios(elemento);
+    aplicarEventoMostrarEstilo();
+
+    let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
+    let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
+
+    let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+    
+    if(filaRowObject != undefined){
+      let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
+      aplicarListenersFilaContainer(filaContenedorObject, proyecto);
+    }
   });
 }
 
