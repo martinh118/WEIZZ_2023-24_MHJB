@@ -6,7 +6,7 @@ function mostrarProyectosUser($idUser)
     try {
         $count = 0;
         $proyectosUser = obtenerProyectosUser($idUser)->fetchAll();
-        $html = "<div class='row d-flex justify-content-around'>";
+        $html = "<div class='row d-flex justify-content-around container-fluid'>";
         foreach ($proyectosUser as $proj) {
             if ($count == 4) {
                 $count = 0;

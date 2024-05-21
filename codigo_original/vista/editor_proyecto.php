@@ -36,7 +36,7 @@ session_start();
 
 
     <header>
-        <div class="row " id="encabezado">
+        <div class="row container-fluid" id="encabezado">
             <div class="col ">
                 <a href="../index.php">
                     <img src="../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
@@ -79,7 +79,7 @@ session_start();
     </header>
 
 
-    <div class="row">
+    <div class="row container-fluid">
         <div class="col">
             <div class='btn-group' role='group' aria-label='Basic outlined example' style='z-index:1'>
                 <button type='button' class='btn btn-outline-danger' id='mostrarCapas'>Capas</button>

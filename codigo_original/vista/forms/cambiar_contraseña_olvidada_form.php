@@ -22,7 +22,7 @@ if (isset($_GET['email'])) {
 <body>
 
     <header>
-        <div class="row" id="encabezado">
+        <div class="row container-fluid" id="encabezado">
             <div class="col-2 ">
                 <a data-bs-toggle="modal" data-bs-target="#regresarInicio">
                     <img src="../../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
@@ -41,7 +41,7 @@ if (isset($_GET['email'])) {
     </header>
 
 
-    <div class="row">
+    <div class="row container-fluid">
         <h2 id="welcomeTitle">Cambiar contraseña</h2>
     </div>
 

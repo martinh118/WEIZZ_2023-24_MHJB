@@ -17,7 +17,7 @@ session_start();
 <body>
 
     <header>
-        <div class="row" id="encabezado">
+        <div class="row container-fluid" id="encabezado">
             <div class="col ">
                 <a href="../../index.php">
                     <img src="../../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
@@ -27,9 +27,7 @@ session_start();
             <div class="col">
                 <h2 id="inicioPage"><a href="../../index.php" class="tituloHeader">Inicio</a></h2>
             </div>
-
-
-
+            <div class="col"></div>
             <div class='col-2 offset-2'>
                 <h2 id='iniciarSesionPage'>
                     <a href='./iniciar_sesion_form.php' class='tituloHeader'>Iniciar Sesión</a>
@@ -37,7 +35,7 @@ session_start();
             </div>
             <div class='col-3'>
                 <h2 id='registroPage'>
-                    <a href='./forms/registrar_form.php' class='tituloHeader'>Crear cuenta</a>
+                    <a href='./registrar_form.php' class='tituloHeader'>Crear cuenta</a>
                 </h2>
 
             </div>
@@ -51,7 +49,7 @@ session_start();
     </header>
 
 
-    <div class="row">
+    <div class="row container-fluid">
         <h2 id="welcomeTitle">Recuperar contraseña</h2>
     </div>
 

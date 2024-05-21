@@ -17,7 +17,7 @@ session_start();
 <body>
 
     <header>
-        <div class="row" id="encabezado">
+        <div class="row container-fluid" id="encabezado">
             <div class="col">
                 <a href="./index.php">
                     <img src="./SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
@@ -60,11 +60,11 @@ session_start();
     </header>
 
 
-    <div class="row">
+    <div class="row container-fluid">
         <h2 id="welcomeTitle">¡Bienvenido!</h2>
     </div>
 
-    <div class="row">
+    <div class="row container-fluid">
 
         <div class="col-2 colNuevoProyecto">
             <a href="./vista/seleccion_bases.php">
@@ -81,8 +81,8 @@ session_start();
 
     <?php
     if (isset($_SESSION['usuario'])) {
-        echo "<div class='row'>
-        <h2 class='col offset-2' id='tusProyectos'>Tus proyectos:</h2>
+        echo "<div class='row container-fluid'>
+        <h2 class='col offset-2 ' id='tusProyectos'>Tus proyectos:</h2>
     </div>";
         mostrarProyectosUser($_SESSION['ID']);
     }

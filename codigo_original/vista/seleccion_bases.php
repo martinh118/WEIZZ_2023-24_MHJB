@@ -22,7 +22,7 @@ session_start();
 
 
     <header class="">
-        <div class="row " id="encabezado">
+        <div class="row container-fluid" id="encabezado">
             <div class="col">
                 <a href="../index.php">
                     <img src="../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
@@ -63,14 +63,14 @@ session_start();
 
     </header>
 
-    <div class="row">
+    <div class="row container-fluid">
         <div class="col-3 offset-1 mt-4">
             <label for="importButton" class="baseTitle">Importar proyecto</label>
             <input type="file" id="importButton" class=" btn btn-danger importButton" accept="application/JSON"></input>
         </div>
     </div>
     <br><br>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center container-fluid">
         <!-- href="./editor_proyecto.php"  -->
 
         <div class="col-2 colCuadroBase">
