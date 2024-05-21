@@ -74,7 +74,7 @@ session_start();
         <!-- href="./editor_proyecto.php"  -->
 
         <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='basico'>
+            <a class="seleccionBase" data-base='basico'>
                 <div class="cuadroBase" id="baseBasico">
                 </div>
                 <h3 class="baseTitle"><b>Basico</b></h3>
@@ -91,7 +91,7 @@ session_start();
         </div> -->
 
         <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='multiple'>
+            <a class="seleccionBase"  data-base='multiple'>
 
                 <div class="cuadroBase" id="baseMultiple">
 
@@ -112,20 +112,6 @@ session_start();
 
     </div>
 
-    <!-- Modal Preguntar seleccionar base basico -->
-    <div class="modal fade" id="modalBase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <h5 class="modal-body" id="tituloModal">
-
-                </h5>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="seleccionarBase">Seleccionar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 </body>

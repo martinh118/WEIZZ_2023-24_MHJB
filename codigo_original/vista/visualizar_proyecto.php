@@ -2,7 +2,18 @@
 require_once("../controlador/config_proyecto/controlador_obtener_proyecto.php");
 session_start();
 
-if (isset($_GET['idProject'])) {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['contenido'])) {
+        $contenido = $_POST['contenido'];
+?>
+        <script>
+            var contenidoProyecto = <?php echo $contenido; ?>;
+        </script>
+    <?php
+    }
+}
+else if (isset($_GET['idProject'])) {
     $proyecto = cargarProyecto($_GET['idProject']);
     $contenido = $proyecto['contenido'];
 ?>

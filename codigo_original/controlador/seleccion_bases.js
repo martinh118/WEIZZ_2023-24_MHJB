@@ -7,12 +7,12 @@ let reader = new FileReader();
 
 $(document).ready(function () {
     let base;
-    $(".seleccionBase").click(function () {
-        base = $(this).data('base');
-        $("#tituloModal").html("¿Seleccionar base <b>" + base + "</b>?");
-    })
+    // $(".seleccionBase").click(function () {
+    //     base = $(this).data('base');
+    //     $("#tituloModal").html("¿Seleccionar base <b>" + base + "</b>?");
+    // })
 
-    $("#seleccionarBase").click(
+    $(".seleccionBase").click(
         function () {
             fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php")
                 .then(response => {
@@ -23,6 +23,7 @@ $(document).ready(function () {
                     return response.json();
                 }).then(data => {
                     let newId;
+                    base = $(this).data('base');
                     if (data.ID == undefined) {
                         newId = 1;
                     } else newId = data.ID;
