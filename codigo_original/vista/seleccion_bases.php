@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../controlador/seleccion_bases.js" type="module"></script>
 
-    
+
 </head>
 <?php
 session_start();
@@ -52,7 +52,6 @@ session_start();
                 <h2 id='registroPage'>
                     <a href='./forms/registrar_form.php' class='tituloHeader'>Crear cuenta</a>
                 </h2>
-
             </div>";
             }
 
@@ -66,8 +65,8 @@ session_start();
 
     <div class="row">
         <div class="col-3 offset-1 mt-4">
-            <label for="importButton" class="baseTitle ">Importar proyecto</label>
-            <input type="file" id="importButton" class=" btn btn-danger importButton"></input>
+            <label for="importButton" class="baseTitle">Importar proyecto</label>
+            <input type="file" id="importButton" class=" btn btn-danger importButton" accept="application/JSON"></input>
         </div>
     </div>
     <br><br>
@@ -94,13 +93,13 @@ session_start();
         <div class="col-2 colCuadroBase">
             <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='multiple'>
 
-                <div class="cuadroBase" id="baseMultiple" >
+                <div class="cuadroBase" id="baseMultiple">
 
                 </div>
                 <h3 class="baseTitle"><b>Múltiple</b></h3>
             </a>
         </div>
-<!-- 
+        <!-- 
         <div class="col-2 colCuadroBase">
             <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='modelo'>
 
@@ -114,19 +113,19 @@ session_start();
     </div>
 
     <!-- Modal Preguntar seleccionar base basico -->
-<div class="modal fade" id="modalBase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <h5 class="modal-body" id="tituloModal">
-        
-      </h5>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="seleccionarBase">Seleccionar</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-      </div>
+    <div class="modal fade" id="modalBase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h5 class="modal-body" id="tituloModal">
+
+                </h5>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="seleccionarBase">Seleccionar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
 </body>

@@ -1,18 +1,48 @@
 import { Proyecto } from "../SRC/clases/Proyecto.js";
 import { Fila } from "../SRC/clases/Fila.js";
 import { FilaContenedor } from "../SRC/clases/FilaContenedor.js";
+import { transformarJson } from "./editor_proyecto/transformar_json.js";
+
+let reader = new FileReader();
 
 $(document).ready(function () {
     let base;
     $(".seleccionBase").click(function () {
         base = $(this).data('base');
         $("#tituloModal").html("¿Seleccionar base <b>" + base + "</b>?");
-
     })
 
     $("#seleccionarBase").click(
         function () {
             fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Hubo un problema al obtener un nuevo ID.');
+                    }
+                    // Devuelve la respuesta como JSON
+                    return response.json();
+                }).then(data => {
+                    let newId;
+                    if (data.ID == undefined) {
+                        newId = 1;
+                    } else newId = data.ID;
+                    newId = parseInt(newId) + 1;
+                    let project = crearProyecto(base, newId);
+                    enviarDatos(project, newId, base);
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+    )
+
+    $("#importButton").on("change", function (event) {
+        reader.onload = onReaderLoad;
+        reader.readAsText(event.target.files[0]);
+    })
+
+    function onReaderLoad(event) {
+        fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php")
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Hubo un problema al obtener un nuevo ID.');
@@ -21,17 +51,20 @@ $(document).ready(function () {
                 return response.json();
             }).then(data => {
                 let newId;
-                if(data.ID == undefined){
+                if (data.ID == undefined) {
                     newId = 1;
-                }else  newId = data.ID;
+                } else newId = data.ID;
                 newId = parseInt(newId) + 1;
-                let project = crearProyecto(base, newId);
-                enviarDatos(project, newId, base);
+                var obj = JSON.parse(event.target.result);
+                console.log(obj);
+                let project = transformarJson(obj);
+                enviarDatos(project, newId, base)
             }).catch(error => {
                 console.error('Error:', error);
             });
+
     }
-    )
+
 
 });
 
@@ -92,9 +125,9 @@ function enviarDatos(project, id, base) {
         })
         .then(data => {
             console.log(data.mensaje);
-            if(data.mensaje == "anonimo"){
+            if (data.mensaje == "anonimo") {
                 location.replace("./editor_proyecto.php?baseAnonimo=" + base);
-            }else location.replace("./editor_proyecto.php?idProject=" + id);
+            } else location.replace("./editor_proyecto.php?idProject=" + id);
         })
         .catch(error => {
             console.error('Error:', error);
