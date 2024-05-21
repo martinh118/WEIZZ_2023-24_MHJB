@@ -1,4 +1,4 @@
-import { transformarJson } from "./editor_proyecto/editor_proyecto.js";
+import { transformarJson } from "./editor_proyecto/transformar_json.js";
 
 let proyecto;
 

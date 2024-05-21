@@ -114,10 +114,19 @@ session_start();
     ?>
     <div class="container" id="proyecto">
         <?php
-        if (isset($_GET['idProject'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['contenido'])) {
+                $contenido = $_POST['contenido'];
+        ?>
+                <script>
+                    var contenidoProyecto = <?php echo $contenido; ?>;
+                </script>
+            <?php
+            }
+        } else if (isset($_GET['idProject'])) {
             $proyecto = cargarProyecto($_GET['idProject']);
             $contenido = $proyecto['contenido'];
-        ?>
+            ?>
             <script>
                 var contenidoProyecto = <?php echo $contenido; ?>
             </script>
@@ -140,8 +149,6 @@ session_start();
             </script>
 
         <?php
-        }else{
-
         }
         ?>
 

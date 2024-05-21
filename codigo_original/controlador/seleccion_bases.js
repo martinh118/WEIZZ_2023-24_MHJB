@@ -126,7 +126,9 @@ function enviarDatos(project, id, base) {
         .then(data => {
             console.log(data.mensaje);
             if (data.mensaje == "anonimo") {
-                location.replace("./editor_proyecto.php?baseAnonimo=" + base);
+                if (base == undefined) {
+                    enviarImportAnonimo(project)
+                } else location.replace("./editor_proyecto.php?baseAnonimo=" + base);
             } else location.replace("./editor_proyecto.php?idProject=" + id);
         })
         .catch(error => {
@@ -134,3 +136,17 @@ function enviarDatos(project, id, base) {
         });
 }
 
+function enviarImportAnonimo(project) {
+    let form = document.createElement("form");
+    form.method = "POST";
+    form.action = "./editor_proyecto.php";
+
+    let input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "contenido";
+    input.value = JSON.stringify(project);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+}
