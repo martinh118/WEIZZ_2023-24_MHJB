@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         cambiarNombre($nombreUsuario, $nuevoNombre);
         $_SESSION['successName'] = "Nombre de usuario cambiado correctamente";
+        $_SESSION['usuario'] = $nuevoNombre;
     }
 
-    $_SESSION['usuario'] = $nuevoNombre;
 
 ?>
     <script>
