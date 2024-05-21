@@ -45,11 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 function revisarForm()
 {
     $error = "";
+    $pass = $_POST['newPass'];
+    $rePass = $_POST['repPass'];
 
-    if ($_POST['newPass'] == "" || $_POST['repPass'] == "") {
+    if ($pass == "" || $rePass == "") {
         $error .= "Ambos campos son obligatorios. <br>";
-    } else if ($_POST['newPass'] != $_POST['repPass']) {
+    } else if ($pass != $rePass) {
         $error .= "La contraseña en ambos campos deben coincidir.<br>";
+    }else if(strlen($pass) < 8 || !preg_match('`[A-Z]`',$pass) || !preg_match('`[0-9]`',$pass) ){
+        $error .= "La contraseña debe superar la longitud de 8 digitos, debe contener al menos una letra en mayuscula y al menos un caracter numérico. (Ej.: Weizz2024)<br>";
     }
 
     return $error;

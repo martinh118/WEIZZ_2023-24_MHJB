@@ -88,8 +88,12 @@ function comprobarDatos()
             }
         }
 
+        if(strlen($pass) < 8 || !preg_match('`[A-Z]`',$pass) || !preg_match('`[0-9]`',$pass) ){
+            $errores .= "La contraseña debe superar la longitud de 8 digitos, debe contener al menos una letra en mayuscula y al menos un caracter numérico. (Ej.: Weizz2024)<br>";
+        }
+
         if($pass != $pass2){
-            $errores .= "Las contrasenyas aplicadas no son identicas.<br>";
+            $errores .= "Las contraseñas aplicadas no son identicas.<br>";
         }
         return $errores;
     } catch (PDOException $e) {
