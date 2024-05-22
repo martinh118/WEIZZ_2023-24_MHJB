@@ -87,9 +87,12 @@ session_start();
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <h5 class="modal-body">
-        ¿Deseas eliminar tu cuenta de usuario?
-      </h5>
+        <div class="modal-body">
+            <h5>
+              ¿Deseas eliminar tu cuenta de usuario?
+            </h5>
+            <h5 id="titleDeleteUser">Tu cuenta y todos tus proyectos serán eliminados permanentemente.</h5>
+        </div>
       <div class="modal-footer">
           <a href="../../controlador/config_usuario/controlador_eliminar_usuario.php" type="button" class="btn btn-danger">Eliminar cuenta</a>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

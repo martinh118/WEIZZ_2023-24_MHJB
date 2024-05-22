@@ -53,6 +53,7 @@ export class Tabla extends Elemento {
         
 
         table.setAttribute("style", this.#crearStringEstiloTabla(this.#estiloTable));
+        table.setAttribute("class", "elementoPadre")
 
         for (let index = 0; index < this.#columnas; index++) {
             let th = crearElemento("th", "Columna-" + index, "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorHeader}; color: ${this.#colorLetraHeader}`);

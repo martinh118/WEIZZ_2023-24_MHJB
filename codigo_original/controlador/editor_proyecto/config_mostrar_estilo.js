@@ -34,6 +34,8 @@ function mostrarConfigEstilo(contenedor) {
   function eventListener(event) {
     let contenido = null;
     let elemento;
+
+
     if ($(event.target).attr("class").includes("containerHijo")) {
 
       let hijoContainerHijo = $(event.target).children()[0];
@@ -178,8 +180,8 @@ function listenerGuardarEstilo() {
     let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
 
     let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
-    
-    if(filaRowObject != undefined){
+
+    if (filaRowObject != undefined) {
       let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
       aplicarListenersFilaContainer(filaContenedorObject, proyecto);
     }
@@ -188,8 +190,8 @@ function listenerGuardarEstilo() {
   });
 }
 
-function listenerReiniciarEstilo(){
-  $(".resetEstiloElemento").click(function(){
+function listenerReiniciarEstilo() {
+  $(".resetEstiloElemento").click(function () {
     let idElemento = $(".idElemento").html();
     let elemento = document.getElementById(idElemento);
     let elementoObjecto = encontrarObjetoElemento(elemento);
@@ -203,8 +205,8 @@ function listenerReiniciarEstilo(){
     let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
 
     let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
-    
-    if(filaRowObject != undefined){
+
+    if (filaRowObject != undefined) {
       let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
       aplicarListenersFilaContainer(filaContenedorObject, proyecto);
     }
