@@ -9,6 +9,11 @@ function eliminarEstilos(){
     let filaRow = document.querySelectorAll('[id*="FilaRow"]');
     let applyBoton = document.querySelectorAll('[id*="apply"]');
     let baseFilaContenedor = document.querySelectorAll('[data-elemento="baseFilaContenedor"]');
+    let botonesBackground = document.querySelectorAll('[class*="estiloBackground"]');
+    
+    botonesBackground.forEach(cH => {
+      cH.setAttribute("hidden", "");
+  });
 
     contenedoresHijo.forEach(cH => {
         cH.setAttribute("style", "margin: 10px; display:flex; align-items: center; justify-content: center;");
@@ -23,7 +28,7 @@ function eliminarEstilos(){
     });
 
     filaRow.forEach(fR => {
-      fR.setAttribute("class", "row");
+      fR.setAttribute("class", "row mx-auto");
     });
 
     applyBoton.forEach(aB => {

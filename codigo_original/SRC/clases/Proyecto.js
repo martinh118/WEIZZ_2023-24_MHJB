@@ -20,7 +20,7 @@ export class Proyecto {
     #crearHeader() {
         let contenedor = new FilaContenedor("Header-" + this.#id, 3);
         contenedor.containerSinOpciones();
-        let filaHeader = new Fila("FilaRowHeader-" + this.#id, [contenedor])
+        let filaHeader = new Fila("FilaRowHeader-" + this.#id, [contenedor]);
         return filaHeader;
     }
 
@@ -44,11 +44,18 @@ export class Proyecto {
         let divRowBody = crearElemento("div", "", "id", "rowBodyProject");
         let divRowFooter = crearElemento("div", "", "id", "rowFooterProject");
 
-        divRowHeader.setAttribute("class", "row border-bottom border-dark border-2");
-        divRowBody.setAttribute("class", "row mt-4 border-bottom border-dark border-2");
-        divRowFooter.setAttribute("class", "row mt-4 ");
+        let botonHeader = crearElemento("button", "HEADER", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto estiloBackground")
+        let botonBody = crearElemento("button", "BODY", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto mb-5 estiloBackground")
+        let botonFooter = crearElemento("button", "FOOTER", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto estiloBackground")
+       
+        divRowHeader.appendChild(botonHeader);
+        divRowBody.appendChild(botonBody);
+        divRowFooter.appendChild(botonFooter);
 
-        // let contenedorHeader = filaHeader.getFilasContenedor();
+        divRowHeader.setAttribute("class", "row border-bottom border-dark border-2");        
+        divRowBody.setAttribute("class", "row border-bottom border-dark border-2");
+        divRowFooter.setAttribute("class", "row ");
+
 
         divRowHeader.appendChild(this.#header.getHtmlBase());
         for (const body of this.#body) {

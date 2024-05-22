@@ -5,6 +5,8 @@ import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
 import { cambiarEstiloTitulo, cambiarEstiloTabla, cambiarEstiloImagen, cambiarEstiloLista, aplicarCambios } from './libreria_cambiar_estilo_elementos.js'
 import { mostrarTablaElementos } from './config_mostrar_elementos.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
+import { mostrarConfigEstiloBackground, listenerGuardarEstiloFilaBackground, listenerReiniciarEstiloFilaBackground } from './config_background_filas.js';
+
 
 var cuadroEstilo = undefined;
 
@@ -19,9 +21,15 @@ aplicarEventoMostrarEstilo();
  */
 export function aplicarEventoMostrarEstilo() {
   let contenedoresHijo = document.querySelectorAll(".containerHijo");
+  let botonesEstilosBackground = document.querySelectorAll(".estiloBackground");
+
 
   contenedoresHijo.forEach((cont) => {
     mostrarConfigEstilo(cont);
+  });
+
+  botonesEstilosBackground.forEach((boton) => {
+    mostrarConfigEstiloBackground(boton);
   });
 
 }
@@ -77,9 +85,9 @@ function encontrarObjetoElemento(elemento) {
   let filaRowObject;
 
   if (filaRowDom.id.includes("Header")) {
-    filaRowObject = proyecto.getHeader(filaRowDom.id);
+    filaRowObject = proyecto.getHeader();
   } else if (filaRowDom.id.includes("Footer")) {
-    filaRowObject = proyecto.getFooter(filaRowDom.id);
+    filaRowObject = proyecto.getFooter();
   } else {
     filaRowObject = proyecto.getFilaRow(filaRowDom.id);
   }
@@ -145,6 +153,8 @@ export function abrirRecuadro(contenido) {
   listenerGuardarEstilo();
   listenerReiniciarEstilo();
 
+  listenerGuardarEstiloFilaBackground();
+  listenerReiniciarEstiloFilaBackground();
 }
 
 function listenerGuardarEstilo() {
@@ -212,5 +222,4 @@ function listenerReiniciarEstilo() {
     }
   });
 }
-
 

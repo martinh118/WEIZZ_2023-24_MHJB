@@ -29,6 +29,10 @@
     border: 2px solid;
 }
 
+#bottomHr{
+    margin-bottom: 0;
+}
+
 header {
     margin-top: 15px;
     background-image: url("../imagenes_web/background_header_2.png");

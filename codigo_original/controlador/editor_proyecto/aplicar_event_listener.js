@@ -94,7 +94,7 @@ function moverArribaCont(button, proyecto) {
                 proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
             }
-        } else if (isElement(filaRowArriba)) {
+        } else if (isElement(filaRowArriba) && !filaRowArriba.getAttribute("class").includes("estiloBackground")) {
 
             let ultimoHijoArriba = filaRowArriba.lastChild;
 

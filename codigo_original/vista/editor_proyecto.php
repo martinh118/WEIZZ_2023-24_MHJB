@@ -74,13 +74,13 @@ session_start();
 
         </div>
 
-        <hr class="hrLinea">
+        <hr class="hrLinea" >
 
     </header>
 
-
+    <!-- border-secondary border-4 border-top border-bottom -->
     <div class="row container-fluid">
-        <div class="col">
+        <div class="col ">
             <div class='btn-group' role='group' aria-label='Basic outlined example' style='z-index:1'>
                 <button type='button' class='btn btn-outline-danger' id='mostrarCapas'>Capas</button>
                 <button type='button' class='btn btn-outline-danger' id='mostrarElementos'>Elementos</button>
@@ -100,7 +100,7 @@ session_start();
             </div>
         </div>
 
-        <hr class="hrLinea">
+        <hr class="hrLinea" id="bottomHr">
 
         <div class='alert alert-success offset-3' role='alert' style="width:40em; text-align:center " id="proyectoGuardadoMessage"><b>Proyecto guardado correctamente</b></div>
 
