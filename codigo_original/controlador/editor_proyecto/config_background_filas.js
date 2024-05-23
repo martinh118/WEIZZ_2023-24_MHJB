@@ -72,5 +72,38 @@ export function listenerGuardarEstiloFilaBackground() {
 }
 
 export function listenerReiniciarEstiloFilaBackground() {
+    $(".resetEstiloFilaBackground").click(function (){
+        let FilaRowObject, filaContenedorObject;
+        let idElemento = $(".idElemento").html();
 
+        if (idElemento.includes("Header")) {
+            FilaRowObject = proyecto.getHeader();
+            FilaRowObject.reiniciarEstilo();
+            filaContenedorObject = FilaRowObject.getFilasContenedor();
+            filaContenedorObject[0].rewriteHTML()
+            filaContenedorObject[0].containerSinOpciones()
+            
+            FilaRowObject.rewriteHTML()
+        } else if (idElemento.includes("Footer")) {
+            FilaRowObject = proyecto.getFooter();
+            FilaRowObject.reiniciarEstilo();
+            
+            filaContenedorObject = FilaRowObject.getFilasContenedor();
+            filaContenedorObject[0].rewriteHTML()
+            filaContenedorObject[0].containerSinOpciones()
+            
+            FilaRowObject.rewriteHTML()
+        } else {
+            FilaRowObject = proyecto.getBody();
+            FilaRowObject.forEach(filaRow => {
+                filaRow.reiniciarEstilo();
+                filaRow.rewriteHTML()
+            });
+
+        }
+
+        proyecto.rewriteHTML();
+        $("#proyecto").html(proyecto.getHtmlBase());
+        aplicarEventoMostrarEstilo();
+    })
 }

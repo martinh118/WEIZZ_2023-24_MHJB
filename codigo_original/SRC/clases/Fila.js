@@ -22,6 +22,7 @@ export class Fila{
         elementoDiv.setAttribute("class", "row mt-4 mx-auto");
         if(this.#colorFondo != undefined) elementoDiv.setAttribute("style", `background-color: ${this.#colorFondo}`);
         
+
         for (const FilaContenedor of this.#filasContenedor) {
             elementoDiv.appendChild(FilaContenedor.getRow());
         }
@@ -143,6 +144,10 @@ export class Fila{
 
     rewriteHTML(){
         this.#htmlBase = this.#crearHtmlBase();
+    }
+
+    reiniciarEstilo(){
+        this.#colorFondo = undefined;
     }
 
     obtenerConfigEstilo(titulo){
