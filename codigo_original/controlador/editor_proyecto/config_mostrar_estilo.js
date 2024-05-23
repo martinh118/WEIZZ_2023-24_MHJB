@@ -6,7 +6,7 @@ import { cambiarEstiloTitulo, cambiarEstiloTabla, cambiarEstiloImagen, cambiarEs
 import { mostrarTablaElementos } from './config_mostrar_elementos.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 import { mostrarConfigEstiloBackground, listenerGuardarEstiloFilaBackground, listenerReiniciarEstiloFilaBackground } from './config_background_filas.js';
-
+import { aplicarEventoOnChange } from './config_cambiar_contenido.js';
 
 var cuadroEstilo = undefined;
 
@@ -187,6 +187,7 @@ function listenerGuardarEstilo() {
         cambiarEstiloLista(elementoObjecto);
       }
 
+      aplicarEventoOnChange(elementoObjecto);
       aplicarCambios(elemento);
       aplicarEventoMostrarEstilo();
 
