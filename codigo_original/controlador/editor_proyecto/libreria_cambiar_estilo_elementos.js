@@ -60,6 +60,11 @@ export function cambiarEstiloTabla(elementoObjeto) {
     let colorFondoBody = document.getElementById("colorFondoBody").value;
     let colorLetraHeader = document.getElementById("colorLetraHeader").value;
     let colorLetraBody = document.getElementById("colorLetraBody").value;
+    let boolHeader = document.getElementById("boolHeader");
+    let bool;
+
+    if(boolHeader.checked) bool = true;
+    else bool = false;
 
     elementoObjeto.setFilas(numFilas);
     elementoObjeto.setColumnas(numColumnas)
@@ -69,7 +74,8 @@ export function cambiarEstiloTabla(elementoObjeto) {
     elementoObjeto.setColorHeader(colorFondoHeader)
     elementoObjeto.setColorBody(colorFondoBody)
     elementoObjeto.setColorLetraHeader(colorLetraHeader)
-    elementoObjeto.setColorLetraBody(colorLetraBody)
+    elementoObjeto.setColorLetraBody(colorLetraBody);
+    elementoObjeto.setBoolHeader(bool)
 
     let estiloTable = {
         'border': `${grosorTabla}px ${estiloBordeTabla} ${colorContornoTabla}`,

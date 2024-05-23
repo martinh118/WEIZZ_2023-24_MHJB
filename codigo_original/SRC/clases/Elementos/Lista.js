@@ -18,7 +18,7 @@ export class Lista extends Elemento {
         this.#color = "#000000";
         this.#fuente = "Arial, Helvetica, sans-serif";
         this.#negrita = false;
-        this.estiloElemento = {"color": this.#color, "list-style-type": this.#estilo, "font-family": this.#fuente}
+        this.estiloElemento = { "color": this.#color, "list-style-type": this.#estilo, "font-family": this.#fuente }
         this.elementoDOM = this.#crearElementoDOM();
         // super.aplicarHijo();
     }
@@ -39,17 +39,17 @@ export class Lista extends Elemento {
         return ul;
     }
 
-    rewriteLista(){
+    rewriteLista() {
         this.elementoDOM = this.#crearElementoDOM();
     }
 
     toJSON() {
         let lista = super.toJSON();
-        lista.itemsContent = this.#itemsContent ;
+        lista.itemsContent = this.#itemsContent;
         lista.numItems = this.#numItems;
         lista.estilo = this.#estilo;
         lista.color = this.#color;
-        lista.fuente = this.#fuente ;
+        lista.fuente = this.#fuente;
         lista.negrita = this.#negrita;
         lista.estiloElemento = this.estiloElemento
         return lista;
@@ -98,13 +98,13 @@ export class Lista extends Elemento {
         this.#negrita = negrita;
     }
 
-    reiniciarEstilo(){
+    reiniciarEstilo() {
         this.#numItems = 5;
         this.#estilo = "default";
         this.#color = "#000000";
         this.#fuente = "Arial, Helvetica, sans-serif";
         this.#negrita = false;
-        this.estiloElemento = {"color": this.#color, "list-style-type": this.#estilo, "font-family": this.#fuente}
+        this.estiloElemento = { "color": this.#color, "list-style-type": this.#estilo, "font-family": this.#fuente }
         this.elementoDOM = this.#crearElementoDOM();
     }
 
@@ -116,7 +116,7 @@ export class Lista extends Elemento {
         <div id="itemsLista">`;
 
         for (let index = 0; index < this.#numItems; index++) {
-            html += `<input type='text' class='itemContent' value='${this.#itemsContent[index]}'><br>`;            
+            html += `<input type='text' class='itemContent' value='${this.#itemsContent[index]}'><br>`;
         }
 
 
@@ -156,13 +156,16 @@ export class Lista extends Elemento {
         <label for="negrita" >Negrita</label>
         `
 
-        if(this.#negrita) html += `<input type="checkbox" checked name="" id="negritaTexto">`;
-        else html +=  `<input type="checkbox"  name="" id="negritaTexto">`
+        if (this.#negrita) html += `<input type="checkbox" checked name="" id="negritaTexto">`;
+        else html += `<input type="checkbox"  name="" id="negritaTexto">`
 
-        html +=`
+        html += `
         <br><br>
+        <div style="position: sticky; bottom: 0; background-color: #FF4242; padding: 2px 2px 2px 2px">
+
         <input type='button' value='Guardar' class='guardarEstiloElemento'>    
         <input type='button' value='Reset' class='resetEstiloElemento'>
+    </div>
     </div>`;
         return html;
     }

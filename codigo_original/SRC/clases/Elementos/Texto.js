@@ -132,8 +132,10 @@ export class Texto extends Elemento{
 
 
         html += `<br><br>
+        <div style="position: sticky; bottom: 0; background-color: #FF4242; padding: 2px 2px 2px 2px">
         <input type='button' class='guardarEstiloElemento' value='Guardar'>
         <input type='button' value='Reset' class='ResetEstiloElemento'>
+    </div>
     </div>
         `;
         return html;

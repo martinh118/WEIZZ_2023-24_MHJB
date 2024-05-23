@@ -155,8 +155,10 @@ export class Fila{
             else html += `<input type="color" id="colorFondo" value='#000000'>`
             html += `
             <br><br>
+        <div style="position: sticky; bottom: 0; background-color: #FF4242; padding: 2px 2px 2px 2px">
             <input type='button' value='Guardar' class="guardarEstiloFilaBackground">
             <input type='button' value='Reset' class="resetEstiloFilaBackground">
+        </div>
         </div>
         
         `

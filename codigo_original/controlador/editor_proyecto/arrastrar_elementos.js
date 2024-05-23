@@ -4,8 +4,10 @@ import { Lista } from '../../SRC/clases/Elementos/Lista.js';
 import { Imagen } from '../../SRC/clases/Elementos/Imagen.js';
 import { Tabla } from '../../SRC/clases/Elementos/Tabla.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
+import { encontrarObjetoElemento } from './config_mostrar_estilo.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
+import { aplicarEventoOnChange } from './config_cambiar_contenido.js';
 import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/gestionElementos.js';
 /**
  * 
@@ -15,6 +17,10 @@ export function aplicarEventosArrastrar(proyecto) {
     let containers = document.querySelectorAll(".containerHijo");
     containers.forEach((containerHijo) => {
         eventosContainerHijo(containerHijo, proyecto);
+        if(!containerHijo.children[0].id.includes("apply")){
+            let element = encontrarObjetoElemento(containerHijo.children[0]);
+            aplicarEventoOnChange(element);
+        }
     });
 }
 
@@ -56,6 +62,7 @@ export function eventosContainerHijo(cont, proyecto) {
                 let elementoCreado = crearElemento(data, elementoPadre);
                 añadirCambiosClase(elementoCreado, elementoPadre, proyecto);
                 aplicarEventoMostrarEstilo();
+                aplicarEventoOnChange(elementoCreado);
 
             }
         } catch (err) {
@@ -122,11 +129,11 @@ function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
         claseFilaContenedor = claseFilaRow.getFilaContenedorUnico(DOMFilaContenedor.id)
         claseContainer = claseFilaContenedor.getContainerUnico(elementoPadre.id);
         claseContainer.setElementoHijo(elementoCreado);
+        if(filaRow.id.includes("Header") || filaRow.id.includes("Footer")){
+            cambiosHeaderFooter();
+        }else cambiosBody();
     }
 
-    if(filaRow.id.includes("Header") || filaRow.id.includes("Footer")){
-        cambiosHeaderFooter();
-    }else cambiosBody();
 
 
     function cambiosHeaderFooter() {

@@ -43,17 +43,18 @@ function mostrarConfigEstilo(contenedor) {
     let contenido = null;
     let elemento;
 
+    if ($(event.target).attr("class")) {
+      if ($(event.target).attr("class").includes("containerHijo")) {
 
-    if ($(event.target).attr("class").includes("containerHijo")) {
+        let hijoContainerHijo = $(event.target).children()[0];
+        if ($(hijoContainerHijo).attr('class').includes("element")) {
+          elemento = hijoContainerHijo
 
-      let hijoContainerHijo = $(event.target).children()[0];
-      if ($(hijoContainerHijo).attr('class').includes("element")) {
-        elemento = hijoContainerHijo
+        }
 
+      } else if ($(event.target).attr("class").includes("element")) {
+        elemento = event.target;
       }
-
-    } else if ($(event.target).attr("class").includes("element")) {
-      elemento = event.target;
     }
 
     if (elemento != undefined) {
@@ -78,7 +79,7 @@ export function mostrarContenidoCSS(elemento) {
 
 }
 
-function encontrarObjetoElemento(elemento) {
+export function encontrarObjetoElemento(elemento) {
   let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
   let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
   let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
@@ -158,67 +159,73 @@ export function abrirRecuadro(contenido) {
 }
 
 function listenerGuardarEstilo() {
+
   $(".guardarEstiloElemento").click(function () {
     let idElemento = $(".idElemento").html();
     let elemento = document.getElementById(idElemento);
-    let elementoObjecto = encontrarObjetoElemento(elemento);
+    if (elemento != null) {
 
-    if (idElemento.includes("Titulo")) {
-      cambiarEstiloTitulo(elementoObjecto);
+      let elementoObjecto = encontrarObjetoElemento(elemento);
+
+      if (idElemento.includes("Titulo")) {
+        cambiarEstiloTitulo(elementoObjecto);
+      }
+
+      if (idElemento.includes("Texto")) {
+        cambiarEstiloTitulo(elementoObjecto);
+      }
+
+      if (idElemento.includes("Tabla")) {
+        cambiarEstiloTabla(elementoObjecto);
+      }
+
+      if (idElemento.includes("Imagen")) {
+        cambiarEstiloImagen(elementoObjecto);
+      }
+
+      if (idElemento.includes("Lista")) {
+        cambiarEstiloLista(elementoObjecto);
+      }
+
+      aplicarCambios(elemento);
+      aplicarEventoMostrarEstilo();
+
+      let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
+      let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
+
+      let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+
+      if (filaRowObject != undefined) {
+        let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
+        aplicarListenersFilaContainer(filaContenedorObject, proyecto);
+      }
     }
 
-    if (idElemento.includes("Texto")) {
-      cambiarEstiloTitulo(elementoObjecto);
-    }
-
-    if (idElemento.includes("Tabla")) {
-      cambiarEstiloTabla(elementoObjecto);
-    }
-
-    if (idElemento.includes("Imagen")) {
-      cambiarEstiloImagen(elementoObjecto);
-    }
-
-    if (idElemento.includes("Lista")) {
-      cambiarEstiloLista(elementoObjecto);
-    }
-
-    aplicarCambios(elemento);
-    aplicarEventoMostrarEstilo();
-
-    let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
-    let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
-
-    let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
-
-    if (filaRowObject != undefined) {
-      let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
-      aplicarListenersFilaContainer(filaContenedorObject, proyecto);
-    }
-
-    // console.log(elementoObjecto);
   });
+
 }
 
 function listenerReiniciarEstilo() {
   $(".resetEstiloElemento").click(function () {
     let idElemento = $(".idElemento").html();
     let elemento = document.getElementById(idElemento);
-    let elementoObjecto = encontrarObjetoElemento(elemento);
+    if (elemento != null) {
+      let elementoObjecto = encontrarObjetoElemento(elemento);
 
-    elementoObjecto.reiniciarEstilo();
+      elementoObjecto.reiniciarEstilo();
 
-    aplicarCambios(elemento);
-    aplicarEventoMostrarEstilo();
+      aplicarCambios(elemento);
+      aplicarEventoMostrarEstilo();
 
-    let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
-    let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
+      let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
+      let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");
 
-    let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+      let filaRowObject = proyecto.getFilaRow(filaRowDom.id);
 
-    if (filaRowObject != undefined) {
-      let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
-      aplicarListenersFilaContainer(filaContenedorObject, proyecto);
+      if (filaRowObject != undefined) {
+        let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
+        aplicarListenersFilaContainer(filaContenedorObject, proyecto);
+      }
     }
   });
 }

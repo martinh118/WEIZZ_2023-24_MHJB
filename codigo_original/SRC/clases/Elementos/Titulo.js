@@ -78,7 +78,7 @@ export class Titulo extends Elemento {
 
     obtenerConfigEstilo() {
         
-        let html = `<div id="contenidoRecuadroEstilo" style='padding:5px 5px 5px 5px'>
+        let html = `<div id="contenidoRecuadroEstilo" style='padding:5px 5px 5px 5px; overflow: auto;'>
         <div hidden class='idElemento'>${this.id}</div>
         <label for='contenidoTitulo'><b>Contenido Titulo: </b></label><br>
         <textarea id='contenidoTitulo' cols='30' rows='2'>${this.contenido}</textarea>
@@ -111,9 +111,11 @@ export class Titulo extends Elemento {
         }else html += `<input type="checkbox" name="" id="subrayado" >`;
 
         html += `<br><br>
-        <input type='button' class='guardarEstiloElemento' value='Guardar'>
+        </div>
+        <div style="position: sticky; bottom: 0; background-color: #FF4242; padding: 2px 2px 2px 2px">
+        <input type='button' class='guardarEstiloElemento'  value='Guardar'>
         <input type='button' value='Reset' class='resetEstiloElemento'>
-    </div>
+        </div>
         `;
         return html;
 

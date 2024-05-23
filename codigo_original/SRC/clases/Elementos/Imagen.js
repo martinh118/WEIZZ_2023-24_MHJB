@@ -145,10 +145,11 @@ export class Imagen extends Elemento{
             <label for="colorBorde"><b>Color borde:</b></label><br>
             <input type="color" id="colorBorde" value='${this.#colorBorde}'>
             <br><br>
+        <div style="position: sticky; bottom: 0; background-color: #FF4242; padding: 2px 2px 2px 2px">
             <input type='button' value='Guardar' class="guardarEstiloElemento">
             <input type='button' value='Reset' class="resetEstiloElemento">
         </div>
-        
+        </div>
         `
 
 
