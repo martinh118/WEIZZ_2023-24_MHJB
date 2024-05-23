@@ -26,7 +26,7 @@ export class BotonesContainer {
         let borrarElemento = this.#borrarElemento;
 
         //ATRIBUTOS 
-        let atributosGrupoPadre = { "class": "list-group list-group-horizontal p-2", "style": 'height: 30%;top: -48px;position: absolute;' };
+        let atributosGrupoPadre = { "class": "list-group h-auto list-group-horizontal p-2", "style": 'height: 30%;top: -48px;position: absolute;' };
         // let atributosBotonesHijos = { "class": "list-group-item-action list-group-item border border-2 border-dark" };
         let arrElementos = [subirElemento, bajarElemento, borrarElemento];
 
