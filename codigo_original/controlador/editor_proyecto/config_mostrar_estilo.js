@@ -226,6 +226,10 @@ function listenerReiniciarEstilo() {
         let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
         aplicarListenersFilaContainer(filaContenedorObject, proyecto);
       }
+
+      let divPrincipal = crearElemento("div", "");
+      divPrincipal.innerHTML = elementoObjecto.obtenerConfigEstilo();
+      abrirRecuadro(divPrincipal);
     }
   });
 }

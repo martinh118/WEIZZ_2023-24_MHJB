@@ -1,6 +1,5 @@
-import { aplicarCambios } from "./libreria_cambiar_estilo_elementos.js";
-import { aplicarEventoMostrarEstilo, mostrarContenidoCSS, abrirRecuadro } from "./config_mostrar_estilo.js";
-import { aplicarEventosArrastrar, eventosContainerHijo } from "./arrastrar_elementos.js";
+import { mostrarContenidoCSS, abrirRecuadro } from "./config_mostrar_estilo.js";
+import { eventosContainerHijo } from "./arrastrar_elementos.js";
 import { proyecto } from "./editor_proyecto.js";
 
 export function aplicarEventoOnChange(elementoObjeto) {
@@ -12,26 +11,36 @@ export function aplicarEventoOnChange(elementoObjeto) {
     if (idElemento.includes("Titulo") || idElemento.includes("Texto")) {
       elemento.addEventListener("input", function () {
         cambiarContenidoTitulo(elementoObjeto, elemento);
-        let contenido = mostrarContenidoCSS(elemento);
-        abrirRecuadro(contenido);
-
-        eventosContainerHijo(elemento.parentNode,proyecto)
       })
     }
 
-    // aplicarCambios(elemento);
-    // aplicarEventoMostrarEstilo();
+    if (idElemento.includes("Lista")) {
+      elemento.addEventListener("input", function () {
+        cambiarContenidoTabla(elementoObjeto, elemento);
+      })
+    }
+
+
   }
 }
 
 function cambiarContenidoTitulo(elementoObjeto, elemento) {
   elementoObjeto.setContenido(elemento.innerHTML);
-  // elementoObjeto.rewriteHTML();
-
+  let contenido = mostrarContenidoCSS(elemento);
+  abrirRecuadro(contenido);
+  eventosContainerHijo(elemento.parentNode, proyecto)
 }
 
-function cambiarContenidoTabla(elementoObjeto) {
-  console.log(elementoObjeto);
+function cambiarContenidoTabla(elementoObjeto, elemento) {
+  let content = elemento.children;
+  let arrCont = [];
+  for (const cont of content) {
+   arrCont.push(cont.innerHTML.toString())
+  }
+  elementoObjeto.setItemsContent(arrCont);
+  let contenido = mostrarContenidoCSS(elemento);
+  abrirRecuadro(contenido);
+  eventosContainerHijo(elemento.parentNode, proyecto)
 }
 
 

@@ -2,7 +2,7 @@ import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/gestionElementos.js';
 import { proyecto } from './editor_proyecto.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
-
+import { abrirRecuadro } from './config_mostrar_estilo.js';
 
 export function cambiarEstiloTitulo(elementoObjecto) {
     let newContent = document.getElementById("contenidoTitulo").value;
