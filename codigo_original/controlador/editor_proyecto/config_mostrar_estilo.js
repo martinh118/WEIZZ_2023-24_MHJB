@@ -7,6 +7,7 @@ import { mostrarTablaElementos } from './config_mostrar_elementos.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 import { mostrarConfigEstiloBackground, listenerGuardarEstiloFilaBackground, listenerReiniciarEstiloFilaBackground } from './config_background_filas.js';
 import { aplicarEventoOnChange } from './config_cambiar_contenido.js';
+import { aplicarEventosArrastrar } from './arrastrar_elementos.js';
 
 var cuadroEstilo = undefined;
 
@@ -190,6 +191,7 @@ function listenerGuardarEstilo() {
       aplicarEventoOnChange(elementoObjecto);
       aplicarCambios(elemento);
       aplicarEventoMostrarEstilo();
+      aplicarEventosArrastrar(proyecto);
 
       let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
       let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor");

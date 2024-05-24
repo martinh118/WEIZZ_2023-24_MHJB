@@ -86,7 +86,11 @@ export class Tabla extends Elemento {
             let trBody = crearElemento("tr", "");
             trBody.setAttribute("class", "element")
             for (let f = 0; f < this.#columnas; f++) {
-                let td = crearElemento("td", this.contenido["tbody-"+i][f], "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorBody}; color: ${this.#colorLetraBody}`);
+                let td;
+                if(this.contenido["tbody-"+i] != undefined){
+                    td = crearElemento("td", this.contenido["tbody-"+i][f], "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorBody}; color: ${this.#colorLetraBody}`);
+                }else td = crearElemento("td", `Columna-${f}.Fila-${i}`, "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorBody}; color: ${this.#colorLetraBody}`);
+
                 td.setAttribute("class", "element");
                 td.setAttribute("contenteditable", "");
                 trBody.appendChild(td);
@@ -97,7 +101,11 @@ export class Tabla extends Elemento {
         if (this.#boolHeader) {
             
             for (let index = 0; index < this.#columnas; index++) {
-                let th = crearElemento("th", this.contenido["thead"][index], "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorHeader}; color: ${this.#colorLetraHeader}`);
+                let th;
+                if(this.contenido["thead"][index] != undefined){
+                    th = crearElemento("th", this.contenido["thead"][index], "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorHeader}; color: ${this.#colorLetraHeader}`);
+                }else th = crearElemento("th", "Columna-" + index, "style", `border: ${this.#grosor}px ${this.#estiloBorde} ${this.#colorContorno}; background: ${this.#colorHeader}; color: ${this.#colorLetraHeader}`);
+
                 th.setAttribute("class", "element");
                 th.setAttribute("contenteditable", "");
                 trHead.appendChild(th);

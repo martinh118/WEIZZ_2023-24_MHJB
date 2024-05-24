@@ -87,7 +87,7 @@ function obtenerElementosDisponibles() {
     tabla.setAttribute("data-elemento", "Tabla");
 
 
-    let arrElementos = [borrar, titulo, texto, imagen, lista, tabla];
+    let arrElementos = [container, borrar, titulo, texto, imagen, lista, tabla] ;
 
     añadirMismoAtributos("draggable", "true", arrElementos);
     añadirMismoAtributos("ondragstart", "dragStart(event)", arrElementos);

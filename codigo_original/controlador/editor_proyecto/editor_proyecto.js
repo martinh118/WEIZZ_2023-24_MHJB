@@ -1,7 +1,6 @@
 import { aplicarEventListener } from './aplicar_event_listener.js';
 import { transformarJson } from './transformar_json.js';
-import { aplicarEventoOnChange } from './config_cambiar_contenido.js';
-import { encontrarObjetoElemento } from './config_mostrar_estilo.js';
+
 
 export let proyecto;
 /**
@@ -57,13 +56,6 @@ $(document).ready(function () {
           return response.json();
         })
         .then(data => {
-          let containers = document.querySelectorAll(".containerHijo");
-          containers.forEach((containerHijo) => {
-              if(!containerHijo.children[0].id.includes("apply")){
-                  let element = encontrarObjetoElemento(containerHijo.children[0]);
-                  aplicarEventoOnChange(element);
-              }
-          });
           $("#proyectoGuardadoMessage").show()
           setTimeout(() => { $("#proyectoGuardadoMessage").hide() }, 3000);
         })
