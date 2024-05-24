@@ -3,6 +3,11 @@ import { Fila } from '../../SRC/clases/Fila.js';
 import { aplicarEventosArrastrar, eventosContainerHijo } from './arrastrar_elementos.js';
 import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
 
+/**
+ * A cada botón de las FilaContenedor les aplica los eventListener para su correcto funcionamiento.
+ * Crear un nuevo container, desplazar contenedor hacia arriba y abajo, borrar container.
+ * @param {Proyecto} proyecto: Proyecto obre el que se trabaja. 
+ */
 export function aplicarEventListener(proyecto) {
     let botonCrear = document.querySelectorAll(".botonCrear");
     let botonSubir = document.querySelectorAll(".botonSubir");
@@ -30,6 +35,12 @@ export function aplicarEventListener(proyecto) {
 
 }
 
+/**
+ * Realiza todos los cambios en los objetos clase para crear una nueva Fila (dependiendo de la ubicación de la FilaContenedor) y una nueva FilaContenedor
+ * con el correcto orden de visualización y reescribe cada contenido HTML en la página.
+ * @param {DOMElement} button: Boton de crear un nuevo container.
+ * @param {Proyecto} proyecto: Proyecto sobre el que se trabaja. 
+ */
 function crearContainer(button, proyecto) {
     button.addEventListener('click', function (event) {
 
@@ -77,6 +88,12 @@ function crearContainer(button, proyecto) {
     });
 }
 
+/**
+ * Realiza todos los cambios en los objetos clase para desplazar la FilaContenedor en la zona superior o izquierda dependiendo de la ubicación de esta
+ * y crear el correcto orden de visualización y reescribe cada contenido HTML en la página.
+ * @param {DOMElement} button: Botón desplazar FilaContenedor hacia arriba.
+ * @param {Proyecto} proyecto: Proyecto sobre el que se trabaja. 
+ */
 function moverArribaCont(button, proyecto) {
     button.addEventListener('click', function () {
         let selectedFilaBotones = button.parentNode;
@@ -155,7 +172,12 @@ function moverArribaCont(button, proyecto) {
     });
 }
 
-
+/**
+ * Realiza todos los cambios en los objetos clase para desplazar la FilaContenedor en la zona inferior o derecha dependiendo de la ubicación de esta
+ * y crear el correcto orden de visualización y reescribe cada contenido HTML en la página.
+ * @param {DOMElement} button: Botón desplazar FilaContenedor hacia abajo.
+ * @param {Proyecto} proyecto: Proyecto sobre el que se trabaja. 
+ */
 function moverAbajoCont(button, proyecto) {
     button.addEventListener('click', function () {
         let selectedFilaBotones = button.parentNode;
@@ -240,7 +262,12 @@ function moverAbajoCont(button, proyecto) {
     })
 }
 
-
+/**
+ * Realiza todos los cambios en los objetos clase para eliminar la FilaContendor y la Fila
+ * y crear el correcto orden de visualización y reescribe cada contenido HTML en la página.
+ * @param {DOMElement} button: Botón eliminar FilaContenedor.
+ * @param {Proyecto} proyecto: Proyecto sobre el que se trabaja. 
+ */
 function borrarContainer(button, proyecto) {
     button.addEventListener('click', function () {
         let filaBotones = button.parentNode;
@@ -267,6 +294,11 @@ function borrarContainer(button, proyecto) {
     });
 }
 
+/**
+ * Comprueba que el elemento pasado como parametro de entrada sea un elemento HTML o no.
+ * @param {DOMElement} object: objeto seleccionado para comprobar si es un elemento HTML o no.
+ * @returns {boolean} 
+ */
 function isElement(object) {
     return (
         typeof HTMLElement === "object" ? object instanceof HTMLElement : //DOM2
@@ -274,6 +306,11 @@ function isElement(object) {
     );
 }
 
+/**
+ * Comprueba que el elemento pasado como parametro de entrada sea una FilaContenedor o no.
+ * @param {DOMElement} object: objeto seleccionado para comprobar si es un elemento HTML o no.
+ * @returns {boolean}
+ */
 function isFilaContenedor(object) {
     if (object != undefined) {
         let idFilaContenedor = object.id;
@@ -286,6 +323,10 @@ function isFilaContenedor(object) {
 
 }
 
+/**
+ * A partir de todas las Filas creadas en el body del proyecto devuelve el nuevo identificador correspondiente para un correcto orden.
+ * @returns {String} nuevo Id de la Fila.
+ */
 function obtenerFilaRowId() {
     let body = document.getElementById("rowBodyProject");
     let filas = body.childNodes;
@@ -308,6 +349,10 @@ function obtenerFilaRowId() {
 
 }
 
+/**
+ * A partir de todas las FilasContenedor creadas en el body del proyecto devuelve el nuevo identificador correspondiente para un correcto orden.
+ * @returns {String} nuevo Id de la FilaContenedor.
+ */
 function obtenerFilaContenedorId() {
     let filas = document.querySelectorAll(".FilaContenedor");
     let index = 1;
@@ -332,6 +377,13 @@ function obtenerFilaContenedorId() {
     return "FilaContenedor-" + index;
 }
 
+/**
+ * Aplica todos los eventos necesarios en la FilaContenedor para su correcto funcionamiento:
+ * EventListeners para los botones (crear, subir, bajar, borrar),
+ * EventListeners para aplicar nuevos elementos dentro (drop, dragover, dragleave).
+ * @param {FilaContenedor} filaContenedor: FilaContenedor sobre el que se trabaja.
+ * @param {Proyecto} proyecto: Proyeto sobre el que se trabaja. 
+ */
 export function aplicarListenersFilaContainer(filaContenedor, proyecto) {
     let containers = filaContenedor.getContainers();
     let botones = filaContenedor.getOpcionesRow();

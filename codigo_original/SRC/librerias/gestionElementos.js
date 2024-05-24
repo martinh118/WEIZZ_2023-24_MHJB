@@ -1,4 +1,4 @@
-import { proyecto } from "../../controlador/editor_proyecto/editor_proyecto";
+import { proyecto } from "../../controlador/editor_proyecto/editor_proyecto.js";
 
 /**
  * Encuentra el objeto DOM padre que se desee a partir de una key y valor del atributo del padre que se desea buscar.
