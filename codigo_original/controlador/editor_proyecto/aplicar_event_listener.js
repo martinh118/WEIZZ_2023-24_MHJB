@@ -1,12 +1,14 @@
 import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { Fila } from '../../SRC/clases/Fila.js';
 import { aplicarEventosArrastrar, eventosContainerHijo } from './arrastrar_elementos.js';
+import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
 
 export function aplicarEventListener(proyecto) {
     let botonCrear = document.querySelectorAll(".botonCrear");
     let botonSubir = document.querySelectorAll(".botonSubir");
     let botonBajar = document.querySelectorAll(".botonBajar");
     let botonBorrar = document.querySelectorAll(".botonBorrar");
+    
 
     botonCrear.forEach((button) => {
         crearContainer(button, proyecto)
@@ -25,7 +27,6 @@ export function aplicarEventListener(proyecto) {
     });
 
     aplicarEventosArrastrar(proyecto);
-    
 
 }
 
@@ -70,7 +71,9 @@ function crearContainer(button, proyecto) {
 
             
         }
-
+        aplicarEventoMostrarEstilo();
+    
+        
     });
 }
 
@@ -148,7 +151,7 @@ function moverArribaCont(button, proyecto) {
 
             }
         }
-
+        aplicarEventoMostrarEstilo();
     });
 }
 
@@ -232,7 +235,7 @@ function moverAbajoCont(button, proyecto) {
 
             }
         }
-
+        aplicarEventoMostrarEstilo();
 
     })
 }
@@ -260,8 +263,7 @@ function borrarContainer(button, proyecto) {
             $("#proyecto").html(proyecto.getHtmlBase());
         }
 
-
-
+        aplicarEventoMostrarEstilo();
     });
 }
 

@@ -1,5 +1,4 @@
 import { crearElemento, modificarAtributoElemento } from '../librerias/APIElementosHTML.js';
-import { Elemento } from './Elemento.js';
 
 export class Container {
     #id;

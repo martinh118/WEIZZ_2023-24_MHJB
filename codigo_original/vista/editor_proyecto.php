@@ -27,8 +27,9 @@ session_start();
 
 <script>
     function dragStart(event) {
+        //CREAR VARIABLE GLOBAL.
         let tipoElemento = event.target.dataset.elemento;
-        event.dataTransfer.setData("text/plain", tipoElemento);
+        event.dataTransfer.setData("text/plain", tipoElemento);   
     }
 </script>
 
@@ -74,7 +75,7 @@ session_start();
 
         </div>
 
-        <hr class="hrLinea" >
+        <hr class="hrLinea">
 
     </header>
 

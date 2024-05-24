@@ -3,6 +3,8 @@ import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/
 import { proyecto } from './editor_proyecto.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
 import { abrirRecuadro } from './config_mostrar_estilo.js';
+import { Imagen } from '../../SRC/clases/Elementos/Imagen.js';
+import { encontrarObjectoContainer } from '../../SRC/librerias/gestionElementos.js';
 
 export function cambiarEstiloTitulo(elementoObjecto) {
     let newContent = document.getElementById("contenidoTitulo").value;
@@ -63,7 +65,7 @@ export function cambiarEstiloTabla(elementoObjeto) {
     let boolHeader = document.getElementById("boolHeader");
     let bool;
 
-    if(boolHeader.checked) bool = true;
+    if (boolHeader.checked) bool = true;
     else bool = false;
 
     elementoObjeto.setFilas(numFilas);
@@ -102,35 +104,63 @@ export function cambiarEstiloTabla(elementoObjeto) {
 
 }
 
-export function cambiarEstiloImagen(elementoObjeto) {
-    let imagen = document.getElementById("inputImagen").files[0];
-    let ancho = document.getElementById("anchoImagen").value;
-    let alto = document.getElementById("altoImagen").value;
-    let borderRadius = document.getElementById("borderRadius").value;
-    let anchoBorde = document.getElementById("anchoBorde").value;
-    let colorBorde = document.getElementById("colorBorde").value;
+export async function cambiarEstiloImagen(elementoObjeto) {
+    try {
 
-    if (imagen != undefined) {
-        guardarImagen(imagen);
-        elementoObjeto.setSource("../SRC/imagenes_usuario/" + imagen.name);
+        let name, url;
+        let imagen = document.getElementById("inputImagen").files[0];
+        let ancho = document.getElementById("anchoImagen").value;
+        let alto = document.getElementById("altoImagen").value;
+        let borderRadius = document.getElementById("borderRadius").value;
+        let anchoBorde = document.getElementById("anchoBorde").value;
+        let colorBorde = document.getElementById("colorBorde").value;
+
+        if (imagen != undefined) {
+            await guardarImagen(imagen);
+            name = imagen.name
+        } else name = "default_image.jpg";
+
+        url = "../SRC/imagenes_usuario/" + name;
+
+        let object = {
+            "height": `${alto}px`,
+            "width": `${ancho}px`,
+            "border": `${anchoBorde}px solid ${colorBorde}`,
+            "border-radius": `${borderRadius}% !important;`
+        }
+
+        let idDom = elementoObjeto.getId();
+        let imgDom = document.getElementById(idDom);
+        let parentDom = imgDom.parentNode;
+        let nuevaImagen = new Imagen(elementoObjeto.getId(), "");
+    
+        let imagenDom = document.createElement("img");
+        imagenDom.addEventListener("load", () => {
+            nuevaImagen.setSource(url);
+            nuevaImagen.setAncho(ancho);
+            nuevaImagen.setAlto(alto);
+            nuevaImagen.setBorderRadius(borderRadius);
+            nuevaImagen.setAnchoBorde(anchoBorde);
+            nuevaImagen.setColorBorde(colorBorde);
+            nuevaImagen.setEstilo(object);
+            nuevaImagen.rewriteImagen();
+            imgDom.remove();
+            let elemento = nuevaImagen.getElementoDom()
+            parentDom.appendChild(elemento);
+            let contenedorHijoObject = encontrarObjectoContainer(elemento);
+            contenedorHijoObject.setElementoHijo(nuevaImagen);
+        }
+        )
+        imagenDom.src = url;
+        imagenDom.id = "imagenSustituto";
+    } catch (error) {
+        console.error(error);
+
     }
-
-    elementoObjeto.setAncho(ancho);
-    elementoObjeto.setAlto(alto);
-    elementoObjeto.setBorderRadius(borderRadius);
-    elementoObjeto.setAnchoBorde(anchoBorde);
-    elementoObjeto.setColorBorde(colorBorde);
-
-    let object = {
-        "height": `${alto}px`,
-        "width": `${ancho}px`,
-        "border": `${anchoBorde}px solid ${colorBorde}`,
-        "border-radius": `${borderRadius}% !important;`
-    }
-    elementoObjeto.setEstilo(object);
-
-    elementoObjeto.rewriteImagen();
 }
+
+
+
 
 export function cambiarEstiloLista(elementoObjeto) {
     let itemsLista = document.querySelectorAll(".itemContent");
@@ -171,23 +201,29 @@ export function cambiarEstiloLista(elementoObjeto) {
 
 }
 
-function guardarImagen(file) {
-    const formData = new FormData();
-    formData.append('file', file);
+async function guardarImagen(file) {
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
 
-    fetch('../controlador/editor_proyecto/guardar_archivo.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al guardar el archivo.');
-            }
-            console.log('El archivo se ha guardado correctamente en el servidor.');
+        fetch('../controlador/editor_proyecto/guardar_archivo.php', {
+            method: 'POST',
+            body: formData
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al guardar el archivo.');
+                }
+                console.log('El archivo se ha guardado correctamente en el servidor.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } catch (e) {
+        console.error(e);
+        throw error;
+    }
+
 }
 
 

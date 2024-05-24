@@ -8,7 +8,6 @@ export function mostrarConfigEstiloBackground(boton) {
 
     function eventListener(event) {
         let elemento;
-
         if ($(event.target).next().attr("id").includes("FilaRow")) {
             elemento = $(event.target).next()[0];
             let FilaRowObject;

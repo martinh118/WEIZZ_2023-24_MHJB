@@ -37,16 +37,6 @@ export class Imagen extends Elemento{
         return imagen;
     }
 
-    #crearStringEstiloTabla(object) {
-        let html = "";
-
-        for (let es in object) {
-            html += `${es}: ${object[es]};`;
-        }
-
-        return html;
-    }
-
     toJSON(){
         let object = super.toJSON();
         object.source = this.#source;

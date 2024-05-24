@@ -1,3 +1,4 @@
+import { proyecto } from "../../controlador/editor_proyecto/editor_proyecto";
 
 /**
  * Encuentra el objeto DOM padre que se desee a partir de una key y valor del atributo del padre que se desea buscar.
@@ -19,7 +20,7 @@ export function encontrarPadre(elementoSeleccionado, atributoKeyPadre, valorAtri
 
 
         if (atributoPadre != undefined) {
-            while (!atributoPadre.includes(valorAtributoPadre) ) {
+            while (!atributoPadre.includes(valorAtributoPadre)) {
                 elementoPadre = elementoPadre.parentNode;
                 atributoPadre = elementoPadre.getAttribute(atributoKeyPadre);
                 while (atributoPadre == null) {
@@ -32,6 +33,45 @@ export function encontrarPadre(elementoSeleccionado, atributoKeyPadre, valorAtri
     }
     return elementoSeleccionado;
 
+}
+
+export function encontrarObjetoElemento(elemento) {
+    let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
+    let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
+    let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
+    let filaRowObject;
+  
+    if (filaRowDom.id.includes("Header")) {
+      filaRowObject = proyecto.getHeader();
+    } else if (filaRowDom.id.includes("Footer")) {
+      filaRowObject = proyecto.getFooter();
+    } else {
+      filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+    }
+  
+    let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
+    let contenedorHijoObject = filaContenedorObject.getContainerUnico(contenedorHijoDom.id);
+  
+    return contenedorHijoObject.getElementoHijo();
+  }
+
+export function encontrarObjectoContainer(elemento) {
+    let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
+    let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
+    let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
+    let filaRowObject;
+
+    if (filaRowDom.id.includes("Header")) {
+        filaRowObject = proyecto.getHeader();
+    } else if (filaRowDom.id.includes("Footer")) {
+        filaRowObject = proyecto.getFooter();
+    } else {
+        filaRowObject = proyecto.getFilaRow(filaRowDom.id);
+    }
+
+    let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
+    let contenedorHijoObject = filaContenedorObject.getContainerUnico(contenedorHijoDom.id);
+    return contenedorHijoObject
 }
 
 /**

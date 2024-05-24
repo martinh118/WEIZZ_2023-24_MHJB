@@ -8,6 +8,7 @@ import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 import { mostrarConfigEstiloBackground, listenerGuardarEstiloFilaBackground, listenerReiniciarEstiloFilaBackground } from './config_background_filas.js';
 import { aplicarEventoOnChange } from './config_cambiar_contenido.js';
 import { aplicarEventosArrastrar } from './arrastrar_elementos.js';
+import { encontrarObjetoElemento } from '../../SRC/librerias/gestionElementos.js';
 
 var cuadroEstilo = undefined;
 
@@ -80,25 +81,7 @@ export function mostrarContenidoCSS(elemento) {
 
 }
 
-export function encontrarObjetoElemento(elemento) {
-  let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
-  let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")
-  let contenedorHijoDom = encontrarPadre(elemento, "class", "containerHijo")
-  let filaRowObject;
 
-  if (filaRowDom.id.includes("Header")) {
-    filaRowObject = proyecto.getHeader();
-  } else if (filaRowDom.id.includes("Footer")) {
-    filaRowObject = proyecto.getFooter();
-  } else {
-    filaRowObject = proyecto.getFilaRow(filaRowDom.id);
-  }
-
-  let filaContenedorObject = filaRowObject.getFilaContenedorUnico(filaContenedorDom.id);
-  let contenedorHijoObject = filaContenedorObject.getContainerUnico(contenedorHijoDom.id);
-
-  return contenedorHijoObject.getElementoHijo();
-}
 
 /**
  * Abre el recuadro del estilo del objeto con el contenido del objeto dependiendo del elemento
