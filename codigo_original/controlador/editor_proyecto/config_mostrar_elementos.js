@@ -1,11 +1,12 @@
 import { RecuadroArrastrable } from '../../SRC/clases/RecuadroArrastrable.js';
 import { crearElemento, añadirHijos, añadirMismoAtributos } from '../../SRC/librerias/APIElementosHTML.js';
 var cuadroElementos = undefined;
+
+$("#mostrarElementos").click(mostrarTablaElementos);
+
 /**
  * Muestra el recuadro flotante para mostrar los elementos disponibles para aplicar en el proyecto.
  */
-$("#mostrarElementos").click(mostrarTablaElementos);
-
 export function mostrarTablaElementos() {
 
     var selection = document.querySelector('#cuadroElementos') !== null;

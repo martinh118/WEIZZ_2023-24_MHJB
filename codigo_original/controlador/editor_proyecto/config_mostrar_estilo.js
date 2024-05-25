@@ -37,7 +37,7 @@ export function aplicarEventoMostrarEstilo() {
 }
 
 
-function mostrarConfigEstilo(contenedor) {
+export function mostrarConfigEstilo(contenedor) {
   contenedor.addEventListener("click", function (event) { eventListener(event) });
   // contenedor.firstChild.addEventListener("click", function (event) {eventListener(event)});
 

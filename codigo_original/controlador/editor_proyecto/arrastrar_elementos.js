@@ -131,7 +131,7 @@ function crearElemento(data, elementoPadre) {
  * @param {DOMElement} elementoPadre : Container al que le es aplicado el nuevo Elemento.
  * @param {Proyecto} proyecto : Objeto Proyecto.
  */
-function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
+export function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
     let filaRow = encontrarPadre(elementoPadre, "id", "FilaRow");
     let claseFilaRow, DOMFilaContenedor, claseFilaContenedor, claseContainer;
 

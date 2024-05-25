@@ -28,7 +28,7 @@ session_start();
 <script>
     function dragStart(event) {
         //CREAR VARIABLE GLOBAL.
-        let tipoElemento = event.target.dataset.elemento;
+        var tipoElemento = event.target.dataset.elemento;
         event.dataTransfer.setData("text/plain", tipoElemento);   
     }
 </script>

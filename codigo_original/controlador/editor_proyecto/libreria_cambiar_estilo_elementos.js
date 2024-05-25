@@ -4,7 +4,8 @@ import { proyecto } from './editor_proyecto.js';
 import { crearElemento } from '../../SRC/librerias/APIElementosHTML.js';
 import { abrirRecuadro } from './config_mostrar_estilo.js';
 import { Imagen } from '../../SRC/clases/Elementos/Imagen.js';
-import { encontrarObjectoContainer } from '../../SRC/librerias/gestionElementos.js';
+import { añadirCambiosClase } from './arrastrar_elementos.js';
+import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
 
 export function cambiarEstiloTitulo(elementoObjecto) {
     let newContent = document.getElementById("contenidoTitulo").value;
@@ -115,13 +116,6 @@ export async function cambiarEstiloImagen(elementoObjeto) {
         let anchoBorde = document.getElementById("anchoBorde").value;
         let colorBorde = document.getElementById("colorBorde").value;
 
-        if (imagen != undefined) {
-            await guardarImagen(imagen);
-            name = imagen.name
-        } else name = "default_image.jpg";
-
-        url = "../SRC/imagenes_usuario/" + name;
-
         let object = {
             "height": `${alto}px`,
             "width": `${ancho}px`,
@@ -129,30 +123,47 @@ export async function cambiarEstiloImagen(elementoObjeto) {
             "border-radius": `${borderRadius}% !important;`
         }
 
-        let idDom = elementoObjeto.getId();
-        let imgDom = document.getElementById(idDom);
-        let parentDom = imgDom.parentNode;
-        let nuevaImagen = new Imagen(elementoObjeto.getId(), "");
-    
-        let imagenDom = document.createElement("img");
-        imagenDom.addEventListener("load", () => {
-            nuevaImagen.setSource(url);
-            nuevaImagen.setAncho(ancho);
-            nuevaImagen.setAlto(alto);
-            nuevaImagen.setBorderRadius(borderRadius);
-            nuevaImagen.setAnchoBorde(anchoBorde);
-            nuevaImagen.setColorBorde(colorBorde);
-            nuevaImagen.setEstilo(object);
-            nuevaImagen.rewriteImagen();
-            imgDom.remove();
-            let elemento = nuevaImagen.getElementoDom()
-            parentDom.appendChild(elemento);
-            let contenedorHijoObject = encontrarObjectoContainer(elemento);
-            contenedorHijoObject.setElementoHijo(nuevaImagen);
+        if (imagen != undefined) {
+            await guardarImagen(imagen);
+            name = imagen.name
+            url = "../SRC/imagenes_usuario/" + name;
+
+            let idDom = elementoObjeto.getId();
+            let imgDom = document.getElementById(idDom);
+            let parentDom = imgDom.parentNode;
+            let nuevaImagen = new Imagen(elementoObjeto.getId(), "");
+
+            let imagenDom = document.createElement("img");
+            imagenDom.addEventListener("load", () => {
+                if (url != undefined) nuevaImagen.setSource(url);
+                nuevaImagen.setAncho(ancho);
+                nuevaImagen.setAlto(alto);
+                nuevaImagen.setBorderRadius(borderRadius);
+                nuevaImagen.setAnchoBorde(anchoBorde);
+                nuevaImagen.setColorBorde(colorBorde);
+                nuevaImagen.setEstilo(object);
+                nuevaImagen.rewriteImagen();
+                imgDom.remove();
+                let elemento = nuevaImagen.getElementoDom()
+                parentDom.appendChild(elemento);
+                añadirCambiosClase(nuevaImagen, parentDom, proyecto);
+                aplicarEventoMostrarEstilo();
+            }
+            )
+            if (url != undefined) imagenDom.src = url;
+            imagenDom.id = "imagenSustituto";
+        } else {
+            elementoObjeto.setAncho(ancho);
+            elementoObjeto.setAlto(alto);
+            elementoObjeto.setBorderRadius(borderRadius);
+            elementoObjeto.setAnchoBorde(anchoBorde);
+            elementoObjeto.setColorBorde(colorBorde);
+            elementoObjeto.setEstilo(object);
+            elementoObjeto.rewriteImagen();
         }
-        )
-        imagenDom.src = url;
-        imagenDom.id = "imagenSustituto";
+
+
+
     } catch (error) {
         console.error(error);
 
