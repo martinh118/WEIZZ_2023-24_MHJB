@@ -50,6 +50,8 @@ function crearContainer(button, proyecto) {
             let selectedFilaRow = selectedFilaContenedor.parentNode;
 
             let filaContenedorIzquierda = selectedFilaContenedor.previousSibling;
+            let colorBackground = selectedFilaRow.style["backgroundColor"];
+            
 
             if (isElement(filaContenedorIzquierda)) {
                 if (isFilaContenedor(filaContenedorIzquierda)) {
@@ -67,8 +69,8 @@ function crearContainer(button, proyecto) {
             } else {
                 let newIdFila = obtenerFilaRowId();
                 let newFilaRow = new Fila(newIdFila, []);
+                if(colorBackground != "") newFilaRow.setColorFondo(colorBackground);
                 let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(), event.target.value);
-
 
                 newFilaRow.setFilasContenedor([newFilaCont]);
                 newFilaRow.rewriteHTML();
@@ -102,6 +104,8 @@ function moverArribaCont(button, proyecto) {
 
         let filaRowArriba = selectedFilaRow.previousSibling;
         let filaContenedorIzquierda = selectedFilaContenedor.previousSibling;
+        let colorBackground = selectedFilaRow.style["backgroundColor"];
+
 
         if (isElement(filaContenedorIzquierda)) {
             if (isFilaContenedor(filaContenedorIzquierda)) {
@@ -155,6 +159,8 @@ function moverArribaCont(button, proyecto) {
                 let filaContenedorObject = filaRowObject.getFilaContenedorUnico(selectedFilaContenedor.id);
                 let newIdFila = obtenerFilaRowId();
                 let newFila = new Fila(newIdFila, [filaContenedorObject]);
+                if(colorBackground != "") newFila.setColorFondo(colorBackground);
+                newFila.rewriteHTML();
 
                 filaRowObject.eliminarFilaContenedor(selectedFilaContenedor);
 
@@ -186,6 +192,8 @@ function moverAbajoCont(button, proyecto) {
 
         let filaRowAbajo = selectedFilaRow.nextSibling;
         let filaContenedorDerecha = selectedFilaContenedor.nextSibling;
+        let colorBackground = selectedFilaRow.style["backgroundColor"];
+
 
         if (isElement(filaContenedorDerecha)) {
             if (isFilaContenedor(filaContenedorDerecha)) {
@@ -246,7 +254,9 @@ function moverAbajoCont(button, proyecto) {
                 let filaContenedorObject = filaRowObject.getFilaContenedorUnico(selectedFilaContenedor.id);
                 let newIdFila = obtenerFilaRowId();
                 let newFila = new Fila(newIdFila, [filaContenedorObject]);
-
+                if(colorBackground != "") newFila.setColorFondo(colorBackground);
+                newFila.rewriteHTML();
+                
                 filaRowObject.eliminarFilaContenedor(selectedFilaContenedor);
                 filaRowObject.rewriteHTML();
                 // selectedFilaRow.replaceWith(filaRowObject.getHtmlBase());
