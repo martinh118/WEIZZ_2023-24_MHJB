@@ -1,6 +1,6 @@
 import { aplicarEventListener } from './aplicar_event_listener.js';
 import { transformarJson } from './transformar_json.js';
-
+import { comprobarCambiosBody } from './comprobar_existencia_containers.js';
 
 export let proyecto;
 /**
@@ -102,6 +102,7 @@ $("#descargarJson").click(function () {
 function init() {
   if (contenidoProyecto != null) {
     proyecto = transformarJson(contenidoProyecto);
+    comprobarCambiosBody();
 
     $("#proyecto").html(proyecto.getHtmlBase());
     aplicarEventListener(proyecto);
@@ -111,5 +112,4 @@ function init() {
 
 
 }
-
 window.onload = init();
