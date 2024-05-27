@@ -63,7 +63,7 @@ export function eventosContainerHijo(cont, proyecto) {
                         event.target.firstChild.remove();
                     }
                     elementoPadre = event.target;
-
+                    
                 } else {
                     elementoPadre = encontrarPadre(event.target, "class", "containerHijo");
                     elementoPadre.setAttribute("style", "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;");
@@ -80,6 +80,8 @@ export function eventosContainerHijo(cont, proyecto) {
                 añadirCambiosClase(elementoCreado, elementoPadre, proyecto);
                 aplicarEventoMostrarEstilo();
                 aplicarEventoOnChange(elementoCreado);
+                let elementoPadreId = document.getElementById(elementoPadre.id);
+                eventosFilaCont(encontrarPadre(elementoPadreId, "class", "FilaContenedor"), proyecto)
 
             }
         } catch (err) {
@@ -119,7 +121,7 @@ export function eventosContainerHijo(cont, proyecto) {
 /**
  * Crea una nueva subclase de la super clase Elemento dependiendo de nombre seleccionado en la variable data y lo devuelve.
  * @param {String} data: String que indica que elemento nuevo ha sido seleccionado para crear.
- * @param {DOMElement} elementoPadre: Container al que le es aplicado el nuevo Elemento.
+ * @param {DOMElement} elementoPadre: Elemento padre sobre el que se le aplica el nuevo elemento. Obtiene su identificador. 
  * @returns {Elemento} Elemento nuevo
  */
 function crearElemento(data, elementoPadre) {
@@ -147,7 +149,7 @@ function crearElemento(data, elementoPadre) {
  * También, vuelve a aplicar los eventListeners de cada FilaContenedor y Container. (Botones, drops, dragover...)
  * @param {Elemento} elementoCreado: Elemento nuevo aplicado al proyecto.
  * @param {DOMElement} elementoPadre : Container al que le es aplicado el nuevo Elemento.
- * @param {Proyecto} proyecto : Objeto Proyecto.
+ * @param {Proyecto} proyecto : Proyecto sobre el que se trabaja.
  */
 export function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
     let filaRow = encontrarPadre(elementoPadre, "id", "FilaRow");
@@ -186,8 +188,13 @@ export function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
 }
 
 
+/**
+ * Aplica los EventListeners al elemento DOM FilaContenedor para detectar cuando un elemento tipo Container es arrastrado
+ * por los costados de estos, a la hora de soltar el FilaContenedor, se crea una FilaContenedor con dos Containers dentro.
+ * @param {DOMElement} filaCont: Elemento DOM FilaContenedor al que se le aplican los event listeners.
+ * @param {Proyecto} proyecto: Proyecto sobre el que se trabaja. 
+ */
 export function eventosFilaCont(filaCont, proyecto) {
-    //estilo class: border-secondary border-top border-5
 
     filaCont.addEventListener("drop", function (event) {
         event.preventDefault();
@@ -196,13 +203,11 @@ export function eventosFilaCont(filaCont, proyecto) {
         if (elementData == "Container" && !(filaCont.id.includes("Header") || filaCont.id.includes("Footer")) ) {
             const rect = filaCont.getBoundingClientRect();
             const x = event.clientX - rect.left; // Coordenada X relativa al drop zone
-            const y = event.clientY - rect.top;  // Coordenada Y relativa al drop zone
             const width = rect.width;
-            const height = rect.height;
             let selectedFilaRow = filaCont.parentNode;
             
 
-            filaCont.classList.remove('border-top', 'border-start', 'border-bottom', 'border-end', 'border-5', 'border-secondary');
+            filaCont.classList.remove('border-start', 'border-end', 'border-5', 'border-secondary');
 
 
              if (x < width / 4) {
@@ -241,12 +246,10 @@ export function eventosFilaCont(filaCont, proyecto) {
         if (elementData == "Container" && !(filaCont.id.includes("Header") || filaCont.id.includes("Footer")) ) {
             const rect = filaCont.getBoundingClientRect();
             const x = event.clientX - rect.left; // Coordenada X relativa al drop zone
-            const y = event.clientY - rect.top;  // Coordenada Y relativa al drop zone
             const width = rect.width;
-            const height = rect.height;
     
             // Limpia las clases de borde
-            filaCont.classList.remove('border-top', 'border-start', 'border-bottom', 'border-end', 'border-5', 'border-secondary');
+            filaCont.classList.remove( 'border-start', 'border-end', 'border-5', 'border-secondary');
     
             // Determina el borde más cercano
             if (x < width / 4) {
@@ -263,7 +266,7 @@ export function eventosFilaCont(filaCont, proyecto) {
 
         elementData = document.getElementById("tipoElemento").innerHTML;
         if (elementData == "Container"){
-            filaCont.classList.remove('border-top', 'border-start', 'border-bottom', 'border-end', 'border-5', 'border-secondary');
+            filaCont.classList.remove( 'border-start', 'border-end', 'border-5', 'border-secondary');
         }
     })
 }
