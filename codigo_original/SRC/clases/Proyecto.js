@@ -44,9 +44,9 @@ export class Proyecto {
         let divRowBody = crearElemento("div", "", "id", "rowBodyProject");
         let divRowFooter = crearElemento("div", "", "id", "rowFooterProject");
 
-        let botonHeader = crearElemento("button", "HEADER", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto estiloBackground")
-        let botonBody = crearElemento("button", "BODY", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto mb-5 estiloBackground")
-        let botonFooter = crearElemento("button", "FOOTER", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto estiloBackground")
+        let botonHeader = crearElemento("button", "COLOR HEADER", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto estiloBackground")
+        let botonBody = crearElemento("button", "COLOR BODY", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto mb-5 estiloBackground")
+        let botonFooter = crearElemento("button", "COLOR FOOTER", "class", "w-25 btn btn-outline-danger rounded-bottom mx-auto estiloBackground")
        
         divRowHeader.appendChild(botonHeader);
         divRowBody.appendChild(botonBody);

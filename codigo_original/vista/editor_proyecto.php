@@ -24,14 +24,15 @@ session_start();
 
 
 ?>
-
 <script>
     function dragStart(event) {
         //CREAR VARIABLE GLOBAL.
         var tipoElemento = event.target.dataset.elemento;
-        event.dataTransfer.setData("text/plain", tipoElemento);   
+        document.getElementById("tipoElemento").innerHTML = tipoElemento;
+        // event.dataTransfer.setData("text/plain", tipoElemento);   
     }
 </script>
+
 
 <body style="background-color: #EFEFEF;">
 
@@ -113,6 +114,7 @@ session_start();
     }
 
     ?>
+    <div id="tipoElemento" hidden></div>
     <div class="container" id="proyecto">
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -154,7 +156,8 @@ session_start();
         ?>
 
     </div>
-
+    
 </body>
+
 
 </html>

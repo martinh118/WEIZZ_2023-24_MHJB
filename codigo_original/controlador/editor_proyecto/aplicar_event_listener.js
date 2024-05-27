@@ -2,6 +2,7 @@ import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { Fila } from '../../SRC/clases/Fila.js';
 import { aplicarEventosArrastrar, eventosContainerHijo } from './arrastrar_elementos.js';
 import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
+import { eventosFilaCont } from './arrastrar_elementos.js';
 
 /**
  * A cada botón de las FilaContenedor les aplica los eventListener para su correcto funcionamiento.
@@ -64,7 +65,7 @@ function crearContainer(button, proyecto) {
                     
                     proyecto.rewriteHTML();
                     $("#proyecto").html(proyecto.getHtmlBase());
-
+                    eventosFilaCont(newFilaCont.getRow(), proyecto)
                 }
             } else {
                 let newIdFila = obtenerFilaRowId();
@@ -80,6 +81,8 @@ function crearContainer(button, proyecto) {
                 proyecto.addFilaRowBody(newFilaRow, selectedFilaRow);
                 proyecto.rewriteHTML();
                 $("#proyecto").html(proyecto.getHtmlBase());
+                eventosFilaCont(newFilaCont.getRow(), proyecto)
+
             }
 
             
@@ -337,7 +340,7 @@ function isFilaContenedor(object) {
  * A partir de todas las Filas creadas en el body del proyecto devuelve el nuevo identificador correspondiente para un correcto orden.
  * @returns {String} nuevo Id de la Fila.
  */
-function obtenerFilaRowId() {
+export function obtenerFilaRowId() {
     let body = document.getElementById("rowBodyProject");
     let filas = body.childNodes;
     let index = 1;
@@ -363,7 +366,7 @@ function obtenerFilaRowId() {
  * A partir de todas las FilasContenedor creadas en el body del proyecto devuelve el nuevo identificador correspondiente para un correcto orden.
  * @returns {String} nuevo Id de la FilaContenedor.
  */
-function obtenerFilaContenedorId() {
+export function obtenerFilaContenedorId() {
     let filas = document.querySelectorAll(".FilaContenedor");
     let index = 1;
     let numerosId = []

@@ -3,12 +3,18 @@ import { Texto } from '../../SRC/clases/Elementos/Texto.js';
 import { Lista } from '../../SRC/clases/Elementos/Lista.js';
 import { Imagen } from '../../SRC/clases/Elementos/Imagen.js';
 import { Tabla } from '../../SRC/clases/Elementos/Tabla.js';
+import { Fila } from '../../SRC/clases/Fila.js';
+import { FilaContenedor } from '../../SRC/clases/FilaContenedor.js';
 import { encontrarPadre } from '../../SRC/librerias/gestionElementos.js';
 import { encontrarObjetoElemento } from '../../SRC/librerias/gestionElementos.js';
 import { aplicarListenersFilaContainer } from './aplicar_event_listener.js';
 import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
 import { aplicarEventoOnChange } from './config_cambiar_contenido.js';
 import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/gestionElementos.js';
+import { obtenerFilaRowId, obtenerFilaContenedorId } from './aplicar_event_listener.js';
+
+
+var elementData;
 /**
  * Obtiene todos los elementos DOM de los containers y aplica los event listeners para la aplicación de elementos.
  * También aplica los event listeners de los elentos que contengan en su interior para cambiar dinamicamente su contenido de texto.
@@ -16,6 +22,8 @@ import { reescribirHTML, reescribirHTMLHeaderFooter } from '../../SRC/librerias/
  */
 export function aplicarEventosArrastrar(proyecto) {
     let containers = document.querySelectorAll(".containerHijo");
+    let filasRow = document.querySelectorAll("[class*='FilaContenedor']");
+
     containers.forEach((containerHijo) => {
         eventosContainerHijo(containerHijo, proyecto);
         if (!containerHijo.children[0].id.includes("apply")) {
@@ -23,6 +31,11 @@ export function aplicarEventosArrastrar(proyecto) {
             aplicarEventoOnChange(element);
         }
     });
+
+    filasRow.forEach((FR) => {
+        eventosFilaCont(FR, proyecto);
+    })
+
 }
 
 /**
@@ -38,8 +51,10 @@ export function eventosContainerHijo(cont, proyecto) {
         try {
 
             event.preventDefault();
-            var data = event.dataTransfer.getData("text");
-            if (data != "Container") {
+            // var data = event.dataTransfer.getData("text");
+            elementData = document.getElementById("tipoElemento").innerHTML;
+
+            if (elementData != "Container") {
                 let elementoPadre;
 
                 if ($(event.target).hasClass('containerHijo')) {
@@ -61,7 +76,7 @@ export function eventosContainerHijo(cont, proyecto) {
                     }
                 }
 
-                let elementoCreado = crearElemento(data, elementoPadre);
+                let elementoCreado = crearElemento(elementData, elementoPadre);
                 añadirCambiosClase(elementoCreado, elementoPadre, proyecto);
                 aplicarEventoMostrarEstilo();
                 aplicarEventoOnChange(elementoCreado);
@@ -73,27 +88,30 @@ export function eventosContainerHijo(cont, proyecto) {
     })
 
     cont.addEventListener("dragover", function (event) {
-        
+
         event.preventDefault();
+        elementData = document.getElementById("tipoElemento").innerHTML;
 
-        if ($(event.target).hasClass('containerHijo')) {
-            event.target.setAttribute("style", "border-style: solid; border-width: 4px; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
-        } else {
-            let elementoPadre = encontrarPadre(event.target, "class", "containerHijo");
-            elementoPadre.setAttribute("style", "border-style: solid; border-width: 4px; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
+        if (elementData != "Container") {
+            if ($(event.target).hasClass('containerHijo')) {
+                event.target.setAttribute("style", "border-style: solid; border-width: 4px; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
+            } else {
+                let elementoPadre = encontrarPadre(event.target, "class", "containerHijo");
+                elementoPadre.setAttribute("style", "border-style: solid; border-width: 4px; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
+            }
         }
-
     })
 
     cont.addEventListener("dragleave", function (event) {
-
-        if ($(event.target).hasClass('containerHijo')) {
-            event.target.setAttribute("style", "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
-        } else {
-            let elementoPadre = encontrarPadre(event.target, "class", "containerHijo");
-            elementoPadre.setAttribute("style", "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
+        elementData = document.getElementById("tipoElemento").innerHTML;
+        if (elementData != "Container") {
+            if ($(event.target).hasClass('containerHijo')) {
+                event.target.setAttribute("style", "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
+            } else {
+                let elementoPadre = encontrarPadre(event.target, "class", "containerHijo");
+                elementoPadre.setAttribute("style", "border-style: dashed; border-color: grey;  margin: 10px; display:flex; align-items: center; justify-content: center;")
+            }
         }
-
 
     })
 }
@@ -168,7 +186,87 @@ export function añadirCambiosClase(elementoCreado, elementoPadre, proyecto) {
 }
 
 
+export function eventosFilaCont(filaCont, proyecto) {
+    //estilo class: border-secondary border-top border-5
 
+    filaCont.addEventListener("drop", function (event) {
+        event.preventDefault();
+
+        elementData = document.getElementById("tipoElemento").innerHTML;
+        if (elementData == "Container" && !(filaCont.id.includes("Header") || filaCont.id.includes("Footer")) ) {
+            const rect = filaCont.getBoundingClientRect();
+            const x = event.clientX - rect.left; // Coordenada X relativa al drop zone
+            const y = event.clientY - rect.top;  // Coordenada Y relativa al drop zone
+            const width = rect.width;
+            const height = rect.height;
+            let selectedFilaRow = filaCont.parentNode;
+            
+
+            filaCont.classList.remove('border-top', 'border-start', 'border-bottom', 'border-end', 'border-5', 'border-secondary');
+
+
+             if (x < width / 4) {
+                let filaRow = proyecto.getFilaRow(selectedFilaRow.id);
+                let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(), 2);
+                aplicarListenersFilaContainer(newFilaCont, proyecto);
+                filaRow.añadirFilaContenedor(newFilaCont, filaCont);
+
+                filaRow.rewriteHTML();
+                
+                proyecto.rewriteHTML();
+                $("#proyecto").html(proyecto.getHtmlBase());
+                eventosFilaCont(newFilaCont.getRow(), proyecto);
+
+            } else if (x > 3 * width / 4) {
+                let filaRow = proyecto.getFilaRow(selectedFilaRow.id);
+                let newFilaCont = new FilaContenedor(obtenerFilaContenedorId(), 2);
+                aplicarListenersFilaContainer(newFilaCont, proyecto);
+                filaRow.añadirFilaContenedor(newFilaCont, filaCont, true);
+
+                filaRow.rewriteHTML();
+                
+                proyecto.rewriteHTML();
+                $("#proyecto").html(proyecto.getHtmlBase());
+                eventosFilaCont(newFilaCont.getRow(), proyecto);
+            }
+            aplicarEventoMostrarEstilo();
+        }
+    })
+
+
+    filaCont.addEventListener("dragover", function (event) {
+        event.preventDefault();
+
+        elementData = document.getElementById("tipoElemento").innerHTML;
+        if (elementData == "Container" && !(filaCont.id.includes("Header") || filaCont.id.includes("Footer")) ) {
+            const rect = filaCont.getBoundingClientRect();
+            const x = event.clientX - rect.left; // Coordenada X relativa al drop zone
+            const y = event.clientY - rect.top;  // Coordenada Y relativa al drop zone
+            const width = rect.width;
+            const height = rect.height;
+    
+            // Limpia las clases de borde
+            filaCont.classList.remove('border-top', 'border-start', 'border-bottom', 'border-end', 'border-5', 'border-secondary');
+    
+            // Determina el borde más cercano
+            if (x < width / 4) {
+                filaCont.classList.add('border-start', 'border-5', 'border-secondary');
+            } else if (x > 3 * width / 4) {
+                filaCont.classList.add('border-end', 'border-5', 'border-secondary');
+            }
+
+        }
+    })
+
+    filaCont.addEventListener("dragleave", function (event) {
+        event.preventDefault();
+
+        elementData = document.getElementById("tipoElemento").innerHTML;
+        if (elementData == "Container"){
+            filaCont.classList.remove('border-top', 'border-start', 'border-bottom', 'border-end', 'border-5', 'border-secondary');
+        }
+    })
+}
 
 
 

@@ -115,20 +115,32 @@ export class Fila{
 
     }
 
-    añadirFilaContenedor(newFilaContenedor, selectedFilaContenedor = undefined){
+    añadirFilaContenedor(newFilaContenedor, selectedFilaContenedor = undefined, derecha = false){
+        
         if(selectedFilaContenedor != undefined){
-            let idSelected = selectedFilaContenedor.id;
-            for (const filaCont of this.#filasContenedor) {
-                let row = filaCont.getId();
-                if (row == idSelected) {
-                    let indexCont = this.#filasContenedor.indexOf(filaCont);
-                    this.#filasContenedor.splice(indexCont, 0, newFilaContenedor);
-                    break;
+            if(derecha == false){
+                let idSelected = selectedFilaContenedor.id;
+                for (const filaCont of this.#filasContenedor) {
+                    let row = filaCont.getId();
+                    if (row == idSelected) {
+                        let indexCont = this.#filasContenedor.indexOf(filaCont);
+                        this.#filasContenedor.splice(indexCont, 0, newFilaContenedor);
+                        break;
+                    }
+                }
+            }else{
+                let idSelected = selectedFilaContenedor.id;
+                for (const filaCont of this.#filasContenedor) {
+                    let row = filaCont.getId();
+                    if (row == idSelected) {
+                        let indexCont = this.#filasContenedor.indexOf(filaCont);
+                        if(indexCont > 0) this.#filasContenedor.splice(indexCont +1, 0, newFilaContenedor);
+                        else this.#filasContenedor.splice(1, 0, newFilaContenedor);
+                        break;
+                    }
                 }
             }
         }else this.#filasContenedor.push(newFilaContenedor);
-        
-
     }
 
     eliminarFilaContenedor(filaContenedor){
