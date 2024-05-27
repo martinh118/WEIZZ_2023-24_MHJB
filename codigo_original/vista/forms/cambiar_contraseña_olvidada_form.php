@@ -48,10 +48,10 @@ if (isset($_GET['email'])) {
     <?php
     if (isset($_SESSION['errorForgotenPass'])) {
         $error = $_SESSION['errorForgotenPass'];
-        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
+        echo "<div class='alert alert-danger mx-auto' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
     } else if (isset($_SESSION['successForgotenPass'])) {
         $success = $_SESSION['successForgotenPass'];
-        echo "<div class='alert alert-success offset-3' role='alert' style='width:40em; text-align:center' ><b>" . $success . "</b></div>";
+        echo "<div class='alert alert-success mx-auto' role='alert' style='width:40em; text-align:center' ><b>" . $success . "</b></div>";
     }
     ?>
 

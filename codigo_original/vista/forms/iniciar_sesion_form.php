@@ -45,7 +45,7 @@
     <?php
     if (isset($_SESSION['error'])) {
         $error = $_SESSION['error'];
-        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
+        echo "<div class='alert alert-danger mx-auto' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
         // session_unset();
     } else if (isset($_SESSION['usuario'])) {
     ?>

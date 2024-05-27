@@ -56,10 +56,10 @@ session_start();
     <?php
     if (isset($_SESSION['errorEmail'])) {
         $error = $_SESSION['errorEmail'];
-        echo "<div class='alert alert-danger offset-3' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
+        echo "<div class='alert mx-auto alert-danger' role='alert' style='width:40em; text-align:center'><b>" . $error . "</b></div>";
     } else if (isset($_SESSION['successEmail'])) {
         $success = $_SESSION['successEmail'];
-        echo "<div class='alert alert-success offset-3' role='alert' style='width:40em; text-align:center' ><b>" . $success . "</b></div>";
+        echo "<div class='alert  mx-auto alert-success' role='alert' style='width:40em; text-align:center' ><b>" . $success . "</b></div>";
     }
 
     ?>
