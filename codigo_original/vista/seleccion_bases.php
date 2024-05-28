@@ -77,7 +77,7 @@ session_start();
             <a class="seleccionBase" data-base='basico'>
                 <div class="cuadroBase" id="baseBasico">
                 </div>
-                <h3 class="baseTitle"><b>Basico</b></h3>
+                <h3 class="baseTitle"><b>Básico</b></h3>
             </a>
         </div>
 

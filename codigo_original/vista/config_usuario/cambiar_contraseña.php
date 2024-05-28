@@ -48,7 +48,7 @@ session_start();
 
 
     <div class="row container-fluid">
-        <h2 id="welcomeTitle">Editar usuario</h2>
+        <h2 id="welcomeTitle">Cambiar contraseña</h2>
     </div>
 
     <?php
