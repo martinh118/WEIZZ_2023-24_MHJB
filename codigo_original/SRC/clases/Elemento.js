@@ -52,9 +52,6 @@ export class Elemento {
         return this.elementoDOM;
     }
 
-    getElementoPadre() {
-        return this.elementoPadre;
-    }
 
     getEstiloElemento() {
         return this.estiloElemento;
@@ -70,11 +67,6 @@ export class Elemento {
 
     setElementoDom(elemento) {
         this.elementoDOM = elemento;
-    }
-
-    setElementoPadre(nuevoPadre) {
-        this.elementoPadre = nuevoPadre;
-        this.aplicarHijo();
     }
 
     setEstiloElemento(estilo) {
@@ -97,10 +89,6 @@ export class Elemento {
         const node = placeholder.firstElementChild;
         elemento.elementoDOM = node;
         return elemento;
-    }
-
-    obtenerConfigEstilo(){
-        return "";
     }
 
 }

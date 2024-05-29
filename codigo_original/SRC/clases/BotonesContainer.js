@@ -17,6 +17,7 @@ export class BotonesContainer {
         this.#borrarElemento = this.#crearBorrarElemento();
         this.#divGrupoBotones = this.#crearBotones();
     }
+    
     #crearBotones() {
         //ELEMENTOS HTML
         let grupoBotones = crearElemento("div", "", "id", this.#id);
