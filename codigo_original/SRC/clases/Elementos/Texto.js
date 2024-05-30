@@ -95,13 +95,13 @@ export class Texto extends Elemento{
         
         let html = `<div id="contenidoRecuadroEstilo" style='padding:5px 5px 5px 5px'>
         <div hidden class='idElemento'>${this.id}</div>
-        <label for='contenidoTitulo'><b>Contenido Titulo: </b></label><br>
+        <label for='contenidoTitulo'><b>Contenido: </b></label><br>
         <textarea id='contenidoTitulo' cols='30' rows='5'>${this.contenido}</textarea>
         <br>
-        <label for='colorTextoTitulo'><b>Color texto Titulo:</b></label><br>
+        <label for='colorTextoTitulo'><b>Color texto:</b></label><br>
         <input type='color' id='colorTextoTitulo' value='${this.#color}'>
         <br>
-        <label for='tamañoTitulo'><b>Tamaño texto Titulo: </b></label> <br>
+        <label for='tamañoTitulo'><b>Tamaño texto: </b></label> <br>
         <input type='number' id='tamañoTitulo' min='0' max='100' value='${this.#fontSize}'>
         <select id='medidaTamañoTitulo'> 
             <option value='px'>px</option>
@@ -110,7 +110,7 @@ export class Texto extends Elemento{
             <option value='cm'>cm</option>
         </select>
         <br>
-        <label for='fuenteTextoTitulo'><b>Fuente texto Titulo: </b></label> <br>
+        <label for='fuenteTextoTitulo'><b>Fuente texto: </b></label> <br>
         <select id='fuenteTextoTitulo'> 
             <option value='Arial, Helvetica, sans-serif' style='font-family:Arial, Helvetica, sans-serif;'>Arial</option>
             <option value='Georgia, Times New Roman, Times, serif' style='font-family:Georgia, Times New Roman, Times, serif;'>Georgia</option>
