@@ -12,7 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-
+/**
+ * Realiza el registro de usuario despues de comprobar todos los datos del formulario.
+ */
 function registrarUsuario()
 {
     try {
@@ -50,7 +52,10 @@ function registrarUsuario()
     }
 }
 
-
+/**
+ * Comprueba que los datos no estén vacios.
+ * @return error Devuelve string con el error encontrado
+ */
 function comprobarCamposVacios()
 {
 
@@ -68,6 +73,10 @@ function comprobarCamposVacios()
     }
 }
 
+/**
+ * Comprueba que los datos no estén repetidos a partir de obtener todos los usuarios.
+ * @return error Devuelve string con el error encontrado
+ */
 function comprobarDatos()
 {
 
@@ -101,6 +110,10 @@ function comprobarDatos()
     }
 }
 
+/**
+ * Obtener todos los usuario de la base de datos.
+ * @return users devuelve todos los usuarios de la base de datos. 
+ */
 function getUsers()
 {
     try {

@@ -2,7 +2,9 @@ import { transformarJson } from "./editor_proyecto/transformar_json.js";
 
 let proyecto;
 
-
+/**
+ * Esconde y borra todos los elementos de edición del proyecto
+ */
 function eliminarEstilos(){
     let contenedoresHijo = document.querySelectorAll(".containerHijo");
     let grupoBotones = document.querySelectorAll('[id*="botones"]');
@@ -37,6 +39,9 @@ function eliminarEstilos(){
 
 }
 
+/**
+ * Deserializa el proyecto seleccionado para mostrar su contenido.
+ */
 function init() {
     if (contenidoProyecto != null) {
       proyecto = transformarJson(contenidoProyecto);

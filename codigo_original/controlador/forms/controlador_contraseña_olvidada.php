@@ -14,6 +14,10 @@ session_start();
 $_SESSION['errorEmail'] = null;
 $_SESSION['successEmail'] = null;
 
+/**
+ * Realiza las comprobaciones necesarias del formulario para enviar el correo de recuperación de contraseña, realiza
+ * el cambio de token en la base de datos y envia el correo.
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $error = "";
     $error .= comprobarCampoVacio();
@@ -40,7 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
 }
 
-
+/**
+ * Comprueba que los datos vacios.
+ * @return error devuelve los errores encontrados.
+ */
 function comprobarCampoVacio(){
     $error = "";
     if($_POST['email'] == ""){
@@ -50,6 +57,10 @@ function comprobarCampoVacio(){
     return $error;
 }
 
+/**
+ * Comprueba la existencia del correo en la base de datos.
+ * @return error devuelve los errores encontrados.
+ */
 function comprobarExistenciaCorreo(){
     $error = "";
     $usuario = obtenerUsuarioUnico(trim($_POST['email']))->fetch();
@@ -61,6 +72,11 @@ function comprobarExistenciaCorreo(){
     return $error;
 }
 
+/**
+ * Enviar el correo electronico con el link del formulario para cambiar la contraseña
+ * @param correo correo electronico al que se le envia el mensaje de correo.
+ * @param token token para verificar la seguridad del usuario.
+ */
 function enviarCorreo($correo, $token){
     $user = obtenerUsuarioUnico($correo)->fetch();
     $nombre = $user['usuario'];

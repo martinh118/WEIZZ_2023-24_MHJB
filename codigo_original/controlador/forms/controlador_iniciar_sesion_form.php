@@ -17,7 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-
+/**
+ * Realiza el inicio de sesión despues de comprobar todos los datos del formulario.
+ */
 function iniciarSesion()
 {
     try {
@@ -46,7 +48,10 @@ function iniciarSesion()
     }
 }
 
-
+/**
+ * Comprueba que los datos no estén vacios.
+ * @return error Devuelve string con el error encontrado
+ */
 function comprobarCamposVacios()
 {
     try {
@@ -61,6 +66,10 @@ function comprobarCamposVacios()
     }
 }
 
+/**
+ * Comprueba que los datos sean los correctos a partir de obtener todos los usuarios.
+ * @return error Devuelve string con el error encontrado
+ */
 function comprobarDatos()
 {
     try {
@@ -86,6 +95,10 @@ function comprobarDatos()
     }
 }
 
+/**
+ * Obtener todos los usuario de la base de datos.
+ * @return users devuelve todos los usuarios de la base de datos. 
+ */
 function getUsers()
 {
     try {

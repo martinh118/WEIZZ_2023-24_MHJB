@@ -5,13 +5,11 @@ import { transformarJson } from "./editor_proyecto/transformar_json.js";
 
 let reader = new FileReader();
 
+/**
+ * Aplica el event listener a las bases disponibles para crear el nuevo proyecto.
+ */
 $(document).ready(function () {
     let base;
-    // $(".seleccionBase").click(function () {
-    //     base = $(this).data('base');
-    //     $("#tituloModal").html("¿Seleccionar base <b>" + base + "</b>?");
-    // })
-
     $(".seleccionBase").click(
         function () {
             fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php")
@@ -42,6 +40,10 @@ $(document).ready(function () {
         reader.readAsText(event.target.files[0]);
     })
 
+    /**
+     * Obtiene el identificador del nuevo proyecto y envia los datos para crear el nuevo proyecto.
+     * @param {Object} event 
+     */
     function onReaderLoad(event) {
         fetch("../controlador/config_proyecto/controlador_obtener_nuevo_id.php")
             .then(response => {
@@ -69,7 +71,12 @@ $(document).ready(function () {
 
 });
 
-
+/**
+ * Crea las bases del proyecto seleccionado.
+ * @param {String} base Nombre de la base
+ * @param {number} id identificador del nuevo proyecto
+ * @returns {Proyecto} proyecto a editar.
+ */
 function crearProyecto(base, id) {
     let proyecto = new Proyecto(id);
     let fila1, fila2, fila3, fila4;
@@ -109,6 +116,12 @@ function crearProyecto(base, id) {
     return proyecto;
 }
 
+/**
+ * Envia los datos del nuevo proyecto para aplicarlos a la base de datos y que muestre el editor del proyecto.
+ * @param {Proyecto} project proyecto sobre el que se trabaja.
+ * @param {String} id identificador del proyeccto .
+ * @param {String} base base sobre que se trabaja.
+ */
 function enviarDatos(project, id, base) {
     fetch("../controlador/config_proyecto/controlador_crear_proyecto.php", {
         method: 'POST',
@@ -137,6 +150,10 @@ function enviarDatos(project, id, base) {
         });
 }
 
+/**
+ * Envia el proyecto del usuario anonimo al editor del proyecto.
+ * @param {Proyecto} project 
+ */
 function enviarImportAnonimo(project) {
     let form = document.createElement("form");
     form.method = "POST";

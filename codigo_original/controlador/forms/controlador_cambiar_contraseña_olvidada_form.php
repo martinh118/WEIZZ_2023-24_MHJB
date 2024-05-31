@@ -4,6 +4,10 @@ require_once("../../modelo/configuracion_usuario/modelo_usuarios.php");
 
 session_start();
 
+/**
+ * Obtiene los datos del formulario y revisa si los datos son correctos,
+ * en caso que sean correctos realiza el cambio a la base de datos.
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errores = "";
     $errores .= revisarForm();
@@ -42,6 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 }
 
+/**
+ * Revisa las condiciones del formulario, campos no vacios y restricciones de contraseña.
+ * @return error texto de error.
+ */
 function revisarForm()
 {
     $error = "";

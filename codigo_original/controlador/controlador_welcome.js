@@ -1,4 +1,6 @@
-
+/**
+ * Aplica eventListener para cambiar la imagen de la flecha de opciones de cada proyecto en la pagina de inicio.
+ */
 $(document).ready(function () {
     $("img.flechaOpcionesProyecto").hover(function () {
         $(this).attr('src', './SRC/imagenes_web/flecha_opciones_proyecto_desplegado.png');
@@ -11,7 +13,9 @@ $(document).ready(function () {
     )
 })
 
-
+/**
+ * Aplica eventListener para borrar el proyecto seleccionado.
+ */
 $(document).ready(function () {
     $(".accionBorrar").click(function () {
         let info = $(this).data('info');
@@ -23,7 +27,9 @@ $(document).ready(function () {
 
 })
 
-
+/**
+ * Aplica eventListener para duplicar el proyecto seleccionado.
+ */
 $(document).ready(function () {
     $(".accionDuplicar").click(function () {
         let info = $(this).data('info');
@@ -33,7 +39,9 @@ $(document).ready(function () {
     })
 })
 
-
+/**
+ * Aplica eventListener para cambiar el nombre el proyecto seleccionado.
+ */
 $(document).ready(function () {
     $(".accionCambiarNombre").click(function () {
         let info = $(this).data('info');
@@ -42,6 +50,9 @@ $(document).ready(function () {
     })
 })
 
+/**
+ * Aplica eventListener para mostrar la información del proyecto seleccionado.
+ */
 $(document).ready(function () {
     $(".accionInfoProyecto").click(function () {
         let idProyecto = "<b>Identificador:</b> " + $(this).data('id');
