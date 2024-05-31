@@ -7,6 +7,10 @@ import { Imagen } from '../../SRC/clases/Elementos/Imagen.js';
 import { añadirCambiosClase } from './arrastrar_elementos.js';
 import { aplicarEventoMostrarEstilo } from './config_mostrar_estilo.js';
 
+/**
+ * Actualiza el estilo del Elemento Titulo o Texto.
+ * @param {Elemento} elementoObjecto Elemento al que se le aplican los cambios. 
+ */
 export function cambiarEstiloTitulo(elementoObjecto) {
     let newContent = document.getElementById("contenidoTitulo").value;
     let newColor = document.getElementById("colorTextoTitulo").value;
@@ -53,6 +57,10 @@ export function cambiarEstiloTitulo(elementoObjecto) {
 
 }
 
+/**
+ * Actualiza el estilo del Elemento Tabla.
+ * @param {Elemento} elementoObjecto Elemento al que se le aplican los cambios. 
+ */
 export function cambiarEstiloTabla(elementoObjeto) {
     let numFilas = document.getElementById("numFilas").value;
     let numColumnas = document.getElementById("numColumnas").value;
@@ -105,6 +113,10 @@ export function cambiarEstiloTabla(elementoObjeto) {
 
 }
 
+/**
+ * Actualiza el estilo del Elemento Imagen.
+ * @param {Elemento} elementoObjecto Elemento al que se le aplican los cambios. 
+ */
 export async function cambiarEstiloImagen(elementoObjeto) {
     try {
 
@@ -171,8 +183,10 @@ export async function cambiarEstiloImagen(elementoObjeto) {
 }
 
 
-
-
+/**
+ * Actualiza el estilo del Elemento Lista.
+ * @param {Elemento} elementoObjecto Elemento al que se le aplican los cambios. 
+ */
 export function cambiarEstiloLista(elementoObjeto) {
     let itemsLista = document.querySelectorAll(".itemContent");
     let arrItemsLista = [];
@@ -212,6 +226,10 @@ export function cambiarEstiloLista(elementoObjeto) {
 
 }
 
+/**
+ * Guarda la imagen seleccionada en la configuración de estilo del elemento Imagen
+ * @param {file} file archivo seleccionado. 
+ */
 async function guardarImagen(file) {
     try {
         const formData = new FormData();
@@ -237,7 +255,10 @@ async function guardarImagen(file) {
 
 }
 
-
+/**
+ * Actualiza la pagina entera con los cambios de estilo aplicados.
+ * @param {DOMElemento} elemento Elemento al que se le aplican los cambios de estilo.
+ */
 export function aplicarCambios(elemento) {
     let filaRowDom = encontrarPadre(elemento, "id", "FilaRow");
     let filaContenedorDom = encontrarPadre(elemento, "class", "FilaContenedor")

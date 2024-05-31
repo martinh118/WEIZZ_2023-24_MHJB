@@ -11,7 +11,9 @@ import { aplicarEventosArrastrar } from './arrastrar_elementos.js';
 import { encontrarObjetoElemento } from '../../SRC/librerias/gestionElementos.js';
 
 var cuadroEstilo = undefined;
-
+/**
+ * Aplica eventListener para abrir el recuadro de estilo.
+ */
 $("#mostrarEstilo").click(function () {
   abrirRecuadro(null);
 });
@@ -36,7 +38,10 @@ export function aplicarEventoMostrarEstilo() {
 
 }
 
-
+/**
+ * Aplica eventListener a los Containers para abrir el recuadro de configuración de estilo.
+ * @param {DOMElement} contenedor Container seleccionado
+ */
 export function mostrarConfigEstilo(contenedor) {
   contenedor.addEventListener("click", function (event) { eventListener(event) });
   // contenedor.firstChild.addEventListener("click", function (event) {eventListener(event)});
@@ -142,6 +147,9 @@ export function abrirRecuadro(contenido) {
   listenerReiniciarEstiloFilaBackground();
 }
 
+/**
+ * Aplica el eventListener al botón de guardar para actualizar el estilo del elemento seleccionado.
+ */
 function listenerGuardarEstilo() {
 
   $(".guardarEstiloElemento").click(function () {
@@ -191,6 +199,9 @@ function listenerGuardarEstilo() {
 
 }
 
+/**
+ * Aplica el eventListener al botón de reiniciar para actualizar el estilo del elemento seleccionado al estilo por defecto.
+ */
 function listenerReiniciarEstilo() {
   $(".resetEstiloElemento").click(function () {
     let idElemento = $(".idElemento").html();

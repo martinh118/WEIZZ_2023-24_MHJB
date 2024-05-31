@@ -1,5 +1,8 @@
 import { proyecto } from "./editor_proyecto.js";
 
+/**
+ * Aplica el eventListener para abrir el visualizador del proyecto.
+ */
 $("#visualizarPagina").click(function () {
     let id = document.getElementById("idProject");
     if (id != null) {

@@ -7,7 +7,8 @@ import { Fila } from "../../SRC/clases/Fila.js";
 import { FilaContenedor } from "../../SRC/clases/FilaContenedor.js";
 
 /**
- * 
+ * Comprueba cada cambio realizado en el body del proyecto.
+ * En caso de que este no contenga FilaContainers, muestra un botón de creación de FilaContainer.
  */
 export function comprobarCambiosBody() {
     // Selecciona el elemento que quieres observar
@@ -42,6 +43,10 @@ export function comprobarCambiosBody() {
 
 }
 
+/**
+ * Crea el botón de selección para crear una FilaContainer.
+ * @returns {DOMElement} Elemento DOM del botón dropdown con las opciones de creación FilaContainer
+ */
 function crearBotonCrear() {
     let divDropdown = crearElemento("div", "", "class", "dropdown d-grid gap-2 ")
     let botonCrear = crearElemento("button", "+", "id", "crearPrimerContainer");
@@ -70,6 +75,11 @@ function crearBotonCrear() {
     return divDropdown;
 }
 
+/**
+ * Aplica el event listener del botón que se le haya pasado como parametro para crear una FilaContianer.
+ * @param {DOMElement} button Botón dropdown al que se le aplica el eventListener. 
+ * @param {Proyecto} proyecto Proyecto sobre el que se trabaja. 
+ */
 function eventListenerBoton(button, proyecto) {
     button.addEventListener('click', function (event) {
 

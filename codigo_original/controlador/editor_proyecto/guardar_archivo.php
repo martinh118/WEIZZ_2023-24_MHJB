@@ -1,4 +1,7 @@
 <?php
+/**
+ * Guarda la imagen seleccionado al archivo por defecto imagenes_usuario
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
     $targetDirectory = "../../SRC/imagenes_usuario/"; // Ruta de la carpeta donde deseas guardar el archivo
     $targetFile = $targetDirectory . basename($_FILES["file"]["name"]);

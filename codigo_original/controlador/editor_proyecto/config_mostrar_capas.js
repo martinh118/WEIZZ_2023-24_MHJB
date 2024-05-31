@@ -51,7 +51,10 @@ function crearCapasHeader() {
   return rowHeader;
 }
 
-
+/**
+ * Obtiene de manera ordenada todas las capas aplicadas en la zona Body del proyecto.
+ * @returns rowHeader: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas en la zona Body del proyecto.
+ */
 function crearCapasBody() {
   let rowHeader = crearElemento("div", "", "class", "accordion-item");
 
@@ -70,7 +73,10 @@ function crearCapasBody() {
   return rowHeader;
 }
 
-
+/**
+ * Obtiene de manera ordenada todas las capas aplicadas en la zona Footer del proyecto.
+ * @returns rowHeader: Devuelve un div que muestra todos los elementos creados para que el usuario visualice las capas en la zona Footer del proyecto.
+ */
 function crearCapasFooter() {
   let rowHeader = crearElemento("div", "", "class", "accordion-item");
 
@@ -88,7 +94,13 @@ function crearCapasFooter() {
   return rowHeader;
 }
 
-
+/**
+ * Función recursivo para obtener todos los elementos de la zona del proyecto seleccionado y crear el contenido de este.
+ * @param {DOMElement} divPrincipal Zona del proyecto seleccionado.
+ * @param {DOMElement} elemento Elemento seleccionado del cual se comprueba sus predecesores.
+ * @param {number} width Ancho de recuadro de los elementos detectados a mostrar.
+ * @param {String} color Color del qual se muestra el recuadro.
+ */
 function crearContenidoRecuadro(divPrincipal, elemento, width, color) {
   if (elemento.id) {
     let clases = elemento.getAttribute("class");
@@ -118,6 +130,11 @@ function crearContenidoRecuadro(divPrincipal, elemento, width, color) {
 
 }
 
+/**
+ * Añade un eventListener para abrir la configuración de estilo del elemento seleccionado en la tabla de capas.
+ * @param {DOMElement} elementoDiv Elemento DOM al que se le aplica el eventListener
+ * @param {String} id identificador del Elemento DOM. 
+ */
 function añadirEventListenerEstilo(elementoDiv, id){
   elementoDiv.addEventListener("click", function(){
     let target = document.getElementById(id);
@@ -126,7 +143,11 @@ function añadirEventListenerEstilo(elementoDiv, id){
   })
 }
 
-
+/**
+ * Crea los elemento accordion para mostrar el contenido de la zona del proyecto.
+ * @param {String} titulo Titulo al que se le aplica al accordion. 
+ * @returns {DOMElement} Elemento accordion
+ */
 function crearBodyItem(titulo) {
   let divPrincipalBody = crearElemento("div", "", "class", "accordion-collapse collapse show");
   let attrDivPrincipal = {
@@ -143,6 +164,11 @@ function crearBodyItem(titulo) {
   return divPrincipalBody;
 }
 
+/**
+ * Crea el encabezado del accordion.
+ * @param {String} titulo Titutlo al que se le aplica al accordion.
+ * @returns {DOMElement} Elemento accordion.
+ */
 function crearHeaderItem(titulo) {
   let tituloH2 = crearElemento("h2", "", "class", "accordion-header");
   let buttonHeader = crearElemento("button", titulo, "class", "accordion-button");
@@ -161,6 +187,12 @@ function crearHeaderItem(titulo) {
   return tituloH2;
 }
 
+/**
+ * Reestructura el codigo rgb para oscurecer el color pasado como parametro de entrada.
+ * @param {string} color codigo rgb de color.
+ * @param {number} cant Cantidad a la que se le reduce el color.
+ * @returns {String} codigo rgb de color.
+ */
 function oscurecerColor(color, cant) {
   //voy a extraer las tres partes del color
   var rojo = color.substr(1, 2);
@@ -194,6 +226,9 @@ function oscurecerColor(color, cant) {
   return oscuridad;
 }
 
+/**
+ * Abre el recuadro capas.
+ */
 function abrirRecuadroCapas() {
   var selection = document.querySelector('#cuadroCapas') !== null;
 
@@ -242,6 +277,11 @@ function abrirRecuadroCapas() {
   }
 }
 
+/**
+ * Devuelve el nombre a mostrar dependiendo del tagname html que se pasa como parametro.
+ * @param {String} tagName 
+ * @returns {String} Nombre seleccionado.
+ */
 function devolverNombreElemento(tagName) {
   switch (tagName) {
     case "H1":

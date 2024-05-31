@@ -3,6 +3,12 @@ import { proyecto } from "./editor_proyecto.js";
 import { abrirRecuadro } from "./config_mostrar_estilo.js";
 import { aplicarEventoMostrarEstilo } from "./config_mostrar_estilo.js";
 
+/**
+ * Aplica el eventListener al botón que se le ha pasado como parametro de entrada para
+ * mostrar el contenido de configuración del estilo de la clase seleccionada.
+ * Esta función está hecha para el background de Header, Body y Footer.
+ * @param {DOMElement} boton DOM Element al que se le aplica el event listener. 
+ */
 export function mostrarConfigEstiloBackground(boton) {
     boton.addEventListener("click", function (event) { eventListener(event) })
 
@@ -31,6 +37,10 @@ export function mostrarConfigEstiloBackground(boton) {
     }
 }
 
+
+/**
+ * Aplica un eventListener al elemento html que contenga la clase "guardarEstiloFilaBackground" para aplicar el color de fondo seleccionado.
+ */
 export function listenerGuardarEstiloFilaBackground() {
     $(".guardarEstiloFilaBackground").click(function () {
         let FilaRowObject, filaContenedorObject;
@@ -70,6 +80,10 @@ export function listenerGuardarEstiloFilaBackground() {
     });
 }
 
+/**
+ * Aplica un eventListener al elemento html que contenga la clase "resetEstiloFilaBackground" para reiniciar el color de fondo seleccionado.
+ * Es decir, pone el color de fondo por defecto.
+ */
 export function listenerReiniciarEstiloFilaBackground() {
     $(".resetEstiloFilaBackground").click(function (){
         let FilaRowObject, filaContenedorObject;

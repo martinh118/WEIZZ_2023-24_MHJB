@@ -2,6 +2,12 @@ import { mostrarContenidoCSS, abrirRecuadro } from "./config_mostrar_estilo.js";
 import { eventosContainerHijo } from "./arrastrar_elementos.js";
 import { proyecto } from "./editor_proyecto.js";
 
+/**
+ * Aplica un eventListener "input" al objeto pasado como parametro de entrada para detectar cuando su contenido ha sido cambiado. 
+ * Dependiendo del identificador de este, llama a una función u otra.
+ * Esta función esta hecho para los objetos tipo Elementos.
+ * @param {Elemento} elementoObjeto Elemento al que se le aplica el eventListener.
+ */
 export function aplicarEventoOnChange(elementoObjeto) {
   if (elementoObjeto != null) {
 
@@ -30,6 +36,12 @@ export function aplicarEventoOnChange(elementoObjeto) {
   }
 }
 
+/**
+ * Actualiza el contenido del recuadro de configuración del estilo cada vez que el contenido de texto del elemento
+ * Titulo o Texto es modificado. 
+ * @param {Elemento} elementoObjeto Elemento Texto o Titulo.
+ * @param {DOMObject} elemento
+ */
 function cambiarContenidoTitulo(elementoObjeto, elemento) {
   elementoObjeto.setContenido(elemento.innerHTML);
   let contenido = mostrarContenidoCSS(elemento);
@@ -38,6 +50,12 @@ function cambiarContenidoTitulo(elementoObjeto, elemento) {
 
 }
 
+/**
+ * Actualiza el contenido del recuadro de configuración del estilo cada vez que el contenido de texto del elemento
+ * Lista es modificado. 
+ * @param {Elemento} elementoObjeto Elemento Lista.
+ * @param {DOMObject} elemento
+ */
 function cambiarContenidoLista(elementoObjeto, elemento) {
   let content = elemento.children;
   let arrCont = [];
@@ -50,7 +68,12 @@ function cambiarContenidoLista(elementoObjeto, elemento) {
   eventosContainerHijo(elemento.parentNode, proyecto)
 }
 
-
+/**
+ * Actualiza el contenido del recuadro de configuración del estilo cada vez que el contenido de texto del elemento
+ * Tabla es modificado. 
+ * @param {Elemento} elementoObjeto Elemento Tabla.
+ * @param {DOMObject} elemento
+ */
 function cambiarContenidoTabla(elementoObjeto, elemento) {
   let object = {}
 
