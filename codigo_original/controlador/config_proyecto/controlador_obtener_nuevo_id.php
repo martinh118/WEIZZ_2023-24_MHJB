@@ -1,4 +1,7 @@
 <?php
+/**
+ * Muestra el identificador del último proyecto creado.
+ */
 require_once("../../modelo/modelo_principal.php");
 
 $lastProject = obtenerUltimoProyecto()->fetch();

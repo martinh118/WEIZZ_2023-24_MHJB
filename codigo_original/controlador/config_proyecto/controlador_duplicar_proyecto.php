@@ -1,4 +1,7 @@
 <?php
+/**
+ * Obtiene el identificador del proyecto seleccionado y llama la funcion del modelo para duplicar el proyecto seleccionado.
+ */
 require_once("../../modelo/configuracion_proyecto/modelo_duplicar_proyecto.php");
 
 

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Obtiene el nuevo nombre de proyecto aplicado en el formulario y llama a la función del modelo para realizar los cambios a la base de datos. 
+ */
+
 require_once("../../modelo/configuracion_proyecto/modelo_cambiar_nombre.php");
 
 if (isset($_SERVER['REQUEST_METHOD']) == "POST") {

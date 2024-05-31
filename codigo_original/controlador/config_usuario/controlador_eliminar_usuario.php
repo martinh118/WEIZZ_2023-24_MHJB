@@ -3,7 +3,7 @@
 require_once("../../modelo/configuracion_usuario/modelo_eliminar_usuario.php");
 
 /**
- * Elimina l'usuari a la base de dades i redirecciona la página a l'inici.
+ * Elimina al usuario de la base de datos a partir del identificador.
  */
 function eliminarUsuario()
 {

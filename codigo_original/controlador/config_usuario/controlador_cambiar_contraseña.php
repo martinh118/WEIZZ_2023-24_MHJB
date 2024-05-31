@@ -5,6 +5,10 @@ require_once("../../modelo/configuracion_usuario/modelo_cambiar_contraseña.php"
 
 session_start();
 
+/**
+ * Obtiene los datos del formulario para cambiar la contraseña y comprueba que los datos
+ * son correctos o pasan las restricciones de contraseña.
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $oldPass = $_POST['oldPass'];
     $newPass = $_POST['newPass'];

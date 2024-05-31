@@ -1,4 +1,7 @@
 <?php 
+/**
+ * Obtiene el identificador del proyecto seleccionado y llama la funcion del modelo para eliminar el proyecto seleccionado.
+ */
 require_once("../../modelo/configuracion_proyecto/modelo_eliminar_proyecto.php");
 
 

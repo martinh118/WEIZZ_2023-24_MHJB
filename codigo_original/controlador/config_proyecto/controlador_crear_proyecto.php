@@ -1,4 +1,7 @@
 <?php 
+/**
+ * Obtiene los datos del nuevo proyecto creado y llama a la función para crear el nuevo proyecto a la base de datos.
+ */
 require_once("../../modelo/configuracion_proyecto/modelo_crear_proyecto.php");
 session_start();
 $datosProyecto = json_decode(file_get_contents("php://input"), true);

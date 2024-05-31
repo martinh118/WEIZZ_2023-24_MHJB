@@ -6,6 +6,9 @@ import { eventosFilaCont } from "./arrastrar_elementos.js";
 import { Fila } from "../../SRC/clases/Fila.js";
 import { FilaContenedor } from "../../SRC/clases/FilaContenedor.js";
 
+/**
+ * 
+ */
 export function comprobarCambiosBody() {
     // Selecciona el elemento que quieres observar
     const targetNode = document.getElementById('proyecto');

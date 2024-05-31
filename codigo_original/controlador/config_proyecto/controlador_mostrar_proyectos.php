@@ -1,6 +1,10 @@
 <?php
 require_once("./modelo/configuracion_proyecto/modelo_obtener_proyectos.php");
 
+/**
+ * A partir del identificador del usuario con la sesión iniciada, obtiene todos los proyectos creados por este
+ * y por cada proyecto muestra un elemento div con los datos del proyecto.
+ */
 function mostrarProyectosUser($idUser)
 {
     try {
