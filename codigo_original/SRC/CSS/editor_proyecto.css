@@ -34,7 +34,7 @@
 }
 
 header {
-    margin-top: 15px;
+    padding-top: 15px;
     background-image: url("../imagenes_web/background_header_2.png");
     background-repeat: no-repeat;
     background-position: 100% 0%;
