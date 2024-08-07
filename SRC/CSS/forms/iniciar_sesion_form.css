@@ -1,0 +1,114 @@
+body{
+    background-color: #EFEFEF;
+}
+
+@font-face {
+    font-family: "AgrandirRegular";
+    src: url("../../fuentes/PPAgrandir/PPAgrandir-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gladiola";
+    src: url("../../fuentes/Gladiola/Gladiola.ttf");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+#logo_weizz {
+    height: 7em;
+    margin-left: 15px;
+}
+
+.hrLinea {
+    width: 100%;
+    border: 2px solid;
+}
+
+header {
+    padding-top: 15px;
+    background-image: url("../../imagenes_web/background_header_2.png");
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+}
+
+#encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tituloHeader {
+    font-family: 'AgrandirRegular';
+    font-size: 30px;
+    color: black;
+    text-decoration-line: none;
+}
+
+.tituloHeader:hover {
+    text-decoration-line: underline;
+
+}
+
+body {
+    background-image: url('../../imagenes_web/background_body_gris_2.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0% 100%;
+    background-size: 55%;
+    min-height: 100vh;
+
+}
+
+#welcomeTitle {
+    font-family: 'Gladiola';
+    font-size: 3em;
+    text-decoration-line: underline;
+    color: #FF4242;
+    text-align: center;
+}
+
+.agrandir{
+    font-family: 'AgrandirRegular';
+    font-size: 25px;
+    color: black;
+    text-decoration-line: none;
+    text-decoration: underline;
+}
+
+.formTable{
+    width:30em;
+    height: auto;
+	padding:16px;
+	border-radius:10px;
+    border: 2px solid black;
+	margin:auto;
+    background-color: white;
+    
+}
+
+input{
+    width:180px;
+	padding:3px 10px;
+	border:1px solid #000000;
+	border-radius:5px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;
+}
+
+.submitButton{
+    font-family: 'AgrandirRegular';
+    font-size: 20px;
+    text-decoration-line: none;
+    margin-left: 13em;
+    margin-top: 0em;
+}
+
+#contraOlvidada{
+    color: grey;
+    margin-top: 1em;
+}
