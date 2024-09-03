@@ -31,7 +31,7 @@ function mostrarProyectosUser($idUser)
             $html .= "<div class='projectCol' style=''>";
             $html .= "</div>";
 
-            $html .= "<h3 class='titutloProject'>";
+            $html .= "<h3 class='tituloProject'>";
             $html .= $proj["nombre"] . "</h3>";
 
             $html .= "</a>"; // Cerrando el enlace aquí, después de todos los elementos dentro de .col-2

@@ -30,6 +30,9 @@ function iniciarSesion()
         if ($errores == "") {
 
             $usuario = obtenerUsuarioUnico($_POST['email'])->fetch();
+            if($usuario['admin'] == 1){
+                $_SESSION['admin'] = $usuario['admin'];
+            }
             $_SESSION['ID'] = $usuario['ID'];
             $_SESSION['usuario'] = $usuario['usuario'];
             $_SESSION['email'] = $usuario['email'];

@@ -32,9 +32,24 @@ session_start();
             <div class="col">
                 <h2 id="inicioPage"><a href="../index.php" class="tituloHeader">Inicio</a></h2>
             </div>
+            <?php
+            if (isset($_SESSION['admin'])) {
+                echo "<div class='col'><a href='' class='tituloHeader'>Usuarios</a>&nbsp;&nbsp;</div>
+                       <div class='col'> <a href='' class='tituloHeader'>Proyectos</a>&nbsp;&nbsp;</div>
+                ";
+            } 
+            ?>
             <div class="col"></div>
             <?php
-            if (isset($_SESSION['usuario'])) {
+            if (isset($_SESSION['admin'])) {
+                echo "<div class='col-4'>
+                <h2 id='iniciarSesionPage'>
+                        <a href='./vista/config_usuario/configurar_usuario.php' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
+                        <a href='./controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
+                    </h2>
+                </div>
+                ";
+            } else if (isset($_SESSION['usuario'])) {
 
                 echo "<div class='col-4 offset-2'>
                 <h2 id='iniciarSesionPage'>
@@ -71,24 +86,14 @@ session_start();
     </div>
     <br><br>
     <div class="row justify-content-center container-fluid">
-        <!-- href="./editor_proyecto.php"  -->
 
-        <div class="col-2 colCuadroBase">
+        <div class="col-2 colCuadroBase" >
             <a class="seleccionBase" data-base='basico'>
                 <div class="cuadroBase" id="baseBasico">
                 </div>
                 <h3 class="baseTitle"><b>Básico</b></h3>
             </a>
         </div>
-
-        <!-- <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='galeria'>
-                <div class="cuadroBase" id="baseGaleria">
-
-                </div>
-                <h3 class="baseTitle"><b>Galeria</b></h3>
-            </a>
-        </div> -->
 
         <div class="col-2 colCuadroBase">
             <a class="seleccionBase"  data-base='multiple'>
@@ -99,16 +104,6 @@ session_start();
                 <h3 class="baseTitle"><b>Múltiple</b></h3>
             </a>
         </div>
-        <!-- 
-        <div class="col-2 colCuadroBase">
-            <a class="seleccionBase" data-bs-toggle="modal" data-bs-target="#modalBase" data-base='modelo'>
-
-                <div class="cuadroBase" id="baseModelo">
-
-                </div>
-                <h3 class="baseTitle"><b>Modelo</b></h3>
-            </a>
-        </div> -->
 
     </div>
 

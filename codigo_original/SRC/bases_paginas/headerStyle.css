@@ -1,0 +1,34 @@
+#logo_weizz {
+    height: 7em;
+    margin-left: 15px;
+}
+
+.hrLinea {
+    width: 100%;
+    border: 2px solid;
+}
+
+header {
+    margin-top: 15px;
+    background-color: #EFEFEF;
+    background-image: url("../imagenes_web/background_header.png");
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+}
+
+#encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tituloHeader {
+    font-family: 'AgrandirRegular';
+    font-size: 30px;
+    color: black;
+    text-decoration-line: none;
+}
+
+.tituloHeader:hover {
+    text-decoration-line: underline;
+}
