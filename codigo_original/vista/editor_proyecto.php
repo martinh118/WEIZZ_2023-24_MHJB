@@ -3,7 +3,10 @@
 <head>
 
     <link rel="stylesheet" href="../SRC/CSS/editor_proyecto.css" type="text/css">
-    <!-- <link rel="stylesheet" href="../SRC/CSS/proyecto1.css" type="text/css"> -->
+    <link rel="stylesheet" href="../SRC/bases_paginas/headerStyle.css">
+    <link rel="stylesheet" href="../SRC/CSS/font_family.css">
+
+
     <meta charset="UTF-8" />
     <title>Weizz</title>
 
@@ -20,10 +23,8 @@
 </head>
 <?php
 require_once("../controlador/config_proyecto/controlador_obtener_proyecto.php");
-session_start();
-
-
 ?>
+
 <script>
     function dragStart(event) {
         //CREAR VARIABLE GLOBAL.
@@ -37,49 +38,9 @@ session_start();
 <body style="background-color: #EFEFEF;">
 
 
-    <header>
-        <div class="row container-fluid" id="encabezado">
-            <div class="col ">
-                <a href="../index.php">
-                    <img src="../SRC/imagenes_web/logo_weizz_fondo.png" alt="logo_weizz" id="logo_weizz">
-                </a>
-
-            </div>
-            <div class="col">
-                <h2 id="inicioPage"><a href="../index.php" class="tituloHeader">Inicio</a></h2>
-            </div>
-            <div class="col"></div>
-            <?php
-            if (isset($_SESSION['usuario'])) {
-
-                echo "<div class='col-4 offset-4'>
-                <h2 id='iniciarSesionPage'>
-                    <a href='./config_usuario/configurar_usuario.php' class='tituloHeader'><b>" . $_SESSION['usuario'] . "</b></a>&nbsp;&nbsp;
-                    <a href='../controlador/forms/controlador_cerrar_sesion.php' class='tituloHeader'>Cerrar Sesión</a>
-                </h2>
-            </div>";
-            } else {
-                echo "<div class='col-2 offset-2'>
-                <h2 id='iniciarSesionPage'>
-                    <a href='./forms/iniciar_sesion_form.php' class='tituloHeader'>Iniciar Sesión</a>
-                </h2>
-            </div>
-            <div class='col-3'>
-                <h2 id='registroPage'>
-                    <a href='./forms/registrar_form.php' class='tituloHeader'>Crear cuenta</a>
-                </h2>
-
-            </div>";
-            }
-
-            ?>
-
-        </div>
-
-        <hr class="hrLinea">
-
-    </header>
-
+    <?php 
+    include_once("../SRC/bases_paginas/header.php")
+    ?>
     <!-- border-secondary border-4 border-top border-bottom -->
     <div class="row container-fluid ">
         <div class="col ">
