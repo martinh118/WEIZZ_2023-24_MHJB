@@ -37,16 +37,18 @@ function obtenerUsuarioUnico($email){
 
 function crearUsuario( $usuario, $email, $contra, $token){
     try {
+        $fechaCreacion = date('Y-m-d H:i:s');
         $connexio = conectar();
         $statement = $connexio->prepare('INSERT INTO usuarios 
-        (ID,usuario, email, contra, token) VALUES 
-        (NULL,:usuario, :email, :contra, :token)');
+        (ID,usuario, email, contra, token, created_date) VALUES 
+        (NULL,:usuario, :email, :contra, :token, :fechaCreacion)');
         $statement->execute(
             array(
                 ':usuario' => $usuario,
                 ':email' => $email,
                 ':contra' => $contra,
-                ':token' => $token
+                ':token' => $token,
+                ':fechaCreacion' => $fechaCreacion
             )
         );
     } catch (PDOException $e) { //

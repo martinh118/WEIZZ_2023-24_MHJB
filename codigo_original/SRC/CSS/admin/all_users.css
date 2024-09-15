@@ -1,5 +1,5 @@
 body{
-    background-image: url('../../imagenes_web/background_body_gris_2.png');
+    background-image: url('../../imagenes_web/background_body_gris.png');
     background-repeat: no-repeat;
     background-size: auto;
     background-position: 0% 100%;
@@ -18,3 +18,9 @@ body{
 .iconUser{
     height: 2.5em;
 }
+
+.userOption{
+    background-color: #efefef00;
+    border-color: #efefef00;
+}
+

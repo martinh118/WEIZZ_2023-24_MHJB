@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../../SRC/CSS/admin/all_users.css">
     <link rel="stylesheet" href="../../SRC/bases_paginas/headerStyle.css">
     <link rel="stylesheet" href="../../SRC/CSS/font_family.css">
+    <script src="../../controlador/config_admin/controlador_info_users.js"></script>
+    <title>Weizz - Usuarios</title>
 
 </head>
 <?php
@@ -19,7 +21,7 @@ require_once("../../controlador/config_admin/mostrar_usuarios.php");
 
 
 <body>
-<?php 
+    <?php
     include_once("../../SRC/bases_paginas/header.php")
     ?>
     <div class="row container-fluid">
@@ -31,7 +33,22 @@ require_once("../../controlador/config_admin/mostrar_usuarios.php");
     mostrarConfigUsuarios();
     ?>
 
-
+    <!-- Modal mostrar información del usuario -->
+    <div class="modal fade" id="infoUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5>Información sobre el usuario:</h5>
+                    <p id="infoIdUsusario"> </p>
+                    <p id="infoNombreUsusario"></p>
+                    <p id="infoFechaCreacion"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
