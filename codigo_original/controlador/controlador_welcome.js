@@ -3,11 +3,11 @@
  */
 $(document).ready(function () {
     $("img.flechaOpcionesProyecto").hover(function () {
-        $(this).attr('src', './SRC/imagenes_web/flecha_opciones_proyecto_desplegado.png');
+        $(this).attr('src', '/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original/SRC/imagenes_web/flecha_opciones_proyecto_desplegado.png');
 
     },
         function () {
-            $(this).attr('src', './SRC/imagenes_web/flecha_opciones_proyecto.png');
+            $(this).attr('src', '/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original/SRC/imagenes_web/flecha_opciones_proyecto.png');
 
         }
     )

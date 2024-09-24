@@ -37,6 +37,7 @@ function iniciarSesion()
             $_SESSION['usuario'] = $usuario['usuario'];
             $_SESSION['email'] = $usuario['email'];
             $_SESSION['token'] = $usuario['token'];
+            aplicarUltimaSesion($usuario['ID']);
         } else if ($errores != "") {
             $_SESSION['error'] = $errores;
         }

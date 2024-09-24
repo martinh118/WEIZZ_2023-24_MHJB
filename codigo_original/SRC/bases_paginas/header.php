@@ -13,12 +13,12 @@ session_start();
 
             </div>
             <div class="col">
-                <h2 id="inicioPage"><a href="/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original/index.php" class="tituloHeader">Inicio</a></h2>
+                <a href="/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original/index.php" class="tituloHeader">Inicio</a>
             </div>
             <?php
             if (isset($_SESSION['admin'])) {
-                echo "<div class='col'><a href='/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original//vista/admin/all_users.php' class='tituloHeader'>Usuarios</a>&nbsp;&nbsp;</div>
-                       <div class='col'> <a href='' class='tituloHeader'>Proyectos</a>&nbsp;&nbsp;</div>
+                echo "<div class='col'><a href='/practiques/Proyecto_Final_2DAW_2023-24_MHJB/codigo_original/vista/admin/all_users.php' class='tituloHeader'>Usuarios</a></div>
+                       <div class='col'> <a href='' class='tituloHeader'>Proyectos</a></div>
                 ";
             } 
             ?>

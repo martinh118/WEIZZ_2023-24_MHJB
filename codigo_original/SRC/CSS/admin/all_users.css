@@ -24,3 +24,10 @@ body{
     border-color: #efefef00;
 }
 
+#mainTitle{
+    font-family: 'Gladiola';
+    font-size: 3em;
+    text-decoration-line: underline;
+    color: #FF4242;
+    text-align: center;
+}

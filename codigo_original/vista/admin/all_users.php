@@ -42,6 +42,7 @@ require_once("../../controlador/config_admin/mostrar_usuarios.php");
                     <p id="infoIdUsusario"> </p>
                     <p id="infoNombreUsusario"></p>
                     <p id="infoFechaCreacion"></p>
+                    <p id="infoLastSession"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

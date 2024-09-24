@@ -5,12 +5,13 @@ require_once("../../modelo/modelo_principal.php");
  * A partir d'una comanda SQL, selecciona tots els usuaris seleccionats en la taula users de la base de dades.
  * @return statement: Lista array amb tots els usuaris seleccionats.
  */
-function obtenerUsuarios(){
+function obtenerUsuarios()
+{
     try {
         $connexio = conectar();
         $statement = $connexio->prepare('SELECT * FROM usuarios');
         $statement->execute();
-        
+
         return $statement;
     } catch (PDOException $e) { //
         // mostrarem els errors
@@ -18,7 +19,8 @@ function obtenerUsuarios(){
     }
 }
 
-function obtenerUsuarioUnico($email){
+function obtenerUsuarioUnico($email)
+{
     try {
         $connexio = conectar();
         $statement = $connexio->prepare('SELECT * FROM usuarios WHERE email = :email');
@@ -27,7 +29,7 @@ function obtenerUsuarioUnico($email){
                 ':email' => $email
             )
         );
-        
+
         return $statement;
     } catch (PDOException $e) { //
         // mostrarem els errors
@@ -35,7 +37,27 @@ function obtenerUsuarioUnico($email){
     }
 }
 
-function crearUsuario( $usuario, $email, $contra, $token){
+function obtenerUsuarioUnicoId($id)
+{
+    try {
+        $connexio = conectar();
+        $statement = $connexio->prepare('SELECT * FROM usuarios WHERE ID = :id');
+        $statement->execute(
+            array(
+                ':id' => $id
+            )
+        );
+
+        return $statement;
+    } catch (PDOException $e) { //
+        // mostrarem els errors
+        echo "Error obtenerUsuarios: " . $e->getMessage();
+    }
+}
+
+
+function crearUsuario($usuario, $email, $contra, $token)
+{
     try {
         $fechaCreacion = date('Y-m-d H:i:s');
         $connexio = conectar();
@@ -54,5 +76,23 @@ function crearUsuario( $usuario, $email, $contra, $token){
     } catch (PDOException $e) { //
         // mostrarem els errors
         echo "Error crearUsuario: " . $e->getMessage();
+    }
+}
+
+function aplicarUltimaSesion($ID)
+{
+    try {
+        $connexio = conectar();
+        $fechaLastSession = date('Y-m-d H:i:s');
+        $statement = $connexio->prepare('UPDATE usuarios SET last_session = :lastDate WHERE ID = :id');
+        $statement->execute(
+            array(
+                ':id' => $ID,
+                ':lastDate' => $fechaLastSession
+            )
+        );
+    } catch (PDOException $e) { //
+        // mostrarem els errors
+        echo "Error aplicarUltimaSesion: " . $e->getMessage();
     }
 }
