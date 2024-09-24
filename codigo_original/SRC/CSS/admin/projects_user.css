@@ -1,7 +1,7 @@
 
 body {
     background-color: #EFEFEF;
-    background-image: url('../imagenes_web/background_body_gris.png');
+    background-image: url('../../imagenes_web/background_body_gris.png');
     background-repeat: no-repeat;
     background-size: auto;
     background-position: 0% 100%;

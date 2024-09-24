@@ -11,7 +11,7 @@ function mostrarProyectosUserAdmin($idUser)
         foreach ($proyectosUser as $proj) {
             if ($count == 4) {
                 $count = 0;
-                $html .= "</div> <div class='row d-flex justify-content-around>";
+                $html .= "</div> <div class='row d-flex justify-content-around container-fluid'>";
             }
             $html .= "<div class='col-2' style='margin-left: 2cm;margin-top: 20px;'>";
             $html .= "<div class='dropdown'>
